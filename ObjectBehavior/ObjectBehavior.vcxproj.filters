@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="ソース ファイル">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="ヘッダー ファイル">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="リソース ファイル">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Tools">
+      <UniqueIdentifier>{3f793a18-8092-4969-bb96-9052049aeb3d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tools\Connector">
+      <UniqueIdentifier>{79bb0c7b-3c06-4805-87bf-cac8974a1544}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tools\TaskManager">
+      <UniqueIdentifier>{a664c830-61f9-4408-85d7-4d2418543f06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tools\Task">
+      <UniqueIdentifier>{109b3716-7868-46c0-bf50-c2362532e5a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tools\Singleton">
+      <UniqueIdentifier>{fc6d5fc5-90b0-445d-b915-e07276de72d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects">
+      <UniqueIdentifier>{790302c2-d526-4f0c-86e8-0c686495c14b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tools\Worker">
+      <UniqueIdentifier>{097e9ab2-1549-4b48-9a14-3e7bc9c3aa84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\Circle">
+      <UniqueIdentifier>{1bc8f9ab-27e3-4520-9edb-64537dfc59c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\Plane">
+      <UniqueIdentifier>{dfb5bfc9-569a-4d4d-a815-0e8743188fd7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\Interface">
+      <UniqueIdentifier>{269ef80b-272e-4d32-86b9-5168fe3e7f74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\Interface\EditableTask">
+      <UniqueIdentifier>{176be320-942a-4eac-a483-c66f76785dff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\Interface\Behavior">
+      <UniqueIdentifier>{4f669fd6-6f14-47f9-a48a-d5d198fecd2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\Object">
+      <UniqueIdentifier>{9ad4ea26-2329-4328-b7a6-7a8f079a917f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\Header">
+      <UniqueIdentifier>{2b8530fa-b7ba-4e47-80ff-a2e60b9aacf1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tools\Header">
+      <UniqueIdentifier>{2e9ad025-dc49-4b18-be74-ee939c94038e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\RectangleObject">
+      <UniqueIdentifier>{738f9d65-9721-480a-ab91-da9fdb85bbc5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="window.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="TaskManager.cpp">
+      <Filter>Tools\TaskManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>Objects\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Singleton.cpp">
+      <Filter>Tools\Singleton</Filter>
+    </ClCompile>
+    <ClCompile Include="Worker.cpp">
+      <Filter>Tools\Worker</Filter>
+    </ClCompile>
+    <ClCompile Include="Plane.cpp">
+      <Filter>Objects\Plane</Filter>
+    </ClCompile>
+    <ClCompile Include="Circle.cpp">
+      <Filter>Objects\Circle</Filter>
+    </ClCompile>
+    <ClCompile Include="RectangleObject.cpp">
+      <Filter>Objects\RectangleObject</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="header.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="define.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Task.h">
+      <Filter>Tools\Task</Filter>
+    </ClInclude>
+    <ClInclude Include="Behavior.h">
+      <Filter>Objects\Interface\Behavior</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Connector.h">
+      <Filter>Tools\Connector</Filter>
+    </ClInclude>
+    <ClInclude Include="TaskManager.h">
+      <Filter>Tools\TaskManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>Objects\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="EditableTask.h">
+      <Filter>Objects\Interface\EditableTask</Filter>
+    </ClInclude>
+    <ClInclude Include="Singleton.h">
+      <Filter>Tools\Singleton</Filter>
+    </ClInclude>
+    <ClInclude Include="Worker.h">
+      <Filter>Tools\Worker</Filter>
+    </ClInclude>
+    <ClInclude Include="Plane.h">
+      <Filter>Objects\Plane</Filter>
+    </ClInclude>
+    <ClInclude Include="objects.h">
+      <Filter>Objects\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Circle.h">
+      <Filter>Objects\Circle</Filter>
+    </ClInclude>
+    <ClInclude Include="tools.h">
+      <Filter>Tools\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="package.h">
+      <Filter>Tools\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="RectangleObject.h">
+      <Filter>Objects\RectangleObject</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="ObjectBehavior.rc">
+      <Filter>リソース ファイル</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>
