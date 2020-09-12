@@ -8,9 +8,9 @@ protected:
 	int _left = LEFT, _top = TOP, _width = WIDTH, _height = HEIGHT;
 
 public:
-	RectangleObject();
-	RectangleObject(int width, int height);
-	RectangleObject(int left, int top, int width, int height);
+	RectangleObject(Layer layer, bool pers = false);
+	RectangleObject(int width, int height, Layer layer, bool pers = false);
+	RectangleObject(int x, int y, int width, int height, Layer layer, bool pers = false);
 	~RectangleObject();
 
 public:

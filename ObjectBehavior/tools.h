@@ -5,3 +5,4 @@
 #include "Task.h"
 #include "Worker.h"
 #include "TaskManager.h"
+#include "enums.h"

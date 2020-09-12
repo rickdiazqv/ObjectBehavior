@@ -183,6 +183,9 @@
     <ClInclude Include="Connector.h" />
     <ClInclude Include="define.h" />
     <ClInclude Include="EditableTask.h" />
+    <ClInclude Include="enums.h" />
+    <ClInclude Include="functions.h" />
+    <ClInclude Include="Layer.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="header.h" />
     <ClInclude Include="objects.h" />

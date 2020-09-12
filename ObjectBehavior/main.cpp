@@ -5,9 +5,11 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 
 	//BaseObject obj;
 	TaskManager& taskManager = Singleton<TaskManager>::get_instance();
-	RectangleObject rect1(100, 50);
-	RectangleObject rect2(150, 50, 100, 50);
-	RectangleObject rect3(400, 200, 50, 50);
+	//RectangleObject rect0;
+	RectangleObject rect1(111,111,50, 50, Layer::Object, true);
+	printfDx("rect1:%x\n", &rect1);
+	RectangleObject rect2(333, 333, 100, 100, Layer::Default, true);
+	RectangleObject rect3(555, 555, 150, 150, Layer::Floor);
 	while (LoopProcess()) {
 		taskManager.update();
 		taskManager.draw();

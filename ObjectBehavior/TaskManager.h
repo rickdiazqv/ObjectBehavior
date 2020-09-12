@@ -4,7 +4,7 @@
 
 class TaskManager : public Task, public Connector<Task*> {
 private:
-	vector<Task*> tasks;
+	list<Task*> tasks;
 
 public:
 	TaskManager();
@@ -13,5 +13,6 @@ public:
 public:
 	void update() override;
 	void draw() override;
-	void connect(Task* obj) override;
+
+	void connect(Task* self, compare<Task*> comp) override;
 };

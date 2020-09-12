@@ -61,6 +61,18 @@
     <Filter Include="Objects\RectangleObject">
       <UniqueIdentifier>{738f9d65-9721-480a-ab91-da9fdb85bbc5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Tools\Enums">
+      <UniqueIdentifier>{2d9b2cb9-52f0-41ca-b8a1-e4d32818da56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tools\Enums\Header">
+      <UniqueIdentifier>{0fe9e1d7-fb4d-433d-81fa-5ded6994c0bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tools\Enums\Enums">
+      <UniqueIdentifier>{ae270c03-2697-4086-95ee-37bb4fdaabc7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tools\Functions">
+      <UniqueIdentifier>{47405ba1-a2c4-4973-94c4-4669e6f9ec74}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -142,6 +154,15 @@
     </ClInclude>
     <ClInclude Include="RectangleObject.h">
       <Filter>Objects\RectangleObject</Filter>
+    </ClInclude>
+    <ClInclude Include="enums.h">
+      <Filter>Tools\Enums\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Layer.h">
+      <Filter>Tools\Enums\Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="functions.h">
+      <Filter>Tools\Functions</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

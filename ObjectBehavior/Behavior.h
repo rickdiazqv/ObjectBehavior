@@ -1,4 +1,5 @@
 #pragma once
+#include "tools.h"
 
 template <typename T>
 class Behavior {
