@@ -16,5 +16,6 @@ public:
 public:
 	void update() override;
 	void draw() override;
+	string toString() override;
 };
 

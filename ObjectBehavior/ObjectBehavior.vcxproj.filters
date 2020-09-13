@@ -73,6 +73,9 @@
     <Filter Include="Tools\Functions">
       <UniqueIdentifier>{47405ba1-a2c4-4973-94c4-4669e6f9ec74}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Tools\Comparable">
+      <UniqueIdentifier>{ab17729a-c0c3-4e2d-8c0c-7e3d75e5533d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -163,6 +166,9 @@
     </ClInclude>
     <ClInclude Include="functions.h">
       <Filter>Tools\Functions</Filter>
+    </ClInclude>
+    <ClInclude Include="Comparable.h">
+      <Filter>Tools\Comparable</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

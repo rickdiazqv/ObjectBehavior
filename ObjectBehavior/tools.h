@@ -2,6 +2,7 @@
 #include "package.h"
 #include "Singleton.h"
 #include "Connector.h"
+#include "Comparable.h"
 #include "Task.h"
 #include "Worker.h"
 #include "TaskManager.h"

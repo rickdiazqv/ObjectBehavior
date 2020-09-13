@@ -1,21 +1,21 @@
 #include "Worker.h"
 
-Worker::Worker(compare<Task*> comp, initialize<Task*> init, const char* params, ...) {
+Worker::Worker(compare<Worker*> comp) {
 	printfDx("Worker\n");
-	if (init) {
-		va_list args;
-		va_start(args, params);
-		init(this, args); 
-	}
-	if (connector) { connector->connect(this, comp); }
+	if (connector) { connector->connect(this); }
+	_comp = comp;
 }
 
 Worker::~Worker() {
 
 };
 
-void Worker:: setConnector(Connector<Task*>* con) {
+void Worker:: setConnector(Connector<Worker*>* con) {
 	if (connector) { return; }
 	connector = con;
 	printfDx("Task::setConnector\n");
+}
+
+int Worker::compareTo(Worker* other) {
+	return _comp ? _comp(this, other) : 0;
 }

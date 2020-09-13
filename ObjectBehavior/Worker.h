@@ -2,17 +2,25 @@
 #include "package.h"
 #include "Task.h"
 #include "Connector.h"
+#include "Comparable.h"
 
 using varptr = const void*;
 
-class Worker : public Task {
+class Worker : public Task, public Comparable<Worker*> {
 private:
-	inline static Connector<Task*>* connector = nullptr;
+	inline static Connector<Worker*>* connector = nullptr;
+
+private:
+	compare<Worker*> _comp = nullptr;
 
 public:
-	Worker(compare<Task*> comp, initialize<Task*> init, const char* params = nullptr, ...);
+	Worker(compare<Worker*> comp = nullptr);
 	~Worker();
 
 public:
-	static void setConnector(Connector<Task*>* con);
+	static void setConnector(Connector<Worker*>* con);
+
+public:
+	bool comparable() { return _comp; }
+	int compareTo(Worker* other) override;
 };

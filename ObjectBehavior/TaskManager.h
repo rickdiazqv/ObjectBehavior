@@ -2,9 +2,10 @@
 #include "package.h"
 #include "Worker.h"
 
-class TaskManager : public Task, public Connector<Task*> {
+class TaskManager : public Task, public Connector<Worker*> {
 private:
-	list<Task*> tasks;
+	list<Worker*> tasks;
+	queue<Worker*> newTasks;
 
 public:
 	TaskManager();
@@ -14,5 +15,8 @@ public:
 	void update() override;
 	void draw() override;
 
-	void connect(Task* self, compare<Task*> comp) override;
+	void connect(Worker* self) override;
+
+public:
+	void receive();
 };

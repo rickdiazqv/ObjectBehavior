@@ -180,6 +180,7 @@
   <ItemGroup>
     <ClInclude Include="Behavior.h" />
     <ClInclude Include="Circle.h" />
+    <ClInclude Include="Comparable.h" />
     <ClInclude Include="Connector.h" />
     <ClInclude Include="define.h" />
     <ClInclude Include="EditableTask.h" />

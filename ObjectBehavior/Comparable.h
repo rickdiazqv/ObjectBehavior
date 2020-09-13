@@ -2,7 +2,7 @@
 #include "package.h"
 
 template<typename T>
-class Connector {
+class Comparable {
 public:
-	virtual void connect(T self) = 0;
+	virtual int compareTo(T other) = 0;
 };
