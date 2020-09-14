@@ -1,5 +1,6 @@
 #pragma once
 #include "tools.h"
+#include "class.h"
 
 #define title	"ObjctBehavior"
 

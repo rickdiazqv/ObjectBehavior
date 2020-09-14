@@ -1,9 +1,6 @@
 #pragma once
 #include "package.h"
 #include "Singleton.h"
-#include "Connector.h"
-#include "Comparable.h"
-#include "Task.h"
-#include "Worker.h"
-#include "TaskManager.h"
+#include "functions.h"
+#include "declare.h"
 #include "enums.h"

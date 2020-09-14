@@ -1,9 +1,9 @@
 #include "Worker.h"
 
-Worker::Worker(compare<Worker*> comp) {
+Worker::Worker(Comparator<Worker*> compare) {
 	printfDx("Worker\n");
 	if (connector) { connector->connect(this); }
-	_comp = comp;
+	_compare = compare;
 }
 
 Worker::~Worker() {
@@ -17,5 +17,5 @@ void Worker:: setConnector(Connector<Worker*>* con) {
 }
 
 int Worker::compareTo(Worker* other) {
-	return _comp ? _comp(this, other) : 0;
+	return _compare ? _compare(this, other) : 0;
 }

@@ -1,26 +1,24 @@
 #pragma once
-#include "package.h"
+#include "tools.h"
 #include "Task.h"
 #include "Connector.h"
 #include "Comparable.h"
-
-using varptr = const void*;
 
 class Worker : public Task, public Comparable<Worker*> {
 private:
 	inline static Connector<Worker*>* connector = nullptr;
 
 private:
-	compare<Worker*> _comp = nullptr;
+	Comparator<Worker*> _compare = nullptr;
 
 public:
-	Worker(compare<Worker*> comp = nullptr);
+	Worker(Comparator<Worker*> compare = nullptr);
 	~Worker();
 
 public:
 	static void setConnector(Connector<Worker*>* con);
 
 public:
-	bool comparable() { return _comp; }
+	bool comparable() { return _compare; }
 	int compareTo(Worker* other) override;
 };

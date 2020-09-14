@@ -19,9 +19,6 @@
     <Filter Include="Tools\Connector">
       <UniqueIdentifier>{79bb0c7b-3c06-4805-87bf-cac8974a1544}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Tools\TaskManager">
-      <UniqueIdentifier>{a664c830-61f9-4408-85d7-4d2418543f06}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Tools\Task">
       <UniqueIdentifier>{109b3716-7868-46c0-bf50-c2362532e5a9}</UniqueIdentifier>
     </Filter>
@@ -52,9 +49,6 @@
     <Filter Include="Objects\Object">
       <UniqueIdentifier>{9ad4ea26-2329-4328-b7a6-7a8f079a917f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Objects\Header">
-      <UniqueIdentifier>{2b8530fa-b7ba-4e47-80ff-a2e60b9aacf1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Tools\Header">
       <UniqueIdentifier>{2e9ad025-dc49-4b18-be74-ee939c94038e}</UniqueIdentifier>
     </Filter>
@@ -76,6 +70,12 @@
     <Filter Include="Tools\Comparable">
       <UniqueIdentifier>{ab17729a-c0c3-4e2d-8c0c-7e3d75e5533d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Tools\WorkManager">
+      <UniqueIdentifier>{a664c830-61f9-4408-85d7-4d2418543f06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tools\Class">
+      <UniqueIdentifier>{2831a8e4-ec97-4fb6-82a6-bcb5c841f73a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -83,9 +83,6 @@
     </ClCompile>
     <ClCompile Include="window.cpp">
       <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="TaskManager.cpp">
-      <Filter>Tools\TaskManager</Filter>
     </ClCompile>
     <ClCompile Include="Object.cpp">
       <Filter>Objects\Object</Filter>
@@ -104,6 +101,9 @@
     </ClCompile>
     <ClCompile Include="RectangleObject.cpp">
       <Filter>Objects\RectangleObject</Filter>
+    </ClCompile>
+    <ClCompile Include="WorkManager.cpp">
+      <Filter>Tools\WorkManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -125,9 +125,6 @@
     <ClInclude Include="Connector.h">
       <Filter>Tools\Connector</Filter>
     </ClInclude>
-    <ClInclude Include="TaskManager.h">
-      <Filter>Tools\TaskManager</Filter>
-    </ClInclude>
     <ClInclude Include="Object.h">
       <Filter>Objects\Object</Filter>
     </ClInclude>
@@ -142,9 +139,6 @@
     </ClInclude>
     <ClInclude Include="Plane.h">
       <Filter>Objects\Plane</Filter>
-    </ClInclude>
-    <ClInclude Include="objects.h">
-      <Filter>Objects\Header</Filter>
     </ClInclude>
     <ClInclude Include="Circle.h">
       <Filter>Objects\Circle</Filter>
@@ -169,6 +163,15 @@
     </ClInclude>
     <ClInclude Include="Comparable.h">
       <Filter>Tools\Comparable</Filter>
+    </ClInclude>
+    <ClInclude Include="WorkManager.h">
+      <Filter>Tools\WorkManager</Filter>
+    </ClInclude>
+    <ClInclude Include="declare.h">
+      <Filter>Tools\Class</Filter>
+    </ClInclude>
+    <ClInclude Include="class.h">
+      <Filter>Tools\Class</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

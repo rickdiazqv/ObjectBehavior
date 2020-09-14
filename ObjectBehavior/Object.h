@@ -4,7 +4,9 @@
 #include "EditableTask.h"
 #include "Behavior.h"
 
-class Object : public Worker, public EditableTask, public Behavior<Object*> {
+using GameObject = Object*;
+
+class Object : public Worker, public EditableTask, public Behavior<GameObject> {
 protected:
 	inline static const Layer LAYER = Layer::Default;
 	inline static const int X = 0, Y = 0;
@@ -58,5 +60,3 @@ public:
 	void Update() override;
 	void Draw() override;
 };
-
-using GameObject = Object*;

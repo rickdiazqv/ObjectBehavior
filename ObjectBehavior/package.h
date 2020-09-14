@@ -5,6 +5,5 @@
 #include <cassert>
 #include <mutex>
 #include <sstream>
-#include "functions.h"
 
 using namespace std;
