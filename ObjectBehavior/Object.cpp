@@ -5,6 +5,10 @@ Object::Object() : Object(X, Y, LAYER, PERS) {
 }
 
 Object::Object(int x, int y, Layer layer, bool pers) : Worker(
+	// proc comparator
+	nullptr,
+
+	// draw comparator
 	[](Worker* self, Worker* other) {
 		Object* slf = nullptr, * otr = nullptr;
 		int comp = 0;
@@ -19,7 +23,7 @@ Object::Object(int x, int y, Layer layer, bool pers) : Worker(
 		}
 
 		comp = int(slf->getLayer()) - int(otr->getLayer());
-		if (comp == 0){
+		if (comp == 0) {
 			bool pslf = slf->getPers();
 			bool potr = otr->getPers();
 
@@ -61,6 +65,12 @@ void Object::update() {
 
 	vx += ax;
 	vy += ay;
+
+	int dy = getDY();
+	if (getX() == 111 && getY() >= 444) {
+		int a = 0;
+	}
+	if (dy != 0) { sortSelf(this, dy); }
 }
 
 string Object::toString() {

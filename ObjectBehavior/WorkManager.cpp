@@ -10,14 +10,8 @@ WorkManager::~WorkManager() {
 }
 
 void WorkManager::update() {
-	auto mover = workers.end();
-	for (auto worker = workers.begin(); worker != workers.end(); worker++) {
+	for (auto worker = _workers.begin(); worker != _workers.end(); worker++) {
 		(*worker)->update();
-		//if((*worker)->)
-	}
-	// 描画順の調整 pers == trueのオブジェクトが優先的に前面に描画される
-	for (auto worker = workers.begin(); worker != workers.end(); worker++) {
-		//if (self->compareTo(*task) < 0) { continue; }
 	}
 	// queueのオブジェクトをlistに追加
 	receive();
@@ -26,9 +20,9 @@ void WorkManager::update() {
 void WorkManager::draw() {
 	//clsDx();
 	int i = 0;
-	for (auto worker = workers.begin(); worker != workers.end(); worker++) {
-		(*worker)->draw();
-		DrawFormatString(300, 100 + i * 20, 0xffffff, (*worker)->toString().c_str());
+	for (auto worker = Worker::getDrawHead(); worker != nullptr; worker = worker->getNext()) {
+		worker->draw();
+		DrawFormatString(300, 100 + i * 20, 0xffffff, worker->toString().c_str());
 		i++;
 	}
 }
@@ -36,36 +30,44 @@ void WorkManager::draw() {
 void WorkManager::connect(Worker* self) {
 	printfDx("connect\n");
 	if (!self) { return; }
-	queWorkers.push(self);
-	printfDx("queue size:%d\n", queWorkers.size());
+	_queWorkers.push(self);
+	printfDx("queue size:%d\n", _queWorkers.size());
+}
+
+void WorkManager::disconnect(Worker* self) {
+	_workers.remove(self);
 }
 
 void WorkManager::receive() {
-	while (!queWorkers.empty()) {
+	while (!_queWorkers.empty()) {
 		printfDx("while ");
-		Worker* self = queWorkers.front();
-		queWorkers.pop();
+		Worker* self = _queWorkers.front();
+		_queWorkers.pop();
 		if (!self) { continue; }
 
-		if (workers.empty()) {
+		// Workerの内部ポインタのソート
+		Worker::sortSelf(self);
+
+		// WorkManager内部のlistにWorkerを挿入
+		if (_workers.empty()) {
 			printfDx("empty\n");
-			workers.push_back(self);
+			_workers.push_back(self);
 			continue;
 		}
-		if (!self->comparable()) {
+		if (!self->procComparable()) {
 			printfDx("comp is null\n");
-			workers.push_front(self);
+			_workers.push_front(self);
 			continue;
 		}
 
-		int size = workers.size();
-		for (auto worker = workers.rbegin(); worker != workers.rend(); worker++) {
+		int size = _workers.size();
+		for (auto worker = _workers.rbegin(); worker != _workers.rend(); worker++) {
 			if (self->compareTo(*worker) < 0) { continue; }
 			printfDx("insert\n");
-			workers.insert(worker.base(), self);
+			_workers.insert(worker.base(), self);
 			break;
 		}
-		if (workers.size() == size) { workers.push_front(self); }
+		if (_workers.size() == size) { _workers.push_front(self); }
 	}
 	//printfDx("check tasks\n");
 	//for (auto task = tasks.begin(); task != tasks.end(); task++) {
@@ -75,5 +77,5 @@ void WorkManager::receive() {
 	//}
 	//printfDx("size:%d\n", tasks.size());
 	//printfDx("end check\n\n");
-	DrawFormatString(500, 0, 0xffffff, "tasks size:%d, queue size:%d", workers.size(), queWorkers.size());
+	DrawFormatString(500, 0, 0xffffff, "tasks size:%d, queue size:%d", _workers.size(), _queWorkers.size());
 }

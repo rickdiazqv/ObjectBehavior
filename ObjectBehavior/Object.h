@@ -27,8 +27,8 @@ public:
 	int ax = AX, ay = AY;
 
 protected:
-	Object* _prev = nullptr;
-	Object* _next = nullptr;
+	//Object* _prev = nullptr;
+	//Object* _next = nullptr;
 
 public:
 	Object();
@@ -41,6 +41,11 @@ public:
 	bool getPers() { return _pers; }
 	int getX() { return _x; }
 	int getY() { return _y; }
+	int getXHist() { return _x_hist; }
+	int getYHist() { return _y_hist; }
+	int getDX() { return getX() - getXHist(); }
+	int getDY() { return getY() - getYHist(); }
+	bool isMove() { return getDX() != 0 || getDY() != 0; }
 
 // setter
 public:

@@ -4,5 +4,5 @@
 
 #define title	"ObjctBehavior"
 
-#define winx	800
-#define winy	600
+#define winx	1280
+#define winy	720
