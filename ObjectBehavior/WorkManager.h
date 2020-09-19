@@ -3,6 +3,7 @@
 #include "Task.h"
 #include "Connector.h"
 #include "Worker.h"
+#include "Input.h"
 
 class WorkManager : public Task, public Connector<Worker*> {
 private:
@@ -12,6 +13,7 @@ private:
 	//Worker* _drawHead = nullptr;
 	//Worker* _drawTail = nullptr;
 	queue<Worker*> _queWorkers;
+	//Input& _input = Singleton<Input>::get_instance();
 
 public:
 	WorkManager();

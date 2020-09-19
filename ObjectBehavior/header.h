@@ -1,5 +1,6 @@
 #pragma once
-#include "define.h"
+#include "class.h"
+#include "global.h"
 
 int AllInit();
 int LoopProcess();

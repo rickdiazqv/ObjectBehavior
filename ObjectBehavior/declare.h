@@ -16,6 +16,7 @@ class Object;
 
 // class
 class WorkManager;
+class Input;
 class Plane;
 class RectangleObject;
 class Circle;

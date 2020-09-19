@@ -1,8 +1,10 @@
 #include "WorkManager.h"
+#include "global.h"
 
 WorkManager::WorkManager() {
 	printfDx("WorkManager\n");
 	Worker::setConnector(this);
+	//input = &_input;
 }
 
 WorkManager::~WorkManager() {
@@ -19,10 +21,12 @@ void WorkManager::update() {
 
 void WorkManager::draw() {
 	//clsDx();
+	DrawFormatString(300, 20, 0xffffff, (*_workers.begin())->toString().c_str());
+	//DrawFormatString(300, 40, 0xffffff, (*++_workers.begin())->toString().c_str());
 	int i = 0;
 	for (auto worker = Worker::getDrawHead(); worker != nullptr; worker = worker->getNext()) {
 		worker->draw();
-		DrawFormatString(300, 100 + i * 20, 0xffffff, worker->toString().c_str());
+		DrawFormatString(300, 60 + i * 20, 0xffffff, worker->toString().c_str());
 		i++;
 	}
 }
@@ -67,7 +71,9 @@ void WorkManager::receive() {
 			_workers.insert(worker.base(), self);
 			break;
 		}
-		if (_workers.size() == size) { _workers.push_front(self); }
+		if (_workers.size() == size) { 
+			_workers.push_front(self); 
+		}
 	}
 	//printfDx("check tasks\n");
 	//for (auto task = tasks.begin(); task != tasks.end(); task++) {

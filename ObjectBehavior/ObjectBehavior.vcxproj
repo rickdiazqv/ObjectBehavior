@@ -168,6 +168,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Circle.cpp" />
+    <ClCompile Include="Input.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Plane.cpp" />
@@ -188,6 +189,8 @@
     <ClInclude Include="EditableTask.h" />
     <ClInclude Include="enums.h" />
     <ClInclude Include="functions.h" />
+    <ClInclude Include="global.h" />
+    <ClInclude Include="Input.h" />
     <ClInclude Include="Layer.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="header.h" />

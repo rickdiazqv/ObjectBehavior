@@ -76,6 +76,9 @@
     <Filter Include="Tools\Class">
       <UniqueIdentifier>{2831a8e4-ec97-4fb6-82a6-bcb5c841f73a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Tools\Input">
+      <UniqueIdentifier>{01ac0d67-7d47-4fab-ad21-61c693015805}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -104,6 +107,9 @@
     </ClCompile>
     <ClCompile Include="WorkManager.cpp">
       <Filter>Tools\WorkManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Input.cpp">
+      <Filter>Tools\Input</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -172,6 +178,12 @@
     </ClInclude>
     <ClInclude Include="class.h">
       <Filter>Tools\Class</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>Tools\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="global.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
