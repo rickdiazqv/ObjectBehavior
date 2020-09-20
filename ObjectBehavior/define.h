@@ -1,12 +1,15 @@
 #pragma once
 #include "tools.h"
 
-#define title	"ObjctBehavior"
+constexpr const char* title = "ObjctBehavior";
 
-#define winx	1280
-#define winy	720
+constexpr int winx = 1280;
+constexpr int winy = 720;
 
-#define n_key	256
+constexpr int n_mouse = 3;
+constexpr int n_key = 256;
+
+constexpr const char* path_key = "key.ini";
 
 #ifdef __GLOBAL_INSTANCE__
 #define GLOBAL

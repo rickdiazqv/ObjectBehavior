@@ -4,44 +4,7 @@ Object::Object() : Object(X, Y, LAYER, PERS) {
 
 }
 
-Object::Object(int x, int y, Layer layer, bool pers) : Worker(
-	// proc comparator
-	nullptr,
-
-	// draw comparator
-	[](Worker* self, Worker* other) {
-		Object* slf = nullptr, * otr = nullptr;
-		int comp = 0;
-
-		try {
-			slf = (Object*)self;
-			otr = (Object*)other;
-		}
-		catch (bad_cast e) {
-			printfDx("bad cast\n");
-			return comp;
-		}
-
-		comp = int(slf->getLayer()) - int(otr->getLayer());
-		if (comp == 0) {
-			bool pslf = slf->getPers();
-			bool potr = otr->getPers();
-
-			if (pslf && potr) {
-				comp = slf->getY() - otr->getY();
-			}
-			else if (pslf && !potr) {
-			}
-			else if (!pslf && potr) {
-				comp = -1;
-			}
-			else {
-
-			}
-		}
-
-		return comp;
-	}) {
+Object::Object(int x, int y, Layer layer, bool pers) {
 	printfDx("Object\n");
 	_layer = layer;
 	_pers = pers;
@@ -93,4 +56,37 @@ void Object::Update() {
 
 void Object::Draw() {
 
+}
+
+int Object::drawCompareTo(Worker* other) {
+	Object* otr = nullptr;
+	int comp = 0;
+
+	try {
+		otr = (Object*)other;
+	}
+	catch (bad_cast e) {
+		printfDx("bad cast\n");
+		return comp;
+	}
+
+	comp = int(this->getLayer()) - int(otr->getLayer());
+	if (comp == 0) {
+		bool pslf = this->getPers();
+		bool potr = otr->getPers();
+
+		if (pslf && potr) {
+			comp = this->getY() - otr->getY();
+		}
+		else if (pslf && !potr) {
+		}
+		else if (!pslf && potr) {
+			comp = -1;
+		}
+		else {
+
+		}
+	}
+
+	return comp;
 }

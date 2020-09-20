@@ -13,11 +13,11 @@ private:
 	inline static int _mx = MOUSE_X, _my = MOUSE_Y;
 	inline static int _mx_hist = MOUSE_X, _my_hist = MOUSE_Y;
 
-	inline static char mouse[3] = { 0, 0, 0 };
+	inline static char _mouse[n_mouse];
 	inline static bool _useMouse = true;
 
 private:
-	inline static char _key[n_key];
+	inline static unordered_map<unsigned char, char> _key;
 	inline static bool _useKey = true;
 
 public:
@@ -30,15 +30,28 @@ public:
 	static int getMouseYHist() { return _my_hist; }
 	static int getDX() { return getMouseX() - getMouseXHist(); }
 	static int getDY() { return getMouseY() - getMouseYHist(); }
-	static bool isMove() { return getDX() != 0 || getDY != 0; }
+	static bool isMove() {
+		int dx = getDX();
+		int dy = getDY();
+		return dx != 0 || dy != 0;
+	}
+	static bool isMouseDown(int index) { return _mouse[index] == 1; }
+	static bool isMouse(int index) { return _mouse[index] > 0; }
+	static bool isMouseUp(int index) { return _mouse[index] == -1; }
 
 public:
 	static void setUseMouse(bool useMouse) { _useMouse = useMouse; }
 	static void setUseKey(bool useKey) { _useKey = useKey; }
 
+private:
+	static void setKey(const char* path);
+
 public:
 	void update() override;
 	void draw() override;
 	string toString() override;
-};
 
+public:
+	int procCompareTo(Worker* other) override { return -1; }
+	int drawCompareTo(Worker* other) override { return -1; }
+};

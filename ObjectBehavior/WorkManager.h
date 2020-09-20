@@ -13,7 +13,7 @@ private:
 	//Worker* _drawHead = nullptr;
 	//Worker* _drawTail = nullptr;
 	queue<Worker*> _queWorkers;
-	//Input& _input = Singleton<Input>::get_instance();
+	bool _receive = true;
 
 public:
 	WorkManager();

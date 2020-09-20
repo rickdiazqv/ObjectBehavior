@@ -4,7 +4,6 @@
 WorkManager::WorkManager() {
 	printfDx("WorkManager\n");
 	Worker::setConnector(this);
-	//input = &_input;
 }
 
 WorkManager::~WorkManager() {
@@ -16,7 +15,7 @@ void WorkManager::update() {
 		(*worker)->update();
 	}
 	// queueのオブジェクトをlistに追加
-	receive();
+	if (_receive) { receive(); }
 }
 
 void WorkManager::draw() {
@@ -35,6 +34,7 @@ void WorkManager::connect(Worker* self) {
 	printfDx("connect\n");
 	if (!self) { return; }
 	_queWorkers.push(self);
+	_receive = true;
 	printfDx("queue size:%d\n", _queWorkers.size());
 }
 
@@ -43,6 +43,7 @@ void WorkManager::disconnect(Worker* self) {
 }
 
 void WorkManager::receive() {
+	Worker::sendWorkers();
 	while (!_queWorkers.empty()) {
 		printfDx("while ");
 		Worker* self = _queWorkers.front();
@@ -58,7 +59,7 @@ void WorkManager::receive() {
 			_workers.push_back(self);
 			continue;
 		}
-		if (!self->procComparable()) {
+		if (self->procCompareTo(self) < 0) {
 			printfDx("comp is null\n");
 			_workers.push_front(self);
 			continue;
@@ -66,7 +67,7 @@ void WorkManager::receive() {
 
 		int size = _workers.size();
 		for (auto worker = _workers.rbegin(); worker != _workers.rend(); worker++) {
-			if (self->compareTo(*worker) < 0) { continue; }
+			if (self->procCompareTo(*worker) < 0) { continue; }
 			printfDx("insert\n");
 			_workers.insert(worker.base(), self);
 			break;
@@ -75,13 +76,6 @@ void WorkManager::receive() {
 			_workers.push_front(self); 
 		}
 	}
-	//printfDx("check tasks\n");
-	//for (auto task = tasks.begin(); task != tasks.end(); task++) {
-	//	printfDx("%x, ", *task);
-	//	printfDx((*task)->toString().c_str());
-	//	printfDx("\n");
-	//}
-	//printfDx("size:%d\n", tasks.size());
-	//printfDx("end check\n\n");
-	DrawFormatString(500, 0, 0xffffff, "tasks size:%d, queue size:%d", _workers.size(), _queWorkers.size());
+	_receive = false;
+	//DrawFormatString(500, 0, 0xffffff, "tasks size:%d, queue size:%d", _workers.size(), _queWorkers.size());
 }

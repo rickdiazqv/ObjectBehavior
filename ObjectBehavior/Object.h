@@ -64,4 +64,8 @@ public:
 	void Start() override;
 	void Update() override;
 	void Draw() override;
+
+// Wroker
+public:
+	int drawCompareTo(Worker* other) override;
 };

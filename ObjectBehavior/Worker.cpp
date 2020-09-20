@@ -1,10 +1,11 @@
 #include "Worker.h"
 
-Worker::Worker(Comparator<Worker*> procCompare, Comparator<Worker*> drawCompare) {
+Worker::Worker() {
 	printfDx("Worker\n");
 	if (_connector) { _connector->connect(this); }
-	if (procCompare) { _procCompare = procCompare; }
-	if (drawCompare) { _drawCompare = drawCompare; }
+	else { 
+		_queWorkers.push(this); 
+	}
 }
 
 Worker::~Worker() {
@@ -14,7 +15,7 @@ Worker::~Worker() {
 void Worker::sortSelf(Worker* self) {
 	Worker* current = getCurrent();
 	if (current) {
-		int index = !!(self->_drawCompare(self, current) >= 0);
+		int index = !!(self->drawCompareTo(current) >= 0);
 		sortSelf(self, current, index);
 	}
 	setCurrent(self);
@@ -33,7 +34,7 @@ bool Worker::sortSelf(Worker* const self, Worker* const root, const int index) {
 	int curidx = index;
 
 	while ((current = getNeighbor[index](current)) &&
-		(curidx = !!(self->_drawCompare(self, current) >= 0) == index)) {
+		(curidx = !!(self->drawCompareTo(current) >= 0) == index)) {
 		inswkr = current;
 	}
 	if (inswkr == self) { return false; }
@@ -50,12 +51,21 @@ void Worker::setConnector(Connector<Worker*>* connector) {
 	if (_connector) { return; }
 	_connector = connector;
 	printfDx("Task::setConnector\n");
+}
 
-	// 
+void Worker::sendWorkers() {
+	if (!_connector) { return; }
+	while (!_queWorkers.empty()) {
+		Worker* self = _queWorkers.front();
+		_queWorkers.pop();
+		if (!self) { continue; }
+
+		_connector->connect(self);
+	}
 }
 
 int Worker::compareTo(Worker* other) {
-	return _drawCompare ? _drawCompare(this, other) : 0;
+	return drawCompareTo(other);
 }
 
 UnaryOperator<Worker*> Worker::getNeighbor[2] = {

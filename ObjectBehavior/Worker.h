@@ -11,15 +11,16 @@ private:
 	static TypeBiConsumer<Worker*> setNeighbor[2];
 	inline static Worker* _current = nullptr;
 	inline static Worker* _drawHead = nullptr;
+	inline static queue<Worker*> _queWorkers;
 
 private:
 	Worker* _prev = nullptr;
 	Worker* _next = nullptr;
-	Comparator<Worker*> _procCompare = [](Worker* self, Worker* other) {return 0; };
-	Comparator<Worker*> _drawCompare = _procCompare;
+	//Comparator<Worker*> _procCompare = [](Worker* self, Worker* other) {return 0; };
+	//Comparator<Worker*> _drawCompare = _procCompare;
 
 public:
-	Worker(Comparator<Worker*> procCompare, Comparator<Worker*> drawCompare);
+	Worker();
 	~Worker();
 
 public:
@@ -41,6 +42,7 @@ private:
 
 public:
 	static void setConnector(Connector<Worker*>* connector);
+	static void sendWorkers();
 	static Worker* getCurrent() { return _current; }
 	static Worker* getDrawHead() { return _drawHead; }
 
@@ -49,7 +51,11 @@ private:
 	static void setDrawHead(Worker* worker) { _drawHead = worker; }
 
 public:
-	bool procComparable() { return _procCompare; }
-	bool drawComparable() { return _drawCompare; }
+	//bool procComparable() { return _procCompare; }
+	//bool drawComparable() { return _drawCompare; }
 	int compareTo(Worker* other) override;
+
+public:
+	virtual int procCompareTo(Worker* other) { return 0; }
+	virtual int drawCompareTo(Worker* other) { return 0; }
 };
