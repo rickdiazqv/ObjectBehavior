@@ -79,6 +79,9 @@
     <Filter Include="Tools\Input">
       <UniqueIdentifier>{01ac0d67-7d47-4fab-ad21-61c693015805}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Objects\Model3D">
+      <UniqueIdentifier>{74b89413-d43f-4db2-9424-b297d9c078c8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -110,6 +113,9 @@
     </ClCompile>
     <ClCompile Include="Input.cpp">
       <Filter>Tools\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Model3D.cpp">
+      <Filter>Objects\Model3D</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -184,6 +190,9 @@
     </ClInclude>
     <ClInclude Include="global.h">
       <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Model3D.h">
+      <Filter>Objects\Model3D</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

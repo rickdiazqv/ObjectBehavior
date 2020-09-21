@@ -30,9 +30,6 @@ void Object::update() {
 	vy += ay;
 
 	int dy = getDY();
-	if (getX() == 111 && getY() >= 444) {
-		int a = 0;
-	}
 	if (dy != 0) { sortSelf(this, dy); }
 }
 
@@ -59,14 +56,10 @@ void Object::Draw() {
 }
 
 int Object::drawCompareTo(Worker* other) {
-	Object* otr = nullptr;
+	Object* otr = dynamic_cast<Object*>(other);
 	int comp = 0;
-
-	try {
-		otr = (Object*)other;
-	}
-	catch (bad_cast e) {
-		printfDx("bad cast\n");
+	if (!otr) {
+		printfDx("can not cast\n");
 		return comp;
 	}
 

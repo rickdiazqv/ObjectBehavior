@@ -169,6 +169,7 @@
   <ItemGroup>
     <ClCompile Include="Circle.cpp" />
     <ClCompile Include="Input.cpp" />
+    <ClCompile Include="Model3D.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Plane.cpp" />
@@ -192,6 +193,7 @@
     <ClInclude Include="global.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="Layer.h" />
+    <ClInclude Include="Model3D.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="header.h" />
     <ClInclude Include="package.h" />

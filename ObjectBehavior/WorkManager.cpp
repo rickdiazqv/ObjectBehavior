@@ -59,9 +59,15 @@ void WorkManager::receive() {
 			_workers.push_back(self);
 			continue;
 		}
-		if (self->procCompareTo(self) < 0) {
-			printfDx("comp is null\n");
+		int comp = self->procCompareTo(self);
+		if (comp < 0) {
+			printfDx("front\n");
 			_workers.push_front(self);
+			continue;
+		}
+		if (comp > 0) {
+			printfDx("back\n");
+			_workers.push_back(self);
 			continue;
 		}
 

@@ -12,9 +12,9 @@ private:
 private:
 	inline static int _mx = MOUSE_X, _my = MOUSE_Y;
 	inline static int _mx_hist = MOUSE_X, _my_hist = MOUSE_Y;
-
 	inline static char _mouse[n_mouse];
 	inline static bool _useMouse = true;
+	inline static Worker* collision = nullptr;
 
 private:
 	inline static unordered_map<unsigned char, char> _key;
@@ -52,6 +52,6 @@ public:
 	string toString() override;
 
 public:
-	int procCompareTo(Worker* other) override { return -1; }
-	int drawCompareTo(Worker* other) override { return -1; }
+	int procCompareTo(Worker* other) override { return 1; }
+	int drawCompareTo(Worker* other) override { return 1; }
 };

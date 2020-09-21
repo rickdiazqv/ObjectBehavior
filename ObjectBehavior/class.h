@@ -16,3 +16,4 @@
 #include "Plane.h"
 #include "RectangleObject.h"
 #include "Circle.h"
+#include "Model3D.h"

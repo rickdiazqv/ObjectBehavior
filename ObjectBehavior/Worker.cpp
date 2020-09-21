@@ -25,7 +25,9 @@ void Worker::sortSelf(Worker* self, int dir) {
 	if (dir <= 0 && sortSelf(self, self, 0)) {
 		return;
 	}
-	sortSelf(self, self, 1);
+	if (dir >= 0) {
+		sortSelf(self, self, 1);
+	}
 }
 
 bool Worker::sortSelf(Worker* const self, Worker* const root, const int index) {
