@@ -2,7 +2,7 @@
 #include "global.h"
 
 WorkManager::WorkManager() {
-	printfDx("WorkManager\n");
+	//printfDx("WorkManager\n");
 	Worker::setConnector(this);
 }
 
@@ -25,17 +25,17 @@ void WorkManager::draw() {
 	int i = 0;
 	for (auto worker = Worker::getDrawHead(); worker != nullptr; worker = worker->getNext()) {
 		worker->draw();
-		DrawFormatString(300, 60 + i * 20, 0xffffff, worker->toString().c_str());
+		DrawFormatString(300, 100 + i * 40, 0xffffff, worker->toString().c_str());
 		i++;
 	}
 }
 
 void WorkManager::connect(Worker* self) {
-	printfDx("connect\n");
+	//printfDx("connect\n");
 	if (!self) { return; }
 	_queWorkers.push(self);
 	_receive = true;
-	printfDx("queue size:%d\n", _queWorkers.size());
+	//printfDx("queue size:%d\n", _queWorkers.size());
 }
 
 void WorkManager::disconnect(Worker* self) {
@@ -45,7 +45,7 @@ void WorkManager::disconnect(Worker* self) {
 void WorkManager::receive() {
 	Worker::sendWorkers();
 	while (!_queWorkers.empty()) {
-		printfDx("while ");
+		//printfDx("while ");
 		Worker* self = _queWorkers.front();
 		_queWorkers.pop();
 		if (!self) { continue; }
@@ -55,18 +55,18 @@ void WorkManager::receive() {
 
 		// WorkManager“à•”‚Ìlist‚ÉWorker‚ð‘}“ü
 		if (_workers.empty()) {
-			printfDx("empty\n");
+			//printfDx("empty\n");
 			_workers.push_back(self);
 			continue;
 		}
 		int comp = self->procCompareTo(self);
 		if (comp < 0) {
-			printfDx("front\n");
+			//printfDx("front\n");
 			_workers.push_front(self);
 			continue;
 		}
 		if (comp > 0) {
-			printfDx("back\n");
+			//printfDx("back\n");
 			_workers.push_back(self);
 			continue;
 		}
@@ -74,7 +74,7 @@ void WorkManager::receive() {
 		int size = _workers.size();
 		for (auto worker = _workers.rbegin(); worker != _workers.rend(); worker++) {
 			if (self->procCompareTo(*worker) < 0) { continue; }
-			printfDx("insert\n");
+			//printfDx("insert\n");
 			_workers.insert(worker.base(), self);
 			break;
 		}

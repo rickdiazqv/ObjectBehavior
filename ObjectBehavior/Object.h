@@ -25,6 +25,7 @@ protected:
 public:
 	int vx = VX, vy = VY;
 	int ax = AX, ay = AY;
+	bool collision = true;
 
 protected:
 	//Object* _prev = nullptr;

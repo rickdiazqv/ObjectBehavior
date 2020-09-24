@@ -15,6 +15,7 @@ class Worker;
 class Object;
 
 // class
+class GameProcessor;
 class WorkManager;
 class Input;
 class Plane;

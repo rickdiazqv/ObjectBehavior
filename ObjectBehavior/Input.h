@@ -10,41 +10,53 @@ private:
 	inline static Input* _self = nullptr;
 
 private:
-	inline static int _mx = MOUSE_X, _my = MOUSE_Y;
-	inline static int _mx_hist = MOUSE_X, _my_hist = MOUSE_Y;
-	inline static char _mouse[n_mouse];
-	inline static bool _useMouse = true;
-	inline static Worker* collision = nullptr;
+	int _mx = MOUSE_X, _my = MOUSE_Y;
+	int _mx_hist = MOUSE_X, _my_hist = MOUSE_Y;
+	char _mouse[n_mouse];
+	bool _useMouse = true;
+	Worker* collision = nullptr;
 
 private:
-	inline static unordered_map<unsigned char, char> _key;
-	inline static bool _useKey = true;
+	unordered_map<unsigned char, char> _key;
+	bool _useKey = true;
 
 public:
+	static Input* getInstance() {
+		if (!_self) { _self = new Input(); }
+		return _self;
+	}
+
+	static void finalize() {
+		delete _self;
+		_self = nullptr;
+	}
+
+private:
 	Input();
+	~Input();
 
 public:
-	static int getMouseX() { return _mx; }
-	static int getMouseY() { return _my; }
-	static int getMouseXHist() { return _mx_hist; }
-	static int getMouseYHist() { return _my_hist; }
-	static int getDX() { return getMouseX() - getMouseXHist(); }
-	static int getDY() { return getMouseY() - getMouseYHist(); }
-	static bool isMove() {
+	int getMouseX() { return _mx; }
+	int getMouseY() { return _my; }
+	int getMouseXHist() { return _mx_hist; }
+	int getMouseYHist() { return _my_hist; }
+	int getDX() { return getMouseX() - getMouseXHist(); }
+	int getDY() { return getMouseY() - getMouseYHist(); }
+	bool isMove() {
 		int dx = getDX();
 		int dy = getDY();
 		return dx != 0 || dy != 0;
 	}
-	static bool isMouseDown(int index) { return _mouse[index] == 1; }
-	static bool isMouse(int index) { return _mouse[index] > 0; }
-	static bool isMouseUp(int index) { return _mouse[index] == -1; }
+	bool isMouseDown(int index) { return _mouse[index] == 1; }
+	bool isMouse(int index) { return _mouse[index] > 0; }
+	bool isMouseUp(int index) { return _mouse[index] == -1; }
 
 public:
-	static void setUseMouse(bool useMouse) { _useMouse = useMouse; }
-	static void setUseKey(bool useKey) { _useKey = useKey; }
+	void setUseMouse(bool useMouse) { _useMouse = useMouse; }
+	void setUseKey(bool useKey) { _useKey = useKey; }
 
 private:
-	static void setKey(const char* path);
+	void setKey(const char* path);
 
 public:
 	void update() override;

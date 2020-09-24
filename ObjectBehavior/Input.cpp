@@ -2,11 +2,11 @@
 
 Input::Input() {
 	for (int i = 0; i < n_mouse; i++) { _mouse[i] = 0; }
-	//for (int i = 0; i < n_key; i++) { _key[i] = 0; }
-	if (!_self) {
-		_self = this; 
-		setKey(path_key);
-	}
+	setKey(path_key);
+}
+
+Input::~Input() {
+
 }
 
 void Input::setKey(const char* path) {
@@ -33,7 +33,7 @@ void Input::update() {
 		_mx_hist = _mx;
 		_my_hist = _my;
 		GetMousePoint(&_mx, &_my);
-		
+
 		int mi = GetMouseInput();
 		char& ml = _mouse[0], & mm = _mouse[1], & mr = _mouse[2];
 		if (mi & MOUSE_INPUT_LEFT) {
@@ -55,7 +55,7 @@ void Input::update() {
 		else if (mr == -1) { mr = 0; }
 	}
 	if (_useKey) {
-		for (auto e = _key.begin(); e != _key.end();e++) {
+		for (auto e = _key.begin(); e != _key.end(); e++) {
 			unsigned char k = e->first;
 			char& v = e->second;
 			int key = CheckHitKey(k);

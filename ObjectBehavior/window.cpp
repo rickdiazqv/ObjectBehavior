@@ -14,6 +14,7 @@ int LoopProcess() {
 	return 1;
 }
 int AllInit() {
+	SetAlwaysRunFlag(TRUE);
 	ChangeWindowMode(TRUE); //ウィンドウ表示
 	SetMainWindowText(title); //ウィンドウタイトル
 	SetGraphMode(winx, winy, ColorBit); //ウィンドウサイズ

@@ -12,6 +12,7 @@
 #include "Object.h"
 
 // class
+#include "GameProcessor.h"
 #include "WorkManager.h"
 #include "Plane.h"
 #include "RectangleObject.h"

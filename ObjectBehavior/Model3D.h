@@ -3,7 +3,7 @@
 class Model3D : public Plane {
 private:
 	int modelHandle, attachIndex;
-	float totalTime, playTime;
+	float totalTime, playTime, time = .0f;
 
 public:
 	Model3D(const char* const path);

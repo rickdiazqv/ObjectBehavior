@@ -5,7 +5,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 	if (AllInit() != 0) { return -1; }
 
 	//BaseObject obj;
-	WorkManager& workManager = Singleton<WorkManager>::get_instance();
+	GameProcessor* const gameProcessor = GameProcessor::geInstance();
 	RectangleObject rect1(111, 111, 50, 50, Layer::Object, true);
 	RectangleObject rect2(333, 333, 100, 100, Layer::Default, true);
 	RectangleObject rect3(555, 555, 150, 150, Layer::Floor, true);
@@ -18,13 +18,13 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 	rect4.vy = 2;
 	rect5.vy = 1;
 	rect6.vy = -1;
-	workManager.receive();
+	
 	while (LoopProcess()) {
 		DrawBox(0, 0, winx, winy, 0x7f7f7f, TRUE);
-		workManager.update();
-		workManager.draw();
+		gameProcessor->process();
 	}
-	SingletonFinalizer::finalize();
+
+	GameProcessor::finalize();
 	DxLib_End();
 
 	return 0;

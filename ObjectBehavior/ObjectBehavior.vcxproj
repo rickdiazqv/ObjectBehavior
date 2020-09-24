@@ -176,6 +176,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Circle.cpp" />
+    <ClCompile Include="GameProcessor.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="Model3D.cpp" />
     <ClCompile Include="Object.cpp" />
@@ -198,6 +199,7 @@
     <ClInclude Include="EditableTask.h" />
     <ClInclude Include="enums.h" />
     <ClInclude Include="functions.h" />
+    <ClInclude Include="GameProcessor.h" />
     <ClInclude Include="global.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="Layer.h" />

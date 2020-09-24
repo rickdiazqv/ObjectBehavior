@@ -82,6 +82,9 @@
     <Filter Include="Objects\Model3D">
       <UniqueIdentifier>{74b89413-d43f-4db2-9424-b297d9c078c8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Tools\GameProcessor">
+      <UniqueIdentifier>{7308bb2e-883d-4e13-91b6-b7047101da9c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -116,6 +119,9 @@
     </ClCompile>
     <ClCompile Include="Model3D.cpp">
       <Filter>Objects\Model3D</Filter>
+    </ClCompile>
+    <ClCompile Include="GameProcessor.cpp">
+      <Filter>Tools\GameProcessor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -193,6 +199,9 @@
     </ClInclude>
     <ClInclude Include="Model3D.h">
       <Filter>Objects\Model3D</Filter>
+    </ClInclude>
+    <ClInclude Include="GameProcessor.h">
+      <Filter>Tools\GameProcessor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
