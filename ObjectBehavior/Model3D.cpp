@@ -1,6 +1,6 @@
 #include "Model3D.h"
 
-Model3D::Model3D(const char* path) : Plane() {
+Model3D::Model3D(const char* const path) : Plane() {
     // ‚R‚cƒ‚ƒfƒ‹‚Ì“Ç‚İ‚İ
     modelHandle = MV1LoadModel(path);
 

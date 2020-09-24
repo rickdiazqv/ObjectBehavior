@@ -6,7 +6,7 @@ private:
 	float totalTime, playTime;
 
 public:
-	Model3D(const char* path);
+	Model3D(const char* const path);
 
 public:
 	void update() override;
