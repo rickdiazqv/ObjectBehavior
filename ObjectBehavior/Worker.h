@@ -1,5 +1,5 @@
 #pragma once
-#include "tools.h"
+#include "define.h"
 #include "Task.h"
 #include "Connector.h"
 #include "Comparable.h"
@@ -19,13 +19,19 @@ private:
 	//Comparator<Worker*> _procCompare = [](Worker* self, Worker* other) {return 0; };
 	//Comparator<Worker*> _drawCompare = _procCompare;
 
+private:
+	int _procPriority = 0;
+	int _drawPriority = 0;
+
 public:
-	Worker();
+	Worker(int procPriority, int drawPriority);
 	~Worker();
 
 public:
 	Worker* getPrev() { return _prev; }
 	Worker* getNext() { return _next; }
+	int getProcPriority() { return _procPriority; }
+	int getDrawPriority() { return _drawPriority; }
 
 private:
 	void setPrev(Worker* other) { _prev = other; };
@@ -56,6 +62,6 @@ public:
 	int compareTo(Worker* other) override;
 
 public:
-	virtual int procCompareTo(Worker* other) { return 0; }
-	virtual int drawCompareTo(Worker* other) { return 0; }
+	virtual int procCompareTo(Worker* other) { return this->getProcPriority() - other->getProcPriority(); }
+	virtual int drawCompareTo(Worker* other) { return this->getDrawPriority() - other->getDrawPriority(); }
 };

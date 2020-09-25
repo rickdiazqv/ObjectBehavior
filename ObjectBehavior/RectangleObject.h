@@ -1,16 +1,16 @@
 #pragma once
-#include "tools.h"
+#include "define.h"
 #include "Object.h"
 
 class RectangleObject : public Object {
 protected:
-	inline static const int LEFT = 0, TOP = 0, WIDTH = 0, HEIGHT = 0;
-	int _left = LEFT, _top = TOP, _width = WIDTH, _height = HEIGHT;
+	inline static const float LEFT = .0f, TOP = .0f, WIDTH = .0f, HEIGHT = .0f;
+	float _left = LEFT, _top = TOP, _width = WIDTH, _height = HEIGHT;
 
 public:
 	RectangleObject(Layer layer, bool pers = false);
-	RectangleObject(int width, int height, Layer layer, bool pers = false);
-	RectangleObject(int x, int y, int width, int height, Layer layer, bool pers = false);
+	RectangleObject(float width, float height, Layer layer, bool pers = false);
+	RectangleObject(float x, float y, float width, float height, Layer layer, bool pers = false);
 	~RectangleObject();
 
 public:

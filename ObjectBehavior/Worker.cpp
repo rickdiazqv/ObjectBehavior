@@ -1,11 +1,14 @@
 #include "Worker.h"
 
-Worker::Worker() {
+Worker::Worker(int procPriority, int drawPriority) {
 	printfDx("Worker\n");
 	if (_connector) { _connector->connect(this); }
 	else { 
 		_queWorkers.push(this); 
 	}
+
+	_procPriority = procPriority;
+	_drawPriority = drawPriority;
 }
 
 Worker::~Worker() {

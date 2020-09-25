@@ -85,6 +85,9 @@
     <Filter Include="Tools\GameProcessor">
       <UniqueIdentifier>{7308bb2e-883d-4e13-91b6-b7047101da9c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Tools\Morton">
+      <UniqueIdentifier>{75af97ff-38bd-4e53-acae-bdc2655b38b4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -122,6 +125,9 @@
     </ClCompile>
     <ClCompile Include="GameProcessor.cpp">
       <Filter>Tools\GameProcessor</Filter>
+    </ClCompile>
+    <ClCompile Include="Morton.cpp">
+      <Filter>Tools\Morton</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -202,6 +208,9 @@
     </ClInclude>
     <ClInclude Include="GameProcessor.h">
       <Filter>Tools\GameProcessor</Filter>
+    </ClInclude>
+    <ClInclude Include="Morton.h">
+      <Filter>Tools\Morton</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

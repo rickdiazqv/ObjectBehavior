@@ -22,3 +22,4 @@ class Plane;
 class RectangleObject;
 class Circle;
 class Model3D;
+class Morton;

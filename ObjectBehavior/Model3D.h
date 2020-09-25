@@ -1,5 +1,7 @@
 #pragma once
+#include "define.h"
 #include "Plane.h"
+
 class Model3D : public Plane {
 private:
 	int modelHandle, attachIndex;

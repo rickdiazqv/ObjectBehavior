@@ -4,13 +4,17 @@ Object::Object() : Object(X, Y, LAYER, PERS) {
 
 }
 
-Object::Object(int x, int y, Layer layer, bool pers) {
+Object::Object(float x, float y, Layer layer, bool pers) : Worker(PROC_PRIORITY, DRAW_PRIORITY){
 	printfDx("Object\n");
 	_layer = layer;
 	_pers = pers;
 
 	_x = x;
 	_y = y;
+	_x_hist = getX();
+	_y_hist = getY();
+
+	morton.setMorton(getX(), getY());
 
 	Awake();
 }
@@ -20,8 +24,8 @@ Object::~Object() {
 }
 
 void Object::update() {
-	_x_hist = _x;
-	_y_hist = _y;
+	_x_hist = getX();
+	_y_hist = getY();
 
 	_x += vx;
 	_y += vy;
@@ -29,8 +33,11 @@ void Object::update() {
 	vx += ax;
 	vy += ay;
 
-	int dy = getDY();
-	if (dy != 0) { sortSelf(this, dy); }
+	float dx = getDX(), dy = getDY();
+	if (dy != .0f) { sortSelf(this, dy >= .0f ? 1 : -1); }
+	if (isMove()) {
+		morton.setMorton(getX(), getY());
+	}
 }
 
 string Object::toString() {
@@ -60,7 +67,7 @@ int Object::drawCompareTo(Worker* other) {
 	int comp = 0;
 	if (!otr) {
 		printfDx("can not cast\n");
-		return comp;
+		return this->getDrawPriority() - other->getDrawPriority();
 	}
 
 	comp = int(this->getLayer()) - int(otr->getLayer());
@@ -69,7 +76,7 @@ int Object::drawCompareTo(Worker* other) {
 		bool potr = otr->getPers();
 
 		if (pslf && potr) {
-			comp = this->getY() - otr->getY();
+			comp = (this->getY() - otr->getY()) >= .0f ? 1 : -1;
 		}
 		else if (pslf && !potr) {
 		}

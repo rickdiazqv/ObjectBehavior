@@ -1,6 +1,6 @@
 #include "Input.h"
 
-Input::Input() {
+Input::Input() : Worker(PROC_PRIORITY, DRAW_PRIORITY) {
 	for (int i = 0; i < n_mouse; i++) { _mouse[i] = 0; }
 	setKey(path_key);
 }

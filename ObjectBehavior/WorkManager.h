@@ -1,9 +1,10 @@
 #pragma once
-#include "tools.h"
+#include "define.h"
 #include "Task.h"
 #include "Connector.h"
 #include "Worker.h"
 #include "Input.h"
+#include "Morton.h"
 
 class WorkManager : public Task, public Connector<Worker*> {
 private:

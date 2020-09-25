@@ -1,5 +1,5 @@
 #pragma once
-#include "tools.h"
+#include "define.h"
 #include "Object.h"
 
 class Plane : public Object {
