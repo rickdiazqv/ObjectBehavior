@@ -1,6 +1,6 @@
 #include "Model3D.h"
 
-Model3D::Model3D(const char* const path) : Plane() {
+Model3D::Model3D(const char* const path) : PlaneObject() {
 	// ‚R‚cƒ‚ƒfƒ‹‚Ì“Ç‚İ‚İ
 	modelHandle = MV1LoadModel(path);
 
@@ -21,7 +21,7 @@ Model3D::Model3D(const char* const path) : Plane() {
 }
 
 void Model3D::update() {
-	Plane::update();
+	PlaneObject::update();
 
 	// Ä¶ŠÔ‚ği‚ß‚é
 	playTime += .4f;

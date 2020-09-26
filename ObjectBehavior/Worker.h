@@ -28,6 +28,7 @@ public:
 	~Worker();
 
 public:
+	virtual void init() = 0;
 	Worker* getPrev() { return _prev; }
 	Worker* getNext() { return _next; }
 	int getProcPriority() { return _procPriority; }

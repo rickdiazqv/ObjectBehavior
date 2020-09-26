@@ -51,6 +51,9 @@ void WorkManager::receive() {
 		_queWorkers.pop();
 		if (!self) { continue; }
 
+		// 初期化メソッド
+		self->init();
+
 		// Workerの内部ポインタのソート
 		Worker::sortSelf(self);
 

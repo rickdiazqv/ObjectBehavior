@@ -14,8 +14,10 @@
 // class
 #include "GameProcessor.h"
 #include "WorkManager.h"
-#include "Plane.h"
+#include "PlaneObject.h"
 #include "RectangleObject.h"
-#include "Circle.h"
+#include "CircleObject.h"
 #include "Model3D.h"
 #include "Morton.h"
+#include "ObjectMorton.h"
+#include "RectangleMorton.h"

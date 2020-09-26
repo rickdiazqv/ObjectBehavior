@@ -22,6 +22,10 @@ RectangleObject::~RectangleObject() {
 
 }
 
+void RectangleObject::createMorton() {
+	_morton = new RectangleMorton(this);
+}
+
 void RectangleObject::update() {
 	Object::update();
 
@@ -30,7 +34,22 @@ void RectangleObject::update() {
 }
 
 void RectangleObject::draw() {
-	DrawBoxAA(_left, _top, _left + _width, _top + _height, 0xff0000, TRUE);
+	DrawBoxAA(_left, _top, _left + _width, _top + _height, 0xff0000, FALSE);
+
+	float left = .0f;
+	float top = .0f;
+	int depth = _morton->getDepth();
+	float scale = 2.f;
+	for (int i = 0; i <= depth; i++) {
+		int id = _morton->getMorton(i); 
+		scale /= 2.f;
+		left += scale * float(id % 2);
+		top += scale * float(id >> 1);
+	}
+	left *= float(winx);
+	top *= float(winy);
+	
+	DrawBoxAA(left, top, left + scale * float(winx), top + scale * float(winy), 0xffff00, FALSE);
 }
 
 string RectangleObject::toString() {
@@ -40,7 +59,8 @@ string RectangleObject::toString() {
 		", pers: " << getPers() <<
 		", xy(" << _x << ", " << _y <<
 		"), wh(" << _width << ", " << _height <<
-		"), morton: " << morton.getAbsMorton() <<
+		"), morton: " << _morton->getDepth() <<
+		":" << _morton->getMorton(_morton->getDepth()) <<
 		endl;
 	return oss.str();
 }

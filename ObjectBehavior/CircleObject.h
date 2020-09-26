@@ -2,6 +2,6 @@
 #include "package.h"
 #include "Object.h"
 
-class Circle : public Object {
+class CircleObject : public Object {
 
 };

@@ -26,7 +26,7 @@ protected:
 protected:
 	float _x = X, _y = Y;
 	float _x_hist = _x, _y_hist = _y;
-	Morton morton;
+	Morton* _morton;
 
 public:
 	float vx = VX, vy = VY;
@@ -42,8 +42,12 @@ public:
 	Object(float x, float y, Layer layer, bool pers);
 	~Object();
 
-	// getter
+protected:
+	virtual void createMorton();
+
+	// getterk
 public:
+	void init() override final;
 	Layer getLayer() { return _layer; }
 	bool getPers() { return _pers; }
 	float getX() { return _x; }

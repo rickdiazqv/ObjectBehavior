@@ -38,6 +38,7 @@ private:
 	~Input();
 
 public:
+	void init() override{}
 	int getMouseX() { return _mx; }
 	int getMouseY() { return _my; }
 	int getMouseXHist() { return _mx_hist; }

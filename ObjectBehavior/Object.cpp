@@ -4,7 +4,7 @@ Object::Object() : Object(X, Y, LAYER, PERS) {
 
 }
 
-Object::Object(float x, float y, Layer layer, bool pers) : Worker(PROC_PRIORITY, DRAW_PRIORITY){
+Object::Object(float x, float y, Layer layer, bool pers) : Worker(PROC_PRIORITY, DRAW_PRIORITY) {
 	printfDx("Object\n");
 	_layer = layer;
 	_pers = pers;
@@ -14,13 +14,22 @@ Object::Object(float x, float y, Layer layer, bool pers) : Worker(PROC_PRIORITY,
 	_x_hist = getX();
 	_y_hist = getY();
 
-	morton.setMorton(getX(), getY());
-
 	Awake();
 }
 
 Object::~Object() {
+	delete _morton;
+}
 
+void Object::createMorton() {
+	_morton = new Morton(this);
+}
+
+void Object::init() {
+	if (!_morton) {
+		createMorton();
+		_morton->updateMorton();
+	}
 }
 
 void Object::update() {
@@ -36,7 +45,7 @@ void Object::update() {
 	float dx = getDX(), dy = getDY();
 	if (dy != .0f) { sortSelf(this, dy >= .0f ? 1 : -1); }
 	if (isMove()) {
-		morton.setMorton(getX(), getY());
+		_morton->updateMorton();
 	}
 }
 

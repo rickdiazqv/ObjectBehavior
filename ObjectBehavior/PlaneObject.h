@@ -2,10 +2,10 @@
 #include "define.h"
 #include "Object.h"
 
-class Plane : public Object {
+class PlaneObject : public Object {
 public:
-	Plane();
-	~Plane();
+	PlaneObject();
+	~PlaneObject();
 
 public:
 	void update() override;

@@ -34,9 +34,6 @@
     <Filter Include="Objects\Circle">
       <UniqueIdentifier>{1bc8f9ab-27e3-4520-9edb-64537dfc59c2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Objects\Plane">
-      <UniqueIdentifier>{dfb5bfc9-569a-4d4d-a815-0e8743188fd7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Objects\Interface">
       <UniqueIdentifier>{269ef80b-272e-4d32-86b9-5168fe3e7f74}</UniqueIdentifier>
     </Filter>
@@ -85,8 +82,23 @@
     <Filter Include="Tools\GameProcessor">
       <UniqueIdentifier>{7308bb2e-883d-4e13-91b6-b7047101da9c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Tools\Morton">
+    <Filter Include="Objects\Morton">
       <UniqueIdentifier>{75af97ff-38bd-4e53-acae-bdc2655b38b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\Morton\Morton">
+      <UniqueIdentifier>{601f189f-0a77-421a-840b-9c9b4ff79790}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\Morton\RectangleMorton">
+      <UniqueIdentifier>{a52e33b2-6a81-4d77-ac13-549c74f0fdf2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\PlaneObject">
+      <UniqueIdentifier>{dfb5bfc9-569a-4d4d-a815-0e8743188fd7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\Morton\ObjectMorton">
+      <UniqueIdentifier>{7fb31abb-09a5-451e-9ee0-f4922e4089dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\ObjectManager">
+      <UniqueIdentifier>{1fd03188-89f0-4cc1-ba2b-19476bbf6724}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -105,12 +117,6 @@
     <ClCompile Include="Worker.cpp">
       <Filter>Tools\Worker</Filter>
     </ClCompile>
-    <ClCompile Include="Plane.cpp">
-      <Filter>Objects\Plane</Filter>
-    </ClCompile>
-    <ClCompile Include="Circle.cpp">
-      <Filter>Objects\Circle</Filter>
-    </ClCompile>
     <ClCompile Include="RectangleObject.cpp">
       <Filter>Objects\RectangleObject</Filter>
     </ClCompile>
@@ -126,8 +132,23 @@
     <ClCompile Include="GameProcessor.cpp">
       <Filter>Tools\GameProcessor</Filter>
     </ClCompile>
+    <ClCompile Include="RectangleMorton.cpp">
+      <Filter>Objects\Morton\RectangleMorton</Filter>
+    </ClCompile>
+    <ClCompile Include="PlaneObject.cpp">
+      <Filter>Objects\PlaneObject</Filter>
+    </ClCompile>
+    <ClCompile Include="CircleObject.cpp">
+      <Filter>Objects\Circle</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectMorton.cpp">
+      <Filter>Objects\Morton\ObjectMorton</Filter>
+    </ClCompile>
     <ClCompile Include="Morton.cpp">
-      <Filter>Tools\Morton</Filter>
+      <Filter>Objects\Morton\Morton</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectManager.cpp">
+      <Filter>Objects\ObjectManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -160,12 +181,6 @@
     </ClInclude>
     <ClInclude Include="Worker.h">
       <Filter>Tools\Worker</Filter>
-    </ClInclude>
-    <ClInclude Include="Plane.h">
-      <Filter>Objects\Plane</Filter>
-    </ClInclude>
-    <ClInclude Include="Circle.h">
-      <Filter>Objects\Circle</Filter>
     </ClInclude>
     <ClInclude Include="tools.h">
       <Filter>Tools\Header</Filter>
@@ -210,7 +225,22 @@
       <Filter>Tools\GameProcessor</Filter>
     </ClInclude>
     <ClInclude Include="Morton.h">
-      <Filter>Tools\Morton</Filter>
+      <Filter>Objects\Morton\Morton</Filter>
+    </ClInclude>
+    <ClInclude Include="RectangleMorton.h">
+      <Filter>Objects\Morton\RectangleMorton</Filter>
+    </ClInclude>
+    <ClInclude Include="PlaneObject.h">
+      <Filter>Objects\PlaneObject</Filter>
+    </ClInclude>
+    <ClInclude Include="CircleObject.h">
+      <Filter>Objects\Circle</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectMorton.h">
+      <Filter>Objects\Morton\ObjectMorton</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectManager.h">
+      <Filter>Objects\ObjectManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

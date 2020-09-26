@@ -1,8 +1,8 @@
 #pragma once
 #include "define.h"
-#include "Plane.h"
+#include "PlaneObject.h"
 
-class Model3D : public Plane {
+class Model3D : public PlaneObject {
 private:
 	int modelHandle, attachIndex;
 	float totalTime, playTime, time = .0f;

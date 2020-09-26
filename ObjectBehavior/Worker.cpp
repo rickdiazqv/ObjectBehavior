@@ -21,6 +21,9 @@ void Worker::sortSelf(Worker* self) {
 		int index = !!(self->drawCompareTo(current) >= 0);
 		sortSelf(self, current, index);
 	}
+	else {
+		setDrawHead(self);
+	}
 	setCurrent(self);
 }
 
@@ -47,6 +50,9 @@ bool Worker::sortSelf(Worker* const self, Worker* const root, const int index) {
 	inswkr->setNeighbor[index](inswkr, self);
 	if (!inswkr->getPrev()) {
 		setDrawHead(inswkr);
+	}
+	else if (!self->getPrev()) {
+		setDrawHead(self);
 	}
 
 	return true;
