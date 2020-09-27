@@ -6,7 +6,7 @@
 
 class Worker : public Task, public Comparable<Worker*> {
 private:
-	inline static Connector<Worker*>* _connector = nullptr;
+	inline static Connector<Worker*, void, void>* _connector = nullptr;
 	static UnaryOperator<Worker*> getNeighbor[2];
 	static TypeBiConsumer<Worker*> setNeighbor[2];
 	inline static Worker* _current = nullptr;
@@ -29,14 +29,14 @@ public:
 
 public:
 	virtual void init() = 0;
-	Worker* getPrev() { return _prev; }
-	Worker* getNext() { return _next; }
-	int getProcPriority() { return _procPriority; }
-	int getDrawPriority() { return _drawPriority; }
+	inline Worker* getPrev() { return _prev; }
+	inline Worker* getNext() { return _next; }
+	inline int getProcPriority() { return _procPriority; }
+	inline int getDrawPriority() { return _drawPriority; }
 
 private:
-	void setPrev(Worker* other) { _prev = other; };
-	void setNext(Worker* other) { _next = other; };
+	inline void setPrev(Worker* other) { _prev = other; };
+	inline void setNext(Worker* other) { _next = other; };
 
 public:
 	static void sortSelf(Worker* self);
@@ -48,14 +48,14 @@ private:
 	static bool sortSelf(Worker* const self, Worker* const root, const int index);
 
 public:
-	static void setConnector(Connector<Worker*>* connector);
+	static void setConnector(Connector<Worker*, void, void>* connector);
 	static void sendWorkers();
-	static Worker* getCurrent() { return _current; }
-	static Worker* getDrawHead() { return _drawHead; }
+	inline static Worker* getCurrent() { return _current; }
+	inline static Worker* getDrawHead() { return _drawHead; }
 
 private:
-	static void setCurrent(Worker* worker) { _current = worker; }
-	static void setDrawHead(Worker* worker) { _drawHead = worker; }
+	inline static void setCurrent(Worker* worker) { _current = worker; }
+	inline static void setDrawHead(Worker* worker) { _drawHead = worker; }
 
 public:
 	//bool procComparable() { return _procCompare; }
@@ -63,6 +63,6 @@ public:
 	int compareTo(Worker* other) override;
 
 public:
-	virtual int procCompareTo(Worker* other) { return this->getProcPriority() - other->getProcPriority(); }
-	virtual int drawCompareTo(Worker* other) { return this->getDrawPriority() - other->getDrawPriority(); }
+	inline virtual int procCompareTo(Worker* other) { return this->getProcPriority() - other->getProcPriority(); }
+	inline virtual int drawCompareTo(Worker* other) { return this->getDrawPriority() - other->getDrawPriority(); }
 };

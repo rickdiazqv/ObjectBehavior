@@ -11,9 +11,13 @@
 #include "Worker.h"
 #include "Object.h"
 
-// class
+// singleton
 #include "GameProcessor.h"
 #include "WorkManager.h"
+#include "ObjectManager.h"
+#include "Input.h"
+
+// class
 #include "PlaneObject.h"
 #include "RectangleObject.h"
 #include "CircleObject.h"

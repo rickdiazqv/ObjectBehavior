@@ -1,11 +1,10 @@
 #pragma once
 #include "define.h"
-#include "Object.h"
 
 class Morton {
 public:
 	inline static const int DEPTH = 4;
-	inline static const int SQUARE = int(pow(2, DEPTH - 1));
+	inline static int SQUARE = int(pow(2, DEPTH - 1));
 	inline static const float DX =
 		float(double(winx) / double(SQUARE));
 	inline static const float DY =
@@ -16,7 +15,7 @@ protected:
 	inline static const int SCALE = -1;
 
 protected:
-	Object* _self = nullptr;
+	Object* const _self = nullptr;
 	int _id[DEPTH];
 	int _absId = ID;
 	int _depth = SCALE;

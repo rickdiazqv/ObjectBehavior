@@ -5,7 +5,7 @@ class Task;
 class EditableTask;
 template <typename T>
 class Behavior;
-template <typename T>
+template<typename T, typename  R, typename  S>
 class Connector;
 template <typename T>
 class Comparable;
@@ -14,10 +14,13 @@ class Comparable;
 class Worker;
 class Object;
 
-// class
+// singleton
 class GameProcessor;
 class WorkManager;
+class ObjectManager;
 class Input;
+
+// class
 class PlaneObject;
 class RectangleObject;
 class CircleObject;

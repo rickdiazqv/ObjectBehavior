@@ -1,9 +1,9 @@
 #pragma once
 #include "define.h"
 
-template<typename T>
+template<typename T, typename  R, typename  S>
 class Connector {
 public:
-	virtual void connect(T self) = 0;
-	virtual void disconnect(T self) = 0;
+	virtual R connect(T self) = 0;
+	virtual S disconnect(T self) = 0;
 };

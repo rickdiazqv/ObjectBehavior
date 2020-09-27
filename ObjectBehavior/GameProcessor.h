@@ -2,11 +2,14 @@
 #include "define.h"
 #include "Task.h"
 #include "WorkManager.h"
+#include "ObjectManager.h"
+#include "Input.h"
 
 class GameProcessor {
 private:
 	inline static GameProcessor* _self = nullptr;
-	WorkManager* _workManager = nullptr;
+	WorkManager* _wrkMgr = nullptr;
+	ObjectManager* _objMgr = nullptr;
 	Input* _input = nullptr;
 
 private:

@@ -1,4 +1,5 @@
 #include "Object.h"
+#include "Morton.h"
 
 Object::Object() : Object(X, Y, LAYER, PERS) {
 
@@ -11,8 +12,8 @@ Object::Object(float x, float y, Layer layer, bool pers) : Worker(PROC_PRIORITY,
 
 	_x = x;
 	_y = y;
-	_x_hist = getX();
-	_y_hist = getY();
+	setXHist(getX());
+	setYHist(getY());
 
 	Awake();
 }
@@ -30,23 +31,59 @@ void Object::init() {
 		createMorton();
 		_morton->updateMorton();
 	}
+	updateMortonTree();
+}
+
+void Object::updateMortonTree() {
+	if (_connector->disconnect(this)) {
+		Object* prev = getMortonPrev();
+		Object* next = getMortonNext();
+		if (prev) { prev->setMortonNext(next); }
+		if (next) { next->setMortonPrev(prev); }
+	}
+	Object* tail = _connector->connect(this);
+	if (tail) {
+		tail->setMortonNext(this);
+		this->setMortonPrev(tail);
+	}
+}
+
+void Object::setConnector(Connector<Object*, Object*, bool>* connector) {
+	if (_connector) { return; }
+	_connector = connector;
+	printfDx("Object::setConnector\n");
 }
 
 void Object::update() {
-	_x_hist = getX();
-	_y_hist = getY();
+	bool move = vx != .0f || vy != .0f;
 
-	_x += vx;
-	_y += vy;
+	setXHist(getX());
+	setYHist(getY());
+
+	if (move) {
+		_x += vx;
+		_y += vy;
+	}
 
 	vx += ax;
 	vy += ay;
 
+	if (!move) { return; }
+
 	float dx = getDX(), dy = getDY();
 	if (dy != .0f) { sortSelf(this, dy >= .0f ? 1 : -1); }
-	if (isMove()) {
-		_morton->updateMorton();
+
+	if (_y >= winy - 25) {
+		int a = 0;
 	}
+	int depthHist = _morton->getDepth();
+	int absIdHist = _morton->getAbsMorton();
+	_morton->updateMorton();
+	int depth = _morton->getDepth();
+	int absId = _morton->getAbsMorton();
+
+	if (depth == depthHist && absId == absIdHist) { return; }
+	updateMortonTree();
 }
 
 string Object::toString() {
@@ -75,7 +112,7 @@ int Object::drawCompareTo(Worker* other) {
 	Object* otr = dynamic_cast<Object*>(other);
 	int comp = 0;
 	if (!otr) {
-		printfDx("can not cast\n");
+		//printfDx("can not cast\n");
 		return this->getDrawPriority() - other->getDrawPriority();
 	}
 

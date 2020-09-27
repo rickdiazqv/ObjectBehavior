@@ -2,11 +2,8 @@
 #include "define.h"
 #include "Task.h"
 #include "Connector.h"
-#include "Worker.h"
-#include "Input.h"
-#include "Morton.h"
 
-class WorkManager : public Task, public Connector<Worker*> {
+class WorkManager : public Task, public Connector<Worker*, void, void> {
 private:
 	inline static WorkManager* _self = nullptr;
 

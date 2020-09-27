@@ -58,10 +58,10 @@ bool Worker::sortSelf(Worker* const self, Worker* const root, const int index) {
 	return true;
 }
 
-void Worker::setConnector(Connector<Worker*>* connector) {
+void Worker::setConnector(Connector<Worker*, void, void>* connector) {
 	if (_connector) { return; }
 	_connector = connector;
-	printfDx("Task::setConnector\n");
+	printfDx("Worker::setConnector\n");
 }
 
 void Worker::sendWorkers() {

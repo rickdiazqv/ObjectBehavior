@@ -29,8 +29,8 @@ void RectangleObject::createMorton() {
 void RectangleObject::update() {
 	Object::update();
 
-	if (_x != _x_hist) { _left = _x - _width / 2.f; }
-	if (_y != _y_hist) { _top = _y - _height / 2.f; }
+	if (_x != _xHist) { _left = _x - _width / 2.f; }
+	if (_y != _yHist) { _top = _y - _height / 2.f; }
 }
 
 void RectangleObject::draw() {

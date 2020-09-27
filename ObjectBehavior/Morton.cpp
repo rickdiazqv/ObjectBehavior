@@ -1,7 +1,8 @@
 #include "Morton.h"
+#include "Object.h"
+#include "ObjectManager.h"
 
-Morton::Morton(Object* const self) {
-	_self = self;
+Morton::Morton(Object* const self):_self(self) {
 	for (int i = 0; i < DEPTH; i++) {
 		_id[i] = ID;
 	}
@@ -15,12 +16,13 @@ void Morton::updateMorton() {
 	float x = _self->getX();
 	float y = _self->getY();
 	int id = getOrder(x, y);
-	int deep = id % 4;
+
+	if (id >= ObjectManager::CELL) { return; }
 
 	_depth = DEPTH - 1;
-	if (deep == _id[DEPTH - 1]) { return; }
+	if (id == _absId) { return; }
 
-	_id[DEPTH - 1] = deep;
+	_id[DEPTH - 1] = id % 4;
 	_absId = id;
 	id >>= 2;
 	for (int i = DEPTH - 2; i >= 0; i--, id >>= 2) {
@@ -44,7 +46,7 @@ void Morton::drawGrid() {
 
 int Morton::getUpperShiftCount(int val) {
 	if (val == 0) {
-		printfDx("morton error\n");
+		//printfDx("morton error\n");
 	}
 
 	int c = 0;

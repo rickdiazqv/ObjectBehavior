@@ -1,6 +1,6 @@
 #include "Input.h"
 
-Input::Input() : Worker(PROC_PRIORITY, DRAW_PRIORITY) {
+Input::Input() : Object(X, Y, Layer::UI, true) {
 	for (int i = 0; i < n_mouse; i++) { _mouse[i] = 0; }
 	setKey(path_key);
 }
@@ -30,9 +30,9 @@ void Input::update() {
 	if (this != _self) { return; }
 
 	if (_useMouse) {
-		_mx_hist = _mx;
-		_my_hist = _my;
-		GetMousePoint(&_mx, &_my);
+		Object::update();
+		int x = int(getMouseX()), y = int(getMouseY());
+		GetMousePoint(&x, &y);
 
 		int mi = GetMouseInput();
 		char& ml = _mouse[0], & mm = _mouse[1], & mr = _mouse[2];
@@ -73,7 +73,7 @@ void Input::draw() {
 
 string Input::toString() {
 	ostringstream oss;
-	oss << "xy: (" << setw(4) << getMouseX() << ", " << setw(4) << getMouseY() << "), hist: (" << setw(4) << getMouseXHist() << ", " << setw(4) << getMouseYHist() << "), d: (" << setw(4) << getDX() << ", " << setw(4) << getDY() << "), move: " << (isMove() ? " true" : "false") << ", mouse: (" << setw(2) << int(_mouse[0]) << setw(2) << int(_mouse[1]) << setw(2) << int(_mouse[2]) << "), \nkeysize: " << _key.size() << "key: (";
+	oss << "xy: (" << setw(4) << getMouseX() << ", " << setw(4) << getMouseY() << "), hist: (" << setw(4) << getMouseXHist() << ", " << setw(4) << getMouseYHist() << "), d: (" << setw(4) << getMouseDX() << ", " << setw(4) << getMouseDY() << "), move: " << (isMove() ? " true" : "false") << ", mouse: (" << setw(2) << int(_mouse[0]) << setw(2) << int(_mouse[1]) << setw(2) << int(_mouse[2]) << "), \nkeysize: " << _key.size() << "key: (";
 
 	for (auto e = _key.begin(); e != _key.end(); e++) {
 		oss << setw(2) << (int)e->second;

@@ -1,8 +1,9 @@
 #pragma once
 #include "define.h"
-#include "Worker.h"
+#include "Object.h"
+#include "Morton.h"
 
-class Input : public Worker {
+class Input : public Object {
 private:
 	inline static const int PROC_PRIORITY = 10;
 	inline static const int DRAW_PRIORITY = 10;
@@ -12,11 +13,11 @@ private:
 	inline static Input* _self = nullptr;
 
 private:
-	int _mx = MOUSE_X, _my = MOUSE_Y;
-	int _mx_hist = MOUSE_X, _my_hist = MOUSE_Y;
+	//int _mx = MOUSE_X, _my = MOUSE_Y;
+	//int _mx_hist = MOUSE_X, _my_hist = MOUSE_Y;
 	char _mouse[n_mouse];
 	bool _useMouse = true;
-	Worker* collision = nullptr;
+	Object* _collision = nullptr;
 
 private:
 	unordered_map<unsigned char, char> _key;
@@ -38,25 +39,31 @@ private:
 	~Input();
 
 public:
-	void init() override{}
-	int getMouseX() { return _mx; }
-	int getMouseY() { return _my; }
-	int getMouseXHist() { return _mx_hist; }
-	int getMouseYHist() { return _my_hist; }
-	int getDX() { return getMouseX() - getMouseXHist(); }
-	int getDY() { return getMouseY() - getMouseYHist(); }
-	bool isMove() {
-		int dx = getDX();
-		int dy = getDY();
+	//void init() override{}
+	float getX() = delete;
+	float getY() = delete;
+	float getXHist() = delete;
+	float getYHist() = delete;
+	float getDX() = delete;
+	float getDY() = delete;
+	inline float getMouseX() { return _x; }
+	inline float getMouseY() { return _y; }
+	inline float getMouseXHist() { return _xHist; }
+	inline float getMouseYHist() { return _yHist; }
+	inline float getMouseDX() { return getMouseX() - getMouseXHist(); }
+	inline float getMouseDY() { return getMouseY() - getMouseYHist(); }
+	inline bool isMove() {
+		int dx = getMouseDX();
+		int dy = getMouseDY();
 		return dx != 0 || dy != 0;
 	}
-	bool isMouseDown(int index) { return _mouse[index] == 1; }
-	bool isMouse(int index) { return _mouse[index] > 0; }
-	bool isMouseUp(int index) { return _mouse[index] == -1; }
+	inline bool isMouseDown(int index) { return _mouse[index] == 1; }
+	inline bool isMouse(int index) { return _mouse[index] > 0; }
+	inline bool isMouseUp(int index) { return _mouse[index] == -1; }
 
 public:
-	void setUseMouse(bool useMouse) { _useMouse = useMouse; }
-	void setUseKey(bool useKey) { _useKey = useKey; }
+	inline void setUseMouse(bool useMouse) { _useMouse = useMouse; }
+	inline void setUseKey(bool useKey) { _useKey = useKey; }
 
 private:
 	void setKey(const char* path);
@@ -67,6 +74,6 @@ public:
 	string toString() override;
 
 public:
-	int procCompareTo(Worker* other) override { return 1; }
-	int drawCompareTo(Worker* other) override { return 1; }
+	inline int procCompareTo(Worker* other) override { return 1; }
+	inline int drawCompareTo(Worker* other) override { return 1; }
 };

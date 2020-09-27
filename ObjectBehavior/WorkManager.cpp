@@ -1,5 +1,7 @@
 #include "WorkManager.h"
-#include "global.h"
+#include "Worker.h"
+#include "Input.h"
+#include "Morton.h"
 
 WorkManager::WorkManager() {
 	//printfDx("WorkManager\n");
