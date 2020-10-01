@@ -242,6 +242,9 @@
     <ClInclude Include="ObjectManager.h">
       <Filter>Objects\ObjectManager</Filter>
     </ClInclude>
+    <ClInclude Include="Shape.h">
+      <Filter>Tools\Enums\Enums</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="ObjectBehavior.rc">

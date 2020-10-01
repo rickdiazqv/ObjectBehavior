@@ -8,5 +8,7 @@
 #include <iomanip>
 #include <fstream>
 #include <sstream>
+#include <json.hpp>
 
 using namespace std;
+using json = nlohmann::json;

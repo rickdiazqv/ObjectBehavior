@@ -1,5 +1,6 @@
 #include "Object.h"
 #include "Morton.h"
+#include "RectangleObject.h"
 
 Object::Object() : Object(X, Y, LAYER, PERS) {
 
@@ -52,6 +53,8 @@ void Object::setConnector(Connector<Object*, Object*, bool>* connector) {
 	if (_connector) { return; }
 	_connector = connector;
 	printfDx("Object::setConnector\n");
+
+	setColliderFunction();
 }
 
 void Object::update() {
@@ -135,4 +138,31 @@ int Object::drawCompareTo(Worker* other) {
 	}
 
 	return comp;
+}
+
+void Object::setColliderFunction() {
+	int d = (int)Shape::Dot;
+	int t = (int)Shape::Tryangle;
+	int r = (int)Shape::Rectangle;
+	int c = (int)Shape::Circle;
+
+	colliderFunction[d + r] = [](Object* self, Object* other) {
+		Object* dot = nullptr;
+		RectangleObject* rect = nullptr;
+
+		if (rect = dynamic_cast<RectangleObject*>(self)) {
+			dot = other;
+		}
+		else if (rect = dynamic_cast<RectangleObject*>(other)) {
+			dot = self;
+		}
+		else {
+			return false;
+		}
+
+		float& x = dot->_x, & y = dot->_y;
+		float l = rect->getLeft(), t = rect->getTop();
+		return l <= x && x < l + rect->getWidth() &&
+			t <= y && y < t + rect->getHeight();
+	};
 }

@@ -12,6 +12,10 @@ using BiFunction = R(*)(T, U);
 template<typename T>
 using UnaryOperator = Function<T, T>;
 
+template<typename T, typename R>
+using TypeBiFunction = BiFunction<T,T,R>;
+
+
 template<typename T>
 using Consumer = void(*)(T);
 

@@ -20,6 +20,7 @@ protected:
 
 private:
 	inline static Connector<Object*, Object*, bool>* _connector = nullptr;
+	inline static unordered_map <int, TypeBiFunction<Object*, bool>> colliderFunction;
 
 protected:
 	Layer _layer = LAYER;
@@ -79,6 +80,9 @@ private:
 
 public:
 	static void setConnector(Connector<Object*, Object*, bool>* connector);
+
+private:
+	static void setColliderFunction();
 
 	// Task
 public:
