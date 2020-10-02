@@ -1,6 +1,4 @@
-#include "Object.h"
-#include "Morton.h"
-#include "RectangleObject.h"
+#include "header.h"
 
 Object::Object() : Object(X, Y, LAYER, PERS) {
 
@@ -146,6 +144,10 @@ void Object::setColliderFunction() {
 	int r = (int)Shape::Rectangle;
 	int c = (int)Shape::Circle;
 
+	colliderFunction[d + d] = [](Object* self, Object* other) {
+		return self->_x == other->_x && self->_y == other->_y;
+	};
+
 	colliderFunction[d + r] = [](Object* self, Object* other) {
 		Object* dot = nullptr;
 		RectangleObject* rect = nullptr;
@@ -164,5 +166,79 @@ void Object::setColliderFunction() {
 		float l = rect->getLeft(), t = rect->getTop();
 		return l <= x && x < l + rect->getWidth() &&
 			t <= y && y < t + rect->getHeight();
+	};
+
+	colliderFunction[d + c] = [](Object* self, Object* other) {
+		Object* dot = nullptr;
+		CircleObject* cir = nullptr;
+
+		if (cir = dynamic_cast<CircleObject*>(self)) {
+			dot = other;
+		}
+		else if (cir = dynamic_cast<CircleObject*>(other)) {
+			dot = self;
+		}
+		else {
+			return false;
+		}
+
+		return
+			pow(dot->_x - cir->getX(), 2) +
+			pow(dot->_y - cir->getY(), 2)
+			<= pow(cir->getRadius(), 2);
+	};
+
+	colliderFunction[r + r] = [](Object* self, Object* other) {
+		RectangleObject* rects = nullptr;
+		RectangleObject* recto = nullptr;
+
+		if (!(rects = dynamic_cast<RectangleObject*>(self))) {
+			return false;
+		}
+		if (!(recto = dynamic_cast<RectangleObject*>(other))) {
+			return false;
+		}
+
+		return abs(rects->_x - recto->_x) <
+			(rects->getWidth() + recto->getWidth()) / 2.f &&
+			abs(rects->_y - recto->_y) <
+			(rects->getHeight() + recto->getHeight()) / 2.f;
+	};
+
+	colliderFunction[r + c] = [](Object* self, Object* other) {
+		RectangleObject* rect = (RectangleObject*)self;
+		CircleObject* cir = (CircleObject*)other;
+
+		if (rect = dynamic_cast<RectangleObject*>(self)) {
+			cir = dynamic_cast<CircleObject*>(other);
+		}
+		else if (rect = dynamic_cast<RectangleObject*>(other)) {
+			cir = dynamic_cast<CircleObject*>(self);
+		}
+		if (!rect || !cir) { return false; }
+
+		return
+			abs(rect->_x - cir->_x) <
+			rect->getWidth() / 2.f + cir->getRadius() &&
+			abs(rect->_y - cir->_y) <
+			rect->getHeight() / 2.f + cir->getRadius();
+	};
+
+
+	colliderFunction[r + c] = [](Object* self, Object* other) {
+		CircleObject* cirs = nullptr;
+		CircleObject* ciro = nullptr;
+
+		if (!(cirs = dynamic_cast<CircleObject*>(self))) {
+			return false;
+		}
+		if (!(ciro = dynamic_cast<CircleObject*>(other))) {
+			return false;
+		}
+
+		return
+			pow(cirs->_x - ciro->_x, 2) +
+			pow(cirs->_y - ciro->_y, 2) <
+			pow(cirs->getRadius() + ciro->getRadius(), 2);
 	};
 }

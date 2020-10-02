@@ -1,5 +1,6 @@
 #include "ObjectManager.h"
 #include "Object.h"
+
 ObjectManager::ObjectManager() :Worker(PROC_PRIORITY, DRAW_PRIORITY) {
 	_cell = new Object * [CELL];
 	for (int i = 0; i < CELL; i++) {
@@ -26,7 +27,7 @@ Object* ObjectManager::connect(Object* self) {
 		return nullptr;
 	}
 
-	int index = (int(pow(4, morton->getDepth())) - 1) / 3 +
+	int index = (pow(4, morton->getDepth()) - 1) / 3 +
 		morton->getAbsMorton();
 	printfDx("cell:%d, idx:%d\n", CELL, index);
 
@@ -52,7 +53,7 @@ bool ObjectManager::disconnect(Object* self) {
 		return false;
 	}
 
-	int index = (int(pow(4, morton->getDepth())) - 1) / 3 +
+	int index = (pow(4, morton->getDepth()) - 1) / 3 +
 		morton->getAbsMorton();
 	printfDx("cell:%d, idx:%d\n", CELL, index);
 	

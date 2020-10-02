@@ -31,9 +31,6 @@
     <Filter Include="Tools\Worker">
       <UniqueIdentifier>{097e9ab2-1549-4b48-9a14-3e7bc9c3aa84}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Objects\Circle">
-      <UniqueIdentifier>{1bc8f9ab-27e3-4520-9edb-64537dfc59c2}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Objects\Interface">
       <UniqueIdentifier>{269ef80b-272e-4d32-86b9-5168fe3e7f74}</UniqueIdentifier>
     </Filter>
@@ -100,12 +97,15 @@
     <Filter Include="Objects\ObjectManager">
       <UniqueIdentifier>{1fd03188-89f0-4cc1-ba2b-19476bbf6724}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Tools\Useful">
+      <UniqueIdentifier>{16e376c7-ab86-454f-a424-102315d36583}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\CircleObject">
+      <UniqueIdentifier>{1bc8f9ab-27e3-4520-9edb-64537dfc59c2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="window.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Object.cpp">
@@ -139,7 +139,7 @@
       <Filter>Objects\PlaneObject</Filter>
     </ClCompile>
     <ClCompile Include="CircleObject.cpp">
-      <Filter>Objects\Circle</Filter>
+      <Filter>Objects\CircleObject</Filter>
     </ClCompile>
     <ClCompile Include="ObjectMorton.cpp">
       <Filter>Objects\Morton\ObjectMorton</Filter>
@@ -149,6 +149,12 @@
     </ClCompile>
     <ClCompile Include="ObjectManager.cpp">
       <Filter>Objects\ObjectManager</Filter>
+    </ClCompile>
+    <ClCompile Include="window.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="useful.cpp">
+      <Filter>Tools\Useful</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -234,7 +240,7 @@
       <Filter>Objects\PlaneObject</Filter>
     </ClInclude>
     <ClInclude Include="CircleObject.h">
-      <Filter>Objects\Circle</Filter>
+      <Filter>Objects\CircleObject</Filter>
     </ClInclude>
     <ClInclude Include="ObjectMorton.h">
       <Filter>Objects\Morton\ObjectMorton</Filter>
@@ -244,6 +250,9 @@
     </ClInclude>
     <ClInclude Include="Shape.h">
       <Filter>Tools\Enums\Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="useful.h">
+      <Filter>Tools\Useful</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

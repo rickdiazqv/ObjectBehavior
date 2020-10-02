@@ -188,6 +188,7 @@
     <ClCompile Include="RectangleMorton.cpp" />
     <ClCompile Include="RectangleObject.cpp" />
     <ClCompile Include="Singleton.cpp" />
+    <ClCompile Include="useful.cpp" />
     <ClCompile Include="WorkManager.cpp" />
     <ClCompile Include="window.cpp" />
     <ClCompile Include="Worker.cpp" />
@@ -219,6 +220,7 @@
     <ClInclude Include="RectangleObject.h" />
     <ClInclude Include="Shape.h" />
     <ClInclude Include="Singleton.h" />
+    <ClInclude Include="useful.h" />
     <ClInclude Include="WorkManager.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Task.h" />
