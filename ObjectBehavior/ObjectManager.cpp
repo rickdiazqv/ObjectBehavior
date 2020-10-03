@@ -1,47 +1,159 @@
 #include "ObjectManager.h"
 #include "Object.h"
+#include "MortonTree.h"
 
-ObjectManager::ObjectManager() :Worker(PROC_PRIORITY, DRAW_PRIORITY) {
-	_cell = new Object * [CELL];
-	for (int i = 0; i < CELL; i++) {
-		_cell[i] = nullptr;
+ObjectManager::ObjectManager() : Worker(PROC_PRIORITY, DRAW_PRIORITY) {
+	_cell = new MortonTree[CELL];
+	_n = new int[DEPTH];
+	_root = new int[DEPTH];
+
+	for (int i = 0; i < CELL; i++) { _cell[i].index = i; }
+
+	for (int d = 0; d < DEPTH; d++) {
+		int n = _n[d] = pow(4, d);
+		int root = _root[d] = (n - 1) / 3;
+		for (int i = 0, idx = root; i < n; i++, idx++) {
+			int absId = idx - root;
+
+			// setParent
+			if (d > 0) {
+				int pidx = absId >> 2 + _root[d - 1];
+				_cell[idx].setParent(&_cell[pidx]);
+			}
+
+			// setChild
+			if (d < DEPTH - 1) {
+				int cidx = root + n + 4 * i;
+				printfDx("%d:%d-%d ", idx, cidx, cidx + 3);
+				for (int j = 0, c = cidx; j < 4; j++, c++) {
+					_cell[idx].setChild(&_cell[c], j);
+				}
+			}
+
+			// setPrev
+			if (idx % 4) {
+				_cell[idx].setPrev(&_cell[idx - 1]);
+			}
+			// setNext
+			if (idx % 4 != 3) {
+				_cell[idx].setNext(&_cell[idx + 1]);
+			}
+		}
 	}
 	Object::setConnector(this);
+
+	printfDx("\n\n");
+	printMortonTree(&_cell[0], 0);
+	printfDx("\n\n");
 }
 
 ObjectManager::~ObjectManager() {
 	delete[] _cell;
+	delete[] _n;
+	delete[] _root;
 }
 
 void ObjectManager::update() {
+	int depth = 0;
+	int idx = 0;
+	int sq = 0;
+	MortonTree* tree = &_cell[0];
+	MortonTree* parent = nullptr;
+	MortonTree* child = tree;
 
+	while (child) {
+		// treeの更新
+		tree = child;
+
+		// 同セル内で総当り
+		Object* self = tree->getHead();
+		Object* other = nullptr;
+		while (self && (other = self->getMortonNext())) {
+			do {
+				self->isCollider(other);
+
+			} while (other = other->getMortonNext());
+			self = self->getMortonNext();
+		}
+
+		// 全ての親と総当り
+		parent = tree->getParent();
+		for (int d = depth; d > 0; d--,
+			parent = parent->getParent()) {
+
+			self = tree->getHead();
+			other = parent->getHead();
+
+			// 親と総当り
+			while (self && other) {
+				do {
+					self->isCollider(other);
+				} while (other = other->getMortonNext());
+				self = self->getMortonNext();
+			}
+		}
+
+		// 下位セルに移動する
+		child = tree->getNextChild();
+		if (tree->isLeaf()) {
+			tree->resetChildIndex();
+		}
+		else if (child) { continue; }
+
+		// 上位セルに戻る
+		parent = tree;
+		while (parent = parent->getParent()) {
+			if (child = parent->getNextChild()) {
+				break;
+			}
+		}
+	}
 }
-
 
 Object* ObjectManager::connect(Object* self) {
 	Morton* morton = self->getMorton();
+	int depth = morton->getDepth();
 	int absId = morton->getAbsMorton();
+	Object* res = nullptr;
 
 	if (absId < 0 || CELL <= absId) {
 		printfDx("objmgr con error\n");
 		return nullptr;
 	}
 
-	int index = (pow(4, morton->getDepth()) - 1) / 3 +
-		morton->getAbsMorton();
-	printfDx("cell:%d, idx:%d\n", CELL, index);
+	int idx = getRoot(depth) + absId;
+	//printfDx("cell:%d, idx:%d\n", CELL, index);
 
-	if (!_cell[index]) {
-		_cell[index] = self;
-		return nullptr;
+	if (!_cell[idx].getHead()) {
+		_cell[idx].setHead(self);
+	}
+	else {
+		Object* current = _cell[idx].getHead();
+		while (current->getMortonNext()) {
+			current = current->getMortonNext();
+		}
+		res = current;
 	}
 
-	Object* current = _cell[index];
-	while (current->getMortonNext()) {
-		current = current->getMortonNext();
+	// isLeafの更新
+	MortonTree* tree = &_cell[idx];
+	MortonTree* parent = nullptr;
+	bool isLeaf = true;
+	for (int i = 0; i < 4; i++) {
+		if (tree->getChild(i)) {
+			isLeaf = false;
+			break;
+		}
+	}
+	if (isLeaf) {
+		tree->setIsLeaf(true);
+	}
+	for (int i = 0; i < depth; i++) {
+		parent = tree->getParent();
+		parent->setIsLeaf(false);
 	}
 
-	return current;
+	return res;
 }
 
 bool ObjectManager::disconnect(Object* self) {
@@ -53,27 +165,49 @@ bool ObjectManager::disconnect(Object* self) {
 		return false;
 	}
 
-	int index = (pow(4, morton->getDepth()) - 1) / 3 +
-		morton->getAbsMorton();
-	printfDx("cell:%d, idx:%d\n", CELL, index);
-	
-	if (!_cell[index]) {
+	int index = getRoot(morton->getDepth()) + absId;
+	//printfDx("cell:%d, idx:%d\n", CELL, index);
+
+	if (!_cell[index].getHead()) {
 		//printfDx("objmgr dis error: cell is null\n");
-		return false; 
+		return false;
 	}
 
-	Object* current = _cell[index];
+	Object* current = _cell[index].getHead();
+	MortonTree* tree = &_cell[index];
 	do {
-		if (current == self) {
-			if (!self->getMortonPrev()) {
-				_cell[index] = self->getMortonNext();
-			}
-			return true;
+		if (current != self) {
+			current = current->getMortonNext();
+			continue;
 		}
-		current = current->getMortonNext();
-	} while (current->getMortonNext());
+
+		if (!self->getMortonPrev()) {
+			tree->setHead(self->getMortonNext());
+			// ObjectがなくなったらTreeを切断する
+			if (tree->getParent() && !tree->getHead()) {
+				for (int i = 0; i < 4; i++) {
+					if (tree->getChild(i)) { return true; }
+				}
+				tree->getParent()->setIsLeaf(true);
+			}
+		}
+		return true;
+	} while (current && current->getMortonNext());
 
 	//printfDx("objmgr dis error: self is not found\n");
 
 	return false;
+}
+
+void ObjectManager::printMortonTree(MortonTree* tree, int depth) {
+	if (!tree) { return; }
+	string space = " ";
+	//for (int i = 0; i < depth; i++) { space += "　"; }
+	printfDx("%d%s", tree->index, space.c_str());
+
+	printMortonTree(tree->getNextChild(), depth + 1);
+	printMortonTree(tree->getNextChild(), depth + 1);
+	printMortonTree(tree->getNextChild(), depth + 1);
+	printMortonTree(tree->getNextChild(), depth + 1);
+	tree->resetChildIndex();
 }

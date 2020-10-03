@@ -23,6 +23,7 @@ private:
 	inline static unordered_map <int, TypeBiFunction<Object*, bool>> colliderFunction;
 
 protected:
+	 Shape _shape = Shape::Dot;
 	Layer _layer = LAYER;
 	bool _pers = PERS;
 
@@ -38,12 +39,13 @@ public:
 	float ax = AX, ay = AY;
 
 protected:
-	bool collision = true;
-	bool crossLayer = false;	// レイヤーを跨いで当たり判定を行うかどうか
+	bool _collisionable = true;	// 当たり判定を有効にするか
+	bool _collision = false;		// 衝突したかどうか
+	bool _crossLayer = false;	// レイヤーを跨いで当たり判定を行うかどうか
 
 public:
 	Object();
-	Object(float x, float y, Layer layer, bool pers);
+	Object(float x, float y, Layer layer, bool pers, Shape shape);
 	~Object();
 
 protected:
@@ -99,4 +101,10 @@ public:
 	// Wroker
 public:
 	int drawCompareTo(Worker* other) override;
+
+public:
+	bool isCollider(Object* other) {
+		bool res = _collision = colliderFunction[(int)this->_shape + (int)other->_shape](this, other);
+		return res;
+	}
 };

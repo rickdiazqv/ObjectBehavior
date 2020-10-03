@@ -8,12 +8,15 @@ class ObjectManager final : public Worker, public Connector<Object*, Object*, bo
 public:
 	inline static const int PROC_PRIORITY = 9;
 	inline static const int DRAW_PRIORITY = 9;
-	inline static int CELL = (pow(4, Morton::DEPTH) - 1) / 3;
+	inline static const int DEPTH = Morton::DEPTH;
+	inline static int CELL = (pow(4, DEPTH) - 1) / 3;
 
 private:
 	inline static ObjectManager* _self = nullptr;
 
-	Object** _cell = nullptr;
+	MortonTree* _cell = nullptr;
+	int* _n = nullptr;
+	int* _root = nullptr;
 
 private:
 	ObjectManager();
@@ -30,6 +33,10 @@ public:
 		_self = nullptr;
 	}
 
+private:
+	int getN(int index) { return _n[index]; }
+	int getRoot(int index) { return _root[index]; }
+
 public:
 	void init() override {}
 	void update() override;
@@ -38,4 +45,14 @@ public:
 public:
 	Object* connect(Object* self) override;
 	bool disconnect(Object* self) override;
+
+private:
+	void printMortonTree(MortonTree* tree, int depth);
 };
+
+/*
+‡@“¯ƒZƒ‹“à‚Å‘“–‚è
+‡A‘S‚Ä‚ÌãˆÊƒZƒ‹‚Æ‘“–‚½‚è
+‡BŽq‚ðŽQÆ
+‡C‡@`‡B‚ðŒJ‚è•Ô‚·
+*/

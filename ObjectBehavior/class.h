@@ -25,3 +25,4 @@
 #include "Morton.h"
 #include "ObjectMorton.h"
 #include "RectangleMorton.h"
+#include "MortonTree.h"

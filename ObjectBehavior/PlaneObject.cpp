@@ -1,6 +1,6 @@
 #include "PlaneObject.h"
 
-PlaneObject::PlaneObject() : Object(0, 0, Layer::Character, true) {
+PlaneObject::PlaneObject() : Object(0, 0, Layer::Character, true, SHAPE) {
 
 }
 

@@ -1,10 +1,10 @@
 #include "header.h"
 
-Object::Object() : Object(X, Y, LAYER, PERS) {
+Object::Object() : Object(X, Y, LAYER, PERS, Shape::Dot) {
 
 }
 
-Object::Object(float x, float y, Layer layer, bool pers) : Worker(PROC_PRIORITY, DRAW_PRIORITY) {
+Object::Object(float x, float y, Layer layer, bool pers, Shape shape) : _shape(shape), Worker(PROC_PRIORITY, DRAW_PRIORITY) {
 	printfDx("Object\n");
 	_layer = layer;
 	_pers = pers;
@@ -40,6 +40,8 @@ void Object::updateMortonTree() {
 		if (prev) { prev->setMortonNext(next); }
 		if (next) { next->setMortonPrev(prev); }
 	}
+	this->setMortonPrev(nullptr);
+	this->setMortonNext(nullptr);
 	Object* tail = _connector->connect(this);
 	if (tail) {
 		tail->setMortonNext(this);
@@ -200,9 +202,9 @@ void Object::setColliderFunction() {
 		}
 
 		return abs(rects->_x - recto->_x) <
-			(rects->getWidth() + recto->getWidth()) / 2.f &&
+			(rects->getWidth() + recto->getWidth()) * .5f &&
 			abs(rects->_y - recto->_y) <
-			(rects->getHeight() + recto->getHeight()) / 2.f;
+			(rects->getHeight() + recto->getHeight()) * .5f;
 	};
 
 	colliderFunction[r + c] = [](Object* self, Object* other) {
@@ -217,15 +219,38 @@ void Object::setColliderFunction() {
 		}
 		if (!rect || !cir) { return false; }
 
-		return
-			abs(rect->_x - cir->_x) <
-			rect->getWidth() / 2.f + cir->getRadius() &&
-			abs(rect->_y - cir->_y) <
-			rect->getHeight() / 2.f + cir->getRadius();
+		float l = rect->getLeft(), t = rect->getTop();
+		float r = l + rect->getWidth(), b = t + rect->getHeight();
+		float& x = cir->_x, & y = cir->_y;
+		float rad = cir->getRadius();
+		float radSq = cir->getRadSq();
+
+		if (x < l - rad || r + rad < x ||
+			y < t - rad || b + rad < y) {
+			return false;
+		}
+		if (x < l && y < t &&
+			!(pow(l - x, 2) + pow(t - y, 2) < radSq)) {
+			return false;
+		}
+		if (r < x && y < t &&
+			!(pow(r - x, 2) + pow(t - y, 2) < radSq)) {
+			return false;
+		}
+		if (x < l && b < y &&
+			!(pow(l - x, 2) + pow(b - y, 2) < radSq)) {
+			return false;
+		}
+		if (r < x && b < y &&
+			!(pow(r - x, 2) + pow(b - y, 2) < radSq)) {
+			return false;
+		}
+
+		return true;
 	};
 
 
-	colliderFunction[r + c] = [](Object* self, Object* other) {
+	colliderFunction[c + c] = [](Object* self, Object* other) {
 		CircleObject* cirs = nullptr;
 		CircleObject* ciro = nullptr;
 

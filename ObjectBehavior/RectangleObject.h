@@ -6,6 +6,11 @@
 class RectangleObject : public Object{
 protected:
 	inline static const float LEFT = .0f, TOP = .0f, WIDTH = .0f, HEIGHT = .0f;
+
+private:
+	inline static const Shape SHAPE = Shape::Rectangle;
+
+protected:
 	float _left = LEFT, _top = TOP, _width = WIDTH, _height = HEIGHT;
 
 public:

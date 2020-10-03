@@ -3,6 +3,9 @@
 #include "Object.h"
 
 class PlaneObject : public Object {
+private:
+	inline static const Shape SHAPE = Shape::Circle;
+
 public:
 	PlaneObject();
 	~PlaneObject();

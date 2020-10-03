@@ -1,4 +1,7 @@
 #include "GameProcessor.h"
+#include "WorkManager.h"
+#include "ObjectManager.h"
+#include "Input.h"
 
 GameProcessor::GameProcessor() {
 	_wrkMgr = WorkManager::getInstance();

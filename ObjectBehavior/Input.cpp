@@ -1,6 +1,6 @@
 #include "Input.h"
 
-Input::Input() : Object(X, Y, Layer::UI, true) {
+Input::Input() : Object(X, Y, Layer::UI, true, SHAPE) {
 	for (int i = 0; i < n_mouse; i++) { _mouse[i] = 0; }
 	setKey(path_key);
 }

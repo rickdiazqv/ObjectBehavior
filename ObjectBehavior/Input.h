@@ -8,6 +8,7 @@ private:
 	inline static const int PROC_PRIORITY = 10;
 	inline static const int DRAW_PRIORITY = 10;
 	inline static const int MOUSE_X = 0, MOUSE_Y = 0;
+	inline static const Shape SHAPE = Shape::Dot;
 
 private:
 	inline static Input* _self = nullptr;

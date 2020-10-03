@@ -180,6 +180,7 @@
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="Model3D.cpp" />
     <ClCompile Include="Morton.cpp" />
+    <ClCompile Include="MortonTree.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ObjectManager.cpp" />
@@ -210,6 +211,7 @@
     <ClInclude Include="Layer.h" />
     <ClInclude Include="Model3D.h" />
     <ClInclude Include="Morton.h" />
+    <ClInclude Include="MortonTree.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="header.h" />
     <ClInclude Include="ObjectManager.h" />
