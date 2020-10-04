@@ -23,7 +23,7 @@ void WorkManager::update() {
 void WorkManager::draw() {
 	//clsDx();
 	Morton::drawGrid();
-	DrawFormatString(300, 20, 0xffffff, (*_workers.begin())->toString().c_str());
+	//DrawFormatString(300, 20, 0xffffff, (*_workers.begin())->toString().c_str());
 	//DrawFormatString(300, 40, 0xffffff, (*++_workers.begin())->toString().c_str());
 	int i = 0;
 	for (auto worker = Worker::getDrawHead(); worker != nullptr; worker = worker->getNext()) {
@@ -90,4 +90,5 @@ void WorkManager::receive() {
 	}
 	_receive = false;
 	//DrawFormatString(500, 0, 0xffffff, "tasks size:%d, queue size:%d", _workers.size(), _queWorkers.size());
+	printfDx("\n");
 }

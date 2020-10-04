@@ -24,7 +24,7 @@ ObjectManager::ObjectManager() : Worker(PROC_PRIORITY, DRAW_PRIORITY) {
 			// setChild
 			if (d < DEPTH - 1) {
 				int cidx = root + n + 4 * i;
-				printfDx("%d:%d-%d ", idx, cidx, cidx + 3);
+				//printfDx("%d:%d-%d ", idx, cidx, cidx + 3);
 				for (int j = 0, c = cidx; j < 4; j++, c++) {
 					_cell[idx].setChild(&_cell[c], j);
 				}
@@ -42,9 +42,9 @@ ObjectManager::ObjectManager() : Worker(PROC_PRIORITY, DRAW_PRIORITY) {
 	}
 	Object::setConnector(this);
 
-	printfDx("\n\n");
-	printMortonTree(&_cell[0], 0);
-	printfDx("\n\n");
+	//printfDx("\n\n");
+	//printMortonTree(&_cell[0], 0);
+	//printfDx("\n\n");
 }
 
 ObjectManager::~ObjectManager() {
@@ -70,6 +70,9 @@ void ObjectManager::update() {
 		Object* other = nullptr;
 		while (self && (other = self->getMortonNext())) {
 			do {
+				if (other == other->getMortonNext()) {
+					int a = 0;
+				}
 				self->isCollider(other);
 
 			} while (other = other->getMortonNext());
@@ -110,6 +113,30 @@ void ObjectManager::update() {
 	}
 }
 
+void ObjectManager::draw() {
+	int clr = 0x00ffff;
+	int l = 0, c = 0;
+	for (int i = 0; i < CELL; i++) {
+		Object* obj = _cell[i].getHead();
+		if (!obj) { continue; }
+		DrawFormatString(0, l * 16, clr, "%3d", i);
+		for (int j = 0; obj; j++, obj = obj->getMortonNext()) {
+			if (obj == obj->getMortonPrev()) {
+				DrawFormatString(50 + j * 200, l * 16, clr, "error");
+				break;
+			}
+
+			DrawFormatString(50 + j * 200, l * 16, clr, "(%5.1f, %5.1f)", obj->getX(), obj->getY());
+			c++;
+		}
+		l++;
+	}
+	DrawFormatString(0, 800, 0xffffff, "n_obj:%d", c);
+	if (c > 9) {
+		int a = 0;
+	}
+}
+
 Object* ObjectManager::connect(Object* self) {
 	Morton* morton = self->getMorton();
 	int depth = morton->getDepth();
@@ -117,7 +144,7 @@ Object* ObjectManager::connect(Object* self) {
 	Object* res = nullptr;
 
 	if (absId < 0 || CELL <= absId) {
-		printfDx("objmgr con error\n");
+		//printfDx("objmgr con error: out of bounds\n");
 		return nullptr;
 	}
 
@@ -152,29 +179,32 @@ Object* ObjectManager::connect(Object* self) {
 		parent = tree->getParent();
 		parent->setIsLeaf(false);
 	}
+	if (res == self) {
+		int a = 0;
+	}
 
 	return res;
 }
 
 bool ObjectManager::disconnect(Object* self) {
 	Morton* morton = self->getMorton();
-	int absId = morton->getAbsMorton();
+	int absId = morton->getOldAbs();
 
 	if (absId < 0 || CELL <= absId) {
-		printfDx("objmgr dis error: out of bound\n");
+		//printfDx("objmgr dis error: out of bounds\n");
 		return false;
 	}
 
-	int index = getRoot(morton->getDepth()) + absId;
+	int idx = getRoot(morton->getOldDep()) + absId;
 	//printfDx("cell:%d, idx:%d\n", CELL, index);
 
-	if (!_cell[index].getHead()) {
+	if (!_cell[idx].getHead()) {
 		//printfDx("objmgr dis error: cell is null\n");
 		return false;
 	}
 
-	Object* current = _cell[index].getHead();
-	MortonTree* tree = &_cell[index];
+	Object* current = _cell[idx].getHead();
+	MortonTree* tree = &_cell[idx];
 	do {
 		if (current != self) {
 			current = current->getMortonNext();
@@ -192,9 +222,12 @@ bool ObjectManager::disconnect(Object* self) {
 			}
 		}
 		return true;
-	} while (current && current->getMortonNext());
+	} while (current);
 
 	//printfDx("objmgr dis error: self is not found\n");
+	if (self->getX() == 222.f) {
+		int a = 0;
+	}
 
 	return false;
 }

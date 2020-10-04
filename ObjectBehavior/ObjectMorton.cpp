@@ -4,7 +4,7 @@ ObjectMorton::ObjectMorton(Object* self) : Morton(self){
 
 }
 
-void ObjectMorton::updateMorton() {
+void ObjectMorton::updateMortonParam() {
 	float x = _self->getX();
 	float y = _self->getY();
 	int id = getOrder(x, y);

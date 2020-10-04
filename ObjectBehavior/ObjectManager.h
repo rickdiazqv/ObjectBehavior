@@ -40,7 +40,7 @@ private:
 public:
 	void init() override {}
 	void update() override;
-	void draw() override {}
+	void draw() override;
 
 public:
 	Object* connect(Object* self) override;

@@ -8,5 +8,5 @@ public:
 	ObjectMorton(Object* self);
 
 protected:
-	void updateMorton() override;
+	void updateMortonParam() override;
 };

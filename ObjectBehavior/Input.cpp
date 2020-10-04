@@ -21,9 +21,9 @@ void Input::setKey(const char* path) {
 		_key[(unsigned char)strtol(str.c_str(), nullptr, 16)] = 0;
 	}
 
-	for (auto e = _key.begin(); e != _key.end(); e++) {
-		printfDx("%x:%d, ", e->first, e->second);
-	}
+	//for (auto e = _key.begin(); e != _key.end(); e++) {
+	//	printfDx("%x:%d, ", e->first, e->second);
+	//}
 }
 
 void Input::update() {

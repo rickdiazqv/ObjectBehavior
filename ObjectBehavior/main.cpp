@@ -15,10 +15,10 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 	RectangleObject rect8(1000, 630, 50, 50, Layer::Object, true);
 	//Model3D MGR("data/MGRŽo‹Mver1.3/MGRŽo‹M.pmx");
 	//Model3D miku("data/LatŽ®ƒ~ƒN/LatŽ®ƒ~ƒNVer2.3_Normal.pmd");
-	//rect1.vy = .5f;
-	//rect4.vy = 2;
-	//rect5.vy = 1;
-	//rect6.vy = -1;
+	rect1.vy = .5f;
+	rect4.vy = 2;
+	rect5.vy = 1;
+	rect6.vy = -1;
 	
 	while (LoopProcess()) {
 		DrawBox(0, 0, winx, winy, 0x7f7f7f, TRUE);

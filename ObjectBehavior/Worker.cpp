@@ -1,7 +1,7 @@
 #include "Worker.h"
 
 Worker::Worker(int procPriority, int drawPriority) {
-	printfDx("Worker\n");
+	//printfDx("Worker\n");
 	if (_connector) { _connector->connect(this); }
 	else { 
 		_queWorkers.push(this); 
@@ -61,7 +61,7 @@ bool Worker::sortSelf(Worker* const self, Worker* const root, const int index) {
 void Worker::setConnector(Connector<Worker*, void, void>* connector) {
 	if (_connector) { return; }
 	_connector = connector;
-	printfDx("Worker::setConnector\n");
+	//printfDx("Worker::setConnector\n");
 }
 
 void Worker::sendWorkers() {

@@ -5,7 +5,7 @@ Object::Object() : Object(X, Y, LAYER, PERS, Shape::Dot) {
 }
 
 Object::Object(float x, float y, Layer layer, bool pers, Shape shape) : _shape(shape), Worker(PROC_PRIORITY, DRAW_PRIORITY) {
-	printfDx("Object\n");
+	//printfDx("Object\n");
 	_layer = layer;
 	_pers = pers;
 
@@ -52,7 +52,7 @@ void Object::updateMortonTree() {
 void Object::setConnector(Connector<Object*, Object*, bool>* connector) {
 	if (_connector) { return; }
 	_connector = connector;
-	printfDx("Object::setConnector\n");
+	//printfDx("Object::setConnector\n");
 
 	setColliderFunction();
 }

@@ -8,5 +8,8 @@ public:
 	RectangleMorton(Object* self);
 
 public:
-	void updateMorton() override;
+	void updateMortonParam() override;
+
+public:
+	static void updateRectangleMorton(Morton* const morton, float& left, float& top, float& right, float& bottom);
 };

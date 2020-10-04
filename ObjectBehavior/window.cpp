@@ -18,7 +18,7 @@ int AllInit() {
 	ChangeWindowMode(TRUE); //ウィンドウ表示
 	SetMainWindowText(title); //ウィンドウタイトル
 	SetGraphMode(winx, winy, ColorBit); //ウィンドウサイズ
-	SetFontSize(20); //利用フォントサイズ
+	SetFontSize(16); //利用フォントサイズ
 	if (DxLib_Init() < 0) { return -1; }
 	SetDrawScreen(DX_SCREEN_BACK); //描画対象
 

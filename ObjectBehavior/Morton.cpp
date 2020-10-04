@@ -2,9 +2,10 @@
 #include "Object.h"
 #include "ObjectManager.h"
 
-Morton::Morton(Object* const self):_self(self) {
+Morton::Morton(Object* const self) : _self(self) {
 	for (int i = 0; i < DEPTH; i++) {
 		_id[i] = ID;
+		_oldId[i] = _id[i];
 	}
 }
 
@@ -12,12 +13,17 @@ Morton::~Morton() {
 
 }
 
-void Morton::updateMorton() {
+void Morton::updateMortonParam() {
+	updateOldParam();
+
 	float x = _self->getX();
 	float y = _self->getY();
 	int id = getOrder(x, y);
 
-	if (id >= ObjectManager::CELL) { return; }
+	if ( id < 0 || ObjectManager::CELL <= id) {
+		resetMorton();
+		return;
+	}
 
 	_depth = DEPTH - 1;
 	if (id == _absId) { return; }
@@ -38,24 +44,14 @@ void Morton::drawGrid() {
 	for (int i = 0; i < SQUARE; i++) {
 		for (int j = 0; j < SQUARE; j++) {
 			DrawFormatString(
-				j * DX, i * DY, 0xffffff, "%4d", 
+				j * DX, i * DY, 0xffffff, "%4d",
 				getOrder(j * DX, i * DY));
 		}
 	}
 }
 
 int Morton::getUpperShiftCount(int val) {
-	if (val == 0) {
-		//printfDx("morton error\n");
-	}
-
 	int c = 0;
-	/*int v = 0;
-	do {
-		v = val % 4;
-		val >>= 2;
-		c++;
-	} while (v == 0);*/
 	while (val != 0) {
 		val >>= 2;
 		c++;
@@ -65,6 +61,11 @@ int Morton::getUpperShiftCount(int val) {
 }
 
 int Morton::getOrder(float x, float y) {
+	if (x < .0f) { return X_UNDER; }
+	if (x >= (int)winx) { return X_OVER; }
+	if (y < .0f) { return Y_UNDER; }
+	if (y >= (int)winy) { return Y_OVER; }
+
 	int cx = int(x / DX);
 	int cy = int(y / DY);
 	int dig = 0;
