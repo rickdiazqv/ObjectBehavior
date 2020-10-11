@@ -17,7 +17,7 @@ ObjectManager::ObjectManager() : Worker(PROC_PRIORITY, DRAW_PRIORITY) {
 
 			// setParent
 			if (d > 0) {
-				int pidx = absId >> 2 + _root[d - 1];
+				int pidx = (absId >> 2) + _root[d - 1];
 				_cell[idx].setParent(&_cell[pidx]);
 			}
 
@@ -70,25 +70,19 @@ void ObjectManager::update() {
 		Object* other = nullptr;
 		while (self && (other = self->getMortonNext())) {
 			do {
-				if (other == other->getMortonNext()) {
-					int a = 0;
-				}
 				self->isCollider(other);
-
 			} while (other = other->getMortonNext());
 			self = self->getMortonNext();
 		}
 
 		// 全ての親と総当り
 		parent = tree->getParent();
-		for (int d = depth; d > 0; d--,
-			parent = parent->getParent()) {
+		for (int d = depth; d > 0; d--, parent = parent->getParent()) {
 
 			self = tree->getHead();
-			other = parent->getHead();
 
 			// 親と総当り
-			while (self && other) {
+			while (self && (other = parent->getHead())) {
 				do {
 					self->isCollider(other);
 				} while (other = other->getMortonNext());
@@ -96,17 +90,22 @@ void ObjectManager::update() {
 			}
 		}
 
-		// 下位セルに移動する
-		child = tree->getNextChild();
+		// nodeが葉であれば上位セルに戻る
 		if (tree->isLeaf()) {
 			tree->resetChildIndex();
 		}
-		else if (child) { continue; }
+		// 下位セルに移動する
+		else if (child = tree->getNextChild()) {
+			depth++;
+			continue;
+		}
 
 		// 上位セルに戻る
 		parent = tree;
 		while (parent = parent->getParent()) {
+			depth--;
 			if (child = parent->getNextChild()) {
+				depth++;
 				break;
 			}
 		}
@@ -126,7 +125,8 @@ void ObjectManager::draw() {
 				break;
 			}
 
-			DrawFormatString(50 + j * 200, l * 16, clr, "(%5.1f, %5.1f)", obj->getX(), obj->getY());
+			//DrawFormatString(50 + j * 200, l * 16, clr, "(%5.1f, %5.1f)", obj->getX(), obj->getY());
+			DrawFormatString(50 + j * 200, l * 16, clr, "%s", obj->getId().c_str());
 			c++;
 		}
 		l++;

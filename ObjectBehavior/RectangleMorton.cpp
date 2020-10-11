@@ -62,7 +62,7 @@ void RectangleMorton::updateRectangleMorton(Morton* const morton, float& left, f
 	int depth = DEPTH - 1 - shift;
 	int cur = in[0];
 
-	cur >>= 2 * shift;
+	cur >>= (2 * shift);
 	if (depth == morton->getDepth() && cur == morton->getAbsMorton()) { return; }
 
 	morton->setDepth(depth);

@@ -8,12 +8,14 @@ RectangleObject::RectangleObject(float width, float height, Layer layer, bool pe
 
 }
 
-RectangleObject::RectangleObject(float x, float y, float width, float height, Layer layer, bool pers) : Object(x, y, layer, pers, SHAPE) {
+RectangleObject::RectangleObject(float x, float y, float width, float height, Layer layer, bool pers) : id("rect" + to_string(rectCnt)), Object(x, y, layer, pers, SHAPE) {
 	_width = width;
 	_height = height;
 
 	_left = _x - _width * .5f;
 	_top = _y - _height * .5f;
+
+	rectCnt++;
 
 	Start();
 }
@@ -35,6 +37,7 @@ void RectangleObject::update() {
 
 void RectangleObject::draw() {
 	DrawBoxAA(_left, _top, _left + _width, _top + _height, _collision ? 0x0000ff : 0xff0000, FALSE);
+	DrawFormatString(_left, _top, 0, getId().c_str());
 
 	float left = .0f;
 	float top = .0f;

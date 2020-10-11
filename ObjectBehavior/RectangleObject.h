@@ -9,9 +9,13 @@ protected:
 
 private:
 	inline static const Shape SHAPE = Shape::Rectangle;
+	inline static int rectCnt = 0;
 
 protected:
 	float _left = LEFT, _top = TOP, _width = WIDTH, _height = HEIGHT;
+
+private:
+	const string id;
 
 public:
 	RectangleObject(Layer layer, bool pers = false);
@@ -23,10 +27,11 @@ protected:
 	void createMorton() override;
 
 public:
-	float getLeft() { return _left; }
-	float getTop() { return _top; }
-	float getWidth() { return _width; }
-	float getHeight() { return _height; }
+	inline float getLeft() { return _left; }
+	inline float getTop() { return _top; }
+	inline float getWidth() { return _width; }
+	inline float getHeight() { return _height; }
+	inline string getId() override { return id; }
 
 public:
 	void update() override;

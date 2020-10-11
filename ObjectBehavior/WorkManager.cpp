@@ -28,7 +28,7 @@ void WorkManager::draw() {
 	int i = 0;
 	for (auto worker = Worker::getDrawHead(); worker != nullptr; worker = worker->getNext()) {
 		worker->draw();
-		DrawFormatString(300, 100 + i * 40, 0xffffff, worker->toString().c_str());
+		//DrawFormatString(300, 100 + i * 40, 0xffffff, worker->toString().c_str());
 		i++;
 	}
 }
@@ -79,6 +79,7 @@ void WorkManager::receive() {
 
 		int size = _workers.size();
 		for (auto worker = _workers.rbegin(); worker != _workers.rend(); worker++) {
+			int a = self->procCompareTo(*worker);
 			if (self->procCompareTo(*worker) < 0) { continue; }
 			//printfDx("insert\n");
 			_workers.insert(worker.base(), self);

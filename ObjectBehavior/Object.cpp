@@ -1,10 +1,13 @@
 #include "header.h"
 
-Object::Object() : Object(X, Y, LAYER, PERS, Shape::Dot) {
+/*Object::Object() : Object(X, Y, LAYER, PERS, Shape::Dot) {
+
+}*/
+Object::Object(float x, float y, Layer layer, bool pers, Shape shape) : Object(x, y, layer, pers, shape, PROC_PRIORITY, DRAW_PRIORITY) {
 
 }
 
-Object::Object(float x, float y, Layer layer, bool pers, Shape shape) : _shape(shape), Worker(PROC_PRIORITY, DRAW_PRIORITY) {
+Object::Object(float x, float y, Layer layer, bool pers, Shape shape, int procPriority, int drawPriority) : _shape(shape), Worker(procPriority, procPriority) {
 	//printfDx("Object\n");
 	_layer = layer;
 	_pers = pers;
@@ -58,6 +61,7 @@ void Object::setConnector(Connector<Object*, Object*, bool>* connector) {
 }
 
 void Object::update() {
+	_collision = false;
 	bool move = vx != .0f || vy != .0f;
 
 	setXHist(getX());
@@ -116,6 +120,9 @@ int Object::drawCompareTo(Worker* other) {
 	int comp = 0;
 	if (!otr) {
 		//printfDx("can not cast\n");
+		int a = this->getDrawPriority();
+		int b = other->getDrawPriority();
+		int c = this->getDrawPriority() - other->getDrawPriority();
 		return this->getDrawPriority() - other->getDrawPriority();
 	}
 

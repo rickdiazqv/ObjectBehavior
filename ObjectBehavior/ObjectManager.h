@@ -6,8 +6,8 @@
 
 class ObjectManager final : public Worker, public Connector<Object*, Object*, bool> {
 public:
-	inline static const int PROC_PRIORITY = 9;
-	inline static const int DRAW_PRIORITY = 9;
+	inline static const int PROC_PRIORITY = 10;
+	inline static const int DRAW_PRIORITY = 10;
 	inline static const int DEPTH = Morton::DEPTH;
 	inline static int CELL = (pow(4, DEPTH) - 1) / 3;
 

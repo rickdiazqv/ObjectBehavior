@@ -21,9 +21,10 @@ protected:
 private:
 	inline static Connector<Object*, Object*, bool>* _connector = nullptr;
 	inline static unordered_map <int, TypeBiFunction<Object*, bool>> colliderFunction;
+	inline static int objCnt = 0;
 
 protected:
-	 Shape _shape = Shape::Dot;
+	Shape _shape = Shape::Dot;
 	Layer _layer = LAYER;
 	bool _pers = PERS;
 
@@ -43,9 +44,15 @@ protected:
 	bool _collision = false;		// Õ“Ë‚µ‚½‚©‚Ç‚¤‚©
 	bool _crossLayer = false;	// ƒŒƒCƒ„[‚ðŒ×‚¢‚Å“–‚½‚è”»’è‚ðs‚¤‚©‚Ç‚¤‚©
 
+private:
+	const string id;
+
 public:
-	Object();
-	Object(float x, float y, Layer layer, bool pers, Shape shape);
+	//Object();
+	Object(float x, float y, Layer layer, bool pers,
+		Shape shape);
+	Object(float x, float y, Layer layer, bool pers, 
+		Shape shape, int procPriority, int drawPriority);
 	~Object();
 
 protected:
@@ -63,6 +70,7 @@ public:
 	inline float getDX() { return getX() - getXHist(); }
 	inline float getDY() { return getY() - getYHist(); }
 	inline bool isMove() { return getDX() != .0f || getDY() != .0f; }
+	virtual inline string getId() { return id; }
 	inline Morton* getMorton() { return _morton; }
 	inline Object* getMortonNext() { return _mortonNext; }
 	inline Object* getMortonPrev() { return _mortonPrev; }
@@ -104,7 +112,9 @@ public:
 
 public:
 	bool isCollider(Object* other) {
-		bool res = _collision = colliderFunction[(int)this->_shape + (int)other->_shape](this, other);
+		bool res =  colliderFunction[(int)this->_shape + (int)other->_shape](this, other);
+		if (!this->_collision) { this->_collision = res; }
+		if (!other->_collision) { other->_collision = res; }
 		return res;
 	}
 };
