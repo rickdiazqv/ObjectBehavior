@@ -1,4 +1,5 @@
 #include "RectangleMorton.h"
+#include "RectangleObject.h"
 #include "ObjectManager.h"
 
 RectangleMorton::RectangleMorton(Object* self) : Morton(self) {
@@ -6,8 +7,6 @@ RectangleMorton::RectangleMorton(Object* self) : Morton(self) {
 }
 
 void RectangleMorton::updateMortonParam() {
-	updateOldParam();
-
 	RectangleObject* rect = (RectangleObject*)_self;
 	float left = rect->getLeft();
 	float top = rect->getTop();
@@ -17,7 +16,7 @@ void RectangleMorton::updateMortonParam() {
 	updateRectangleMorton(this, left, top, right, bottom);
 }
 
-void RectangleMorton::updateRectangleMorton(Morton* const morton, float& left, float& top, float& right, float& bottom) {
+void RectangleMorton::updateRectangleMorton(Morton* const morton, float left, float top, float right, float bottom) {
 
 	int in[2] = { -1, -1 };
 	int id[2][2];

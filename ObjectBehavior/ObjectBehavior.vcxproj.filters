@@ -115,6 +115,9 @@
     <Filter Include="Tools\Interface\Task">
       <UniqueIdentifier>{109b3716-7868-46c0-bf50-c2362532e5a9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Objects\Manager\Morton\CircleMorton">
+      <UniqueIdentifier>{af6d408d-2eb0-47d0-bdf7-a497b0a15623}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -170,6 +173,9 @@
     </ClCompile>
     <ClCompile Include="MortonTree.cpp">
       <Filter>Objects\Manager\MortonTree</Filter>
+    </ClCompile>
+    <ClCompile Include="CircleMorton.cpp">
+      <Filter>Objects\Manager\Morton\CircleMorton</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -271,6 +277,9 @@
     </ClInclude>
     <ClInclude Include="MortonTree.h">
       <Filter>Objects\Manager\MortonTree</Filter>
+    </ClInclude>
+    <ClInclude Include="CircleMorton.h">
+      <Filter>Objects\Manager\Morton\CircleMorton</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

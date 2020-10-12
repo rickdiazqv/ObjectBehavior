@@ -175,6 +175,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CircleMorton.cpp" />
     <ClCompile Include="CircleObject.cpp" />
     <ClCompile Include="GameProcessor.cpp" />
     <ClCompile Include="Input.cpp" />
@@ -196,6 +197,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Behavior.h" />
+    <ClInclude Include="CircleMorton.h" />
     <ClInclude Include="CircleObject.h" />
     <ClInclude Include="class.h" />
     <ClInclude Include="declare.h" />

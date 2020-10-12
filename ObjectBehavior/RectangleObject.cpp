@@ -39,7 +39,7 @@ void RectangleObject::draw() {
 	DrawBoxAA(_left, _top, _left + _width, _top + _height, _collision ? 0x0000ff : 0xff0000, FALSE);
 	DrawFormatString(_left, _top, 0, getId().c_str());
 
-	float left = .0f;
+	/*float left = .0f;
 	float top = .0f;
 	int depth = _morton->getDepth();
 	float scale = 2.f;
@@ -52,7 +52,7 @@ void RectangleObject::draw() {
 	left *= float(winx);
 	top *= float(winy);
 
-	DrawBoxAA(left, top, left + scale * float(winx), top + scale * float(winy), 0xffff00, FALSE);
+	DrawBoxAA(left, top, left + scale * float(winx), top + scale * float(winy), 0xffff00, FALSE);*/
 }
 
 string RectangleObject::toString() {

@@ -1,4 +1,5 @@
 #include "CircleObject.h"
+#include "CircleMorton.h"
 
 CircleObject::CircleObject(Layer layer, bool pers) : CircleObject(X, Y, RADIUS, layer, pers) {
 
@@ -20,4 +21,16 @@ CircleObject::CircleObject(float x, float y, float radius, Layer layer, bool per
 
 CircleObject::~CircleObject() {
 
+}
+
+void CircleObject::createMorton() {
+	_morton = new CircleMorton(this);
+}
+
+void CircleObject::update() {
+	Object::update();
+}
+
+void CircleObject::draw() {
+	DrawCircleAA(_x, _y, _radius, POS_NUM, 0xff0000, FALSE);
 }

@@ -14,8 +14,6 @@ Morton::~Morton() {
 }
 
 void Morton::updateMortonParam() {
-	updateOldParam();
-
 	float x = _self->getX();
 	float y = _self->getY();
 	int id = getOrder(x, y);

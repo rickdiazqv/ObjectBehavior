@@ -2,6 +2,7 @@
 #include "Worker.h"
 #include "Input.h"
 #include "Morton.h"
+#include "CircleObject.h"
 
 WorkManager::WorkManager() {
 	//printfDx("WorkManager\n");
@@ -54,6 +55,9 @@ void WorkManager::receive() {
 		if (!self) { continue; }
 
 		// 初期化メソッド
+		if (instanceof<CircleObject>(self)) {
+			int a = 0;
+		}
 		self->init();
 
 		// Workerの内部ポインタのソート

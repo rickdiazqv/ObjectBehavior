@@ -28,4 +28,5 @@ class Model3D;
 class Morton;
 class ObjectMorton;
 class RectangleMorton;
+class CircleMorton;
 class MortonTree;

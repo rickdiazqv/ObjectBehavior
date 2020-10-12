@@ -62,6 +62,8 @@ public:
 
 protected:
 	virtual void updateMortonParam();
+
+private:
 	virtual void updateOldParam() final {
 		_oldAbs = _absId;
 		_oldDep = _depth;

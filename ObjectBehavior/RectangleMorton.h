@@ -1,7 +1,6 @@
 #pragma once
 #include "define.h"
 #include "Morton.h"
-#include "RectangleObject.h"
 
 class RectangleMorton : public Morton {
 public:
@@ -11,5 +10,5 @@ public:
 	void updateMortonParam() override;
 
 public:
-	static void updateRectangleMorton(Morton* const morton, float& left, float& top, float& right, float& bottom);
+	static void updateRectangleMorton(Morton* const morton, float left, float top, float right, float bottom);
 };
