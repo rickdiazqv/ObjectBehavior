@@ -6,6 +6,7 @@
 #include "Behavior.h"
 #include "Connector.h"
 #include "Comparable.h"
+#include "Configurable.h"
 
 // abstract class
 #include "Worker.h"
@@ -27,3 +28,8 @@
 #include "RectangleMorton.h"
 #include "CircleMorton.h"
 #include "MortonTree.h"
+#include "Sprite.h"
+#include "SpriteManager.h"
+#include "Renderer.h"
+#include "Strings.h"
+#include "CSVEditor.h"

@@ -1,0 +1,164 @@
+{
+  "class": "SpriteManager",
+  "config": [
+    {
+      "class": "Sprites",
+      "division": {
+        "x": "3",
+        "y": "7"
+      },
+      "key": "button",
+      "path": "data/sprites/button/",
+      "sprites": [
+        {
+          "key": "red_neutral",
+          "region": {
+            "x": "0",
+            "y": "0"
+          }
+        },
+        {
+          "key": "red_click",
+          "region": {
+            "x": "1",
+            "y": "0"
+          }
+        },
+        {
+          "key": "red_hover",
+          "region": {
+            "x": "2",
+            "y": "0"
+          }
+        },
+        {
+          "key": "yellow_neutral",
+          "region": {
+            "x": "0",
+            "y": "1"
+          }
+        },
+        {
+          "key": "yellow_click",
+          "region": {
+            "x": "1",
+            "y": "1"
+          }
+        },
+        {
+          "key": "yellow_hover",
+          "region": {
+            "x": "2",
+            "y": "1"
+          }
+        },
+        {
+          "key": "green_neutral",
+          "region": {
+            "x": "0",
+            "y": "2"
+          }
+        },
+        {
+          "key": "green_click",
+          "region": {
+            "x": "1",
+            "y": "2"
+          }
+        },
+        {
+          "key": "green_hover",
+          "region": {
+            "x": "2",
+            "y": "2"
+          }
+        },
+        {
+          "key": "emerald_neutral",
+          "region": {
+            "x": "0",
+            "y": "3"
+          }
+        },
+        {
+          "key": "emerald_click",
+          "region": {
+            "x": "1",
+            "y": "3"
+          }
+        },
+        {
+          "key": "emerald_hover",
+          "region": {
+            "x": "2",
+            "y": "3"
+          }
+        },
+        {
+          "key": "purple_neutral",
+          "region": {
+            "x": "0",
+            "y": "4"
+          }
+        },
+        {
+          "key": "purple_click",
+          "region": {
+            "x": "1",
+            "y": "4"
+          }
+        },
+        {
+          "key": "purple_hover",
+          "region": {
+            "x": "2",
+            "y": "4"
+          }
+        },
+        {
+          "key": "white_neutral",
+          "region": {
+            "x": "0",
+            "y": "5"
+          }
+        },
+        {
+          "key": "white_click",
+          "region": {
+            "x": "1",
+            "y": "5"
+          }
+        },
+        {
+          "key": "white_hover",
+          "region": {
+            "x": "2",
+            "y": "5"
+          }
+        },
+        {
+          "key": "black_neutral",
+          "region": {
+            "x": "0",
+            "y": "6"
+          }
+        },
+        {
+          "key": "black_click",
+          "region": {
+            "x": "1",
+            "y": "6"
+          }
+        },
+        {
+          "key": "black_hover",
+          "region": {
+            "x": "2",
+            "y": "6"
+          }
+        }
+      ]
+    }
+  ],
+  "zz": {}
+}

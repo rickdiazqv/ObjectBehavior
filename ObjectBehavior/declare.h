@@ -9,6 +9,8 @@ template<typename T, typename  R, typename  S>
 class Connector;
 template <typename T>
 class Comparable;
+template <typename T>
+class Configurable;
 
 // abstract class
 class Worker;
@@ -30,3 +32,8 @@ class ObjectMorton;
 class RectangleMorton;
 class CircleMorton;
 class MortonTree;
+class Sprite;
+class SpriteManager;
+class Renderer;
+class Strings;
+class CSVEditor;

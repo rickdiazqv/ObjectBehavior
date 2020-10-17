@@ -23,6 +23,8 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 	cir0.vx = .5f;
 	cir0.vy = .5f;
 	
+	//CSVEditor test("data/jb_6.csv");
+
 	while (LoopProcess()) {
 		DrawBox(0, 0, winx, winy, 0x7f7f7f, TRUE);
 		gameProcessor->process();

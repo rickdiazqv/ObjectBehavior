@@ -10,7 +10,7 @@ WorkManager::WorkManager() {
 }
 
 WorkManager::~WorkManager() {
-
+	
 }
 
 void WorkManager::update() {
@@ -55,9 +55,6 @@ void WorkManager::receive() {
 		if (!self) { continue; }
 
 		// 初期化メソッド
-		if (instanceof<CircleObject>(self)) {
-			int a = 0;
-		}
 		self->init();
 
 		// Workerの内部ポインタのソート
