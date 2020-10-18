@@ -9,6 +9,7 @@ private:
 	WorkManager* _wrkMgr = nullptr;
 	ObjectManager* _objMgr = nullptr;
 	Input* _input = nullptr;
+	SpriteManager* _sprMgr = nullptr;
 
 private:
 	GameProcessor();

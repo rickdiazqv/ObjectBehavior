@@ -1,6 +1,6 @@
 #include "Input.h"
 
-Input::Input() : Object(X, Y, Layer::UI, true, SHAPE, PROC_PRIORITY, DRAW_PRIORITY) {
+Input::Input() : _id("in"), Object(X, Y, Layer::UI, true, SHAPE, PROC_PRIORITY, DRAW_PRIORITY) {
 	for (int i = 0; i < n_mouse; i++) { _mouse[i] = 0; }
 	setKey(path_key);
 }
@@ -30,12 +30,14 @@ void Input::update() {
 	if (this != _self) { return; }
 
 	if (_useMouse) {
-		Object::update();
-		int x = int(getMouseX()), y = int(getMouseY());
+		int x, y;
 		GetMousePoint(&x, &y);
+		vx = x - getMouseX();
+		vy = y - getMouseY();
+		Object::update();
 
 		int mi = GetMouseInput();
-		char& ml = _mouse[0], & mm = _mouse[1], & mr = _mouse[2];
+		char& ml = _mouse[LEFT], & mm = _mouse[MIDDLE], & mr = _mouse[RIGHT];
 		if (mi & MOUSE_INPUT_LEFT) {
 			if (0 <= ml && ml < 2) { ml++; }
 		}
@@ -53,6 +55,8 @@ void Input::update() {
 		}
 		else if (mr > 0) { mr = -1; }
 		else if (mr == -1) { mr = 0; }
+
+
 	}
 	if (_useKey) {
 		for (auto e = _key.begin(); e != _key.end(); e++) {
@@ -68,7 +72,20 @@ void Input::update() {
 }
 
 void Input::draw() {
+	char icon[2] = { 'N', '\0' };
+	char& c = icon[0];
 
+	if (isMouse(LEFT)) {
+		c = 'L';
+	}
+	else if (isMouse(MIDDLE)) {
+		c = 'M';
+	}
+	else if (isMouse(RIGHT)) {
+		c = 'R';
+	}
+
+	DrawFormatString(getMouseX(), getMouseY(), 0xffffff, icon);
 }
 
 string Input::toString() {

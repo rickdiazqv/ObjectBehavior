@@ -7,7 +7,7 @@ protected:
 	inline static const int SIZE = 0;
 
 private:
-	const char* const _fpath = nullptr;
+	string _fpath;
 	int _hndl = HANDLE;
 	int _sizeX = SIZE, _sizeY = SIZE;
 
@@ -23,15 +23,16 @@ public:
 	inline int getSizeY() { return _sizeY; }
 
 protected:
-	inline const char* const getFilePath() { return _fpath; }
+	inline string& getFilePath() { return _fpath; }
 	inline void setHandle(int hndl) { _hndl = hndl; }
 	inline void setSizeX(int sizeX) { _sizeX = sizeX; }
 	inline void setSizeY(int sizeY) { _sizeY = sizeY; }
 	
 public:
-	void load();
-	
-private:
-	void load(int hndl);
+	inline virtual void load() {
+		if (getFilePath().empty()) { return; }
+		setHandle(LoadGraph(getFilePath().c_str()));
+	}
+	inline void load(int hndl) { setHandle(hndl); }
 };
 

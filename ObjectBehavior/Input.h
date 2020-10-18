@@ -4,6 +4,11 @@
 #include "Morton.h"
 
 class Input : public Object {
+public:
+	inline static const int LEFT = 0;
+	inline static const int MIDDLE = 1;
+	inline static const int RIGHT = 2;
+
 private:
 	inline static const int PROC_PRIORITY = 9;
 	inline static const int DRAW_PRIORITY = 9;
@@ -23,6 +28,9 @@ private:
 private:
 	unordered_map<unsigned char, char> _key;
 	bool _useKey = true;
+
+private:
+	const string _id;
 
 public:
 	static Input* getInstance() {
@@ -61,6 +69,7 @@ public:
 	inline bool isMouseDown(int index) { return _mouse[index] == 1; }
 	inline bool isMouse(int index) { return _mouse[index] > 0; }
 	inline bool isMouseUp(int index) { return _mouse[index] == -1; }
+	inline string getId() override { return _id; }
 
 public:
 	inline void setUseMouse(bool useMouse) { _useMouse = useMouse; }

@@ -14,6 +14,7 @@ constexpr const char* path_key = "key.ini";
 
 // Button
 constexpr int n_btn_diff = 3;
+constexpr const char* btn = "button";
 constexpr const char* btn_red[n_btn_diff] = {
 	"red_neutral",
 	"red_click",

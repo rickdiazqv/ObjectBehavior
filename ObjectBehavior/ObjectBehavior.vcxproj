@@ -190,6 +190,7 @@
     <ClCompile Include="ObjectMorton.cpp" />
     <ClCompile Include="RectangleMorton.cpp" />
     <ClCompile Include="RectangleObject.cpp" />
+    <ClCompile Include="Button.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Singleton.cpp" />
     <ClCompile Include="Sprite.cpp" />
@@ -230,6 +231,7 @@
     <ClInclude Include="ObjectMorton.h" />
     <ClInclude Include="RectangleMorton.h" />
     <ClInclude Include="RectangleObject.h" />
+    <ClInclude Include="Button.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Shape.h" />
     <ClInclude Include="Singleton.h" />

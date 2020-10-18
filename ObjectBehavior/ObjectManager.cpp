@@ -126,7 +126,7 @@ void ObjectManager::draw() {
 			}
 
 			//DrawFormatString(50 + j * 200, l * 16, clr, "(%5.1f, %5.1f)", obj->getX(), obj->getY());
-			DrawFormatString(50 + j * 200, l * 16, clr, "%s", obj->getId().c_str());
+			DrawFormatString(50 + j * 200, l * 16, clr, "%s(%d)", obj->getId().c_str(), obj->getMorton()->getAbsMorton());
 			c++;
 		}
 		l++;

@@ -14,15 +14,16 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 	RectangleObject rect7(500, 630, 400, 300, Layer::Object, true);
 	RectangleObject rect8(1000, 630, 50, 50, Layer::Object, true);
 	CircleObject cir0(0, 0, 64, Layer::Object, true);
+	Button btn1(1000, 100);
 	//Model3D MGR("data/MGRŽo‹Mver1.3/MGRŽo‹M.pmx");
 	//Model3D miku("data/LatŽ®ƒ~ƒN/LatŽ®ƒ~ƒNVer2.3_Normal.pmd");
 	//rect1.vy = .5f;
 	//rect4.vy = 2;
 	//rect5.vy = 1;
 	//rect6.vy = -1;
-	cir0.vx = .5f;
-	cir0.vy = .5f;
-	
+	//cir0.vx = .5f;
+	//cir0.vy = .5f;
+
 	//CSVEditor test("data/jb_6.csv");
 
 	while (LoopProcess()) {

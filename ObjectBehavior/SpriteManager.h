@@ -3,11 +3,14 @@
 #include "Connector.h"
 #include "Configurable.h"
 #include "Sprite.h"
+#include "Sprites.h"
 
-class SpriteManager : public Connector<Sprite*, string, bool>, public Configurable<json> {
+class SpriteManager : public Connector<Sprite*, string, bool>, public Configurable<json&> {
 private:
 	inline static const string SINGLE = "single";
 	inline static const string COMBINE = "combine";
+	inline static const string SPRITE = "Sprite";
+	inline static const string SPRITES = "Sprites";
 
 private:
 	inline static SpriteManager* _self = nullptr;
@@ -31,16 +34,20 @@ public:
 	}
 
 public:
-	inline Sprite* getSprite(string sprite) { 
-		if (_sprites.count(sprite)) {
-			return _sprites[sprite];
-		}
+	inline Sprite* getSprite(const string& sprite) {
+		if (_sprites.count(sprite)) { return _sprites[sprite]; }
+		return nullptr;
+	}
+	Sprite* getSprite(const string& sprite, const string& divSprite) {
+		if (!_sprites.count(sprite)) { return nullptr; }
+		Sprites* sprites = dynamic_cast<Sprites*>(_sprites[sprite]);
+		if (sprites) { return sprites->getSpriteAt(divSprite); }
 		return nullptr;
 	}
 	void loadSprite(const char* const fpath);
 
 private:
-	void setSprite(json& config) ;
+	void setSprite(json& config);
 	void setSprites(json& config);
 
 public:

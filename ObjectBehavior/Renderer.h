@@ -10,7 +10,7 @@ private:
 	inline static const float LEFT = .0f, TOP = .0f, WIDTH = .0f, HEIGHT = .0f;
 
 private:
-	Sprite* _sprite;
+	Sprite* const _sprite;
 	float _scaleX = SCALE, _scaleY = SCALE;
 	float _x = X, _y = Y;
 	float _left = LEFT, _top = TOP, _width = WIDTH, _height = HEIGHT;
@@ -18,24 +18,19 @@ private:
 	Object* const _parent = nullptr;
 
 public:
-	Renderer(Object* obj, string sprite);
+	Renderer(Object* const obj, const string& sprite);
+	Renderer(Object* const obj, const string& sprite, const string& divSprite);
 	~Renderer();
 
-public:
-	inline void render() {
-		float fx = _parent->getX() + getLeft();
-		float fy = _parent->getY() + getTop();
-		int x = (int)fx, y = (int)fy;
-
-		if (_scaleX == 1.f && _scaleY == 1.f) {
-			DrawGraph(x, y, _sprite->getHandle(), TRUE);
-		}
-		else {
-			DrawExtendGraph(x, y, x + getWidth(), y + getHeight(), _sprite->getHandle(), TRUE);
-		}
-	}
+private:
+	Renderer(Object* const obj, Sprite* const sprite);
 
 public:
+	void render();
+	inline void load() { getSprite()->load(); }
+
+public:
+	inline Sprite* getSprite() { return _sprite; }
 	inline float getScaleX() { return _scaleX; }
 	inline float getScaleY() { return _scaleY; }
 	inline float getWidth() { return _width; }
@@ -46,5 +41,9 @@ public:
 private:
 	inline float getLeft() { return _left; }
 	inline float getTop() { return _top; }
+	inline void setLeft(float left) { _left = left; }
+	inline void setTop(float top) { _top = top; }
+	inline void setWidth(float width) { _width = width; }
+	inline void setHeight(float height) { _height = height; }
 };
 

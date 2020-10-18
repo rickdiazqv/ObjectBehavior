@@ -3,7 +3,11 @@
 #include "Sprites.h"
 
 SpriteManager::SpriteManager() {
-
+	const char* const fpath = "data/json/sprites/sprites.json";
+	//const char* const fpath = "data/json/sprites/test.json";
+	json config = json::parse(DxFileRead(fpath));
+	configure(config);
+	//printfDx(DxFileRead("data/json/sprites/sprites.json").c_str());
 }
 
 SpriteManager::~SpriteManager() {
@@ -31,14 +35,14 @@ void SpriteManager::setSprite(json& config) {
 }
 
 void SpriteManager::setSprites(json& config) {
-	_sprites[config["key"]] = new Sprites(config);
+	_sprites[j2s(config[j_key])] = new Sprites(config);
 }
 
 void SpriteManager::configure(json& config) {
-	json& confList = config["config"];
+	json& confList = config[j_config];
 
 	for (json& conf : confList) {
-		string type = conf["class"];
+		string type = j2s(conf[j_class]);
 		if (type == "Sprite") {
 			setSprite(conf);
 		}

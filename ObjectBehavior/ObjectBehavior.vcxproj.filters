@@ -145,6 +145,12 @@
     <Filter Include="Tools\Configurable">
       <UniqueIdentifier>{75ebfcf2-62f8-421b-b08f-0f68abb9cc5a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SpriteObject">
+      <UniqueIdentifier>{0130fb34-5d03-470c-818d-77eaaa076345}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SpriteObject\Button">
+      <UniqueIdentifier>{7754e54e-b0b8-4daf-8bf9-bf56a4ab9a2e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -221,6 +227,9 @@
     </ClCompile>
     <ClCompile Include="Sprites.cpp">
       <Filter>Components\Sprite\Sprites</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>SpriteObject\Button</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -346,6 +355,9 @@
     </ClInclude>
     <ClInclude Include="Configurable.h">
       <Filter>Tools\Configurable</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>SpriteObject\Button</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

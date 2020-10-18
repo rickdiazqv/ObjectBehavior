@@ -6,6 +6,7 @@
 #include <cassert>
 #include <mutex>
 #include <iomanip>
+#include <iostream>
 #include <fstream>
 #include <sstream>
 #include <json.hpp>

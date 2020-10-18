@@ -39,19 +39,19 @@ public:
 	float vx = VX, vy = VY;
 	float ax = AX, ay = AY;
 
-protected:
+private:
 	bool _collisionable = true;	// 当たり判定を有効にするか
 	bool _collision = false;		// 衝突したかどうか
 	bool _crossLayer = false;	// レイヤーを跨いで当たり判定を行うかどうか
 
 private:
-	const string id;
+	const string _id;
 
 public:
 	//Object();
 	Object(float x, float y, Layer layer, bool pers,
 		Shape shape);
-	Object(float x, float y, Layer layer, bool pers, 
+	Object(float x, float y, Layer layer, bool pers,
 		Shape shape, int procPriority, int drawPriority);
 	~Object();
 
@@ -70,10 +70,13 @@ public:
 	inline float getDX() { return getX() - getXHist(); }
 	inline float getDY() { return getY() - getYHist(); }
 	inline bool isMove() { return getDX() != .0f || getDY() != .0f; }
-	virtual inline string getId() { return id; }
+	inline virtual string getId() { return _id; }
 	inline Morton* getMorton() { return _morton; }
 	inline Object* getMortonNext() { return _mortonNext; }
 	inline Object* getMortonPrev() { return _mortonPrev; }
+	inline bool isCollisionable() { return _collisionable; }
+	inline bool isCollision() { return _collision; }
+	inline bool isCrossLayer() { return _crossLayer; }
 
 	// setter
 public:
@@ -82,6 +85,9 @@ public:
 protected:
 	inline void setXHist(float xHist) { _xHist = xHist; }
 	inline void setYHist(float yHist) { _yHist = yHist; }
+	inline void setCollisionable(bool collisionable) { _collisionable = collisionable; }
+	inline void setCollision(bool collision) { _collision = collision; }
+	inline void setCrossLayer(bool crossLayer) { _crossLayer = crossLayer; }
 
 private:
 	void setMortonNext(Object* other) { _mortonNext = other; }
@@ -112,9 +118,9 @@ public:
 
 public:
 	bool isCollider(Object* other) {
-		bool res =  colliderFunction[(int)this->_shape + (int)other->_shape](this, other);
-		if (!this->_collision) { this->_collision = res; }
-		if (!other->_collision) { other->_collision = res; }
+		bool res = colliderFunction[(int)this->_shape + (int)other->_shape](this, other);
+		if (!this->isCollision()) { this->setCollision(res); }
+		if (!other->isCollision()) { other->setCollision(res); }
 		return res;
 	}
 };

@@ -8,7 +8,7 @@
         "y": "7"
       },
       "key": "button",
-      "path": "data/sprites/button/",
+      "path": "data/sprites/button/button.png",
       "sprites": [
         {
           "key": "red_neutral",
