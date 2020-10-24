@@ -3,6 +3,9 @@
 #include "MortonTree.h"
 
 ObjectManager::ObjectManager() : Worker(PROC_PRIORITY, DRAW_PRIORITY) {
+	Object::setConnector(this);
+	Object::setColliderFunction();
+
 	_cell = new MortonTree[CELL];
 	_n = new int[DEPTH];
 	_root = new int[DEPTH];
@@ -40,7 +43,6 @@ ObjectManager::ObjectManager() : Worker(PROC_PRIORITY, DRAW_PRIORITY) {
 			}
 		}
 	}
-	Object::setConnector(this);
 
 	//printfDx("\n\n");
 	//printMortonTree(&_cell[0], 0);

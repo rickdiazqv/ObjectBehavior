@@ -3,9 +3,8 @@
 #include "Sprites.h"
 
 SpriteManager::SpriteManager() {
-	const char* const fpath = "data/json/sprites/sprites.json";
 	//const char* const fpath = "data/json/sprites/test.json";
-	json config = json::parse(DxFileRead(fpath));
+	json config = json::parse(DxFileRead(CONFIG_PATH));
 	configure(config);
 	//printfDx(DxFileRead("data/json/sprites/sprites.json").c_str());
 }
@@ -43,10 +42,10 @@ void SpriteManager::configure(json& config) {
 
 	for (json& conf : confList) {
 		string type = j2s(conf[j_class]);
-		if (type == "Sprite") {
+		if (type == SPRITE) {
 			setSprite(conf);
 		}
-		else if (type == "Sprites") {
+		else if (type == SPRITES) {
 			setSprites(conf);
 		}
 	}

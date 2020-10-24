@@ -6,10 +6,11 @@ private:
 	inline static GameProcessor* _self = nullptr;
 
 private:
+	SpriteManager* _sprMgr = nullptr;
 	WorkManager* _wrkMgr = nullptr;
 	ObjectManager* _objMgr = nullptr;
 	Input* _input = nullptr;
-	SpriteManager* _sprMgr = nullptr;
+	SceneManager* _scMgr = nullptr;
 
 private:
 	GameProcessor();

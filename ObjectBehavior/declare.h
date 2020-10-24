@@ -11,16 +11,22 @@ template <typename T>
 class Comparable;
 template <typename T>
 class Configurable;
+template <typename T>
+class MouseListener;
+class SceneChanger;
 
 // abstract class
 class Worker;
 class Object;
+class Scene;
 
 // singleton
 class GameProcessor;
 class WorkManager;
 class ObjectManager;
 class Input;
+class SpriteManager;
+class SceneManager;
 
 // class
 class PlaneObject;
@@ -34,7 +40,6 @@ class CircleMorton;
 class MortonTree;
 class Sprite;
 class Sprites;
-class SpriteManager;
 class Renderer;
 class Button;
 class Strings;

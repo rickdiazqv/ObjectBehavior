@@ -11,6 +11,7 @@ constexpr int n_key = 256;
 
 constexpr const char* path_key = "key.ini";
 
+constexpr SceneId sc_init = SceneId::Title;
 
 // Button
 constexpr int n_btn_diff = 3;

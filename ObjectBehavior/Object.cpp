@@ -1,4 +1,8 @@
 #include "header.h"
+#include "Input.h"
+#include "Object.h"
+
+Input* const Object::_input = Input::getInstance();
 
 /*Object::Object() : Object(X, Y, LAYER, PERS, Shape::Dot) {
 
@@ -52,16 +56,10 @@ void Object::updateMortonTree() {
 	}
 }
 
-void Object::setConnector(Connector<Object*, Object*, bool>* connector) {
-	if (_connector) { return; }
-	_connector = connector;
-	//printfDx("Object::setConnector\n");
-
-	setColliderFunction();
-}
-
 void Object::update() {
-	_collision = false;
+	setOldCollision(isCollision());
+	setCollision(false);
+
 	bool move = vx != .0f || vy != .0f;
 
 	setXHist(getX());
@@ -148,16 +146,20 @@ int Object::drawCompareTo(Worker* other) {
 }
 
 void Object::setColliderFunction() {
+	if (_colliderFunction.size() > 0) { return; }
+
 	int d = (int)Shape::Dot;
 	int t = (int)Shape::Tryangle;
 	int r = (int)Shape::Rectangle;
 	int c = (int)Shape::Circle;
 
-	colliderFunction[d + d] = [](Object* self, Object* other) {
+	_colliderFunction[0] = nullptr;
+
+	_colliderFunction[d + d] = [](Object* self, Object* other) {
 		return self->_x == other->_x && self->_y == other->_y;
 	};
 
-	colliderFunction[d + r] = [](Object* self, Object* other) {
+	_colliderFunction[d + r] = [](Object* self, Object* other) {
 		Object* dot = nullptr;
 		RectangleObject* rect = nullptr;
 
@@ -177,7 +179,7 @@ void Object::setColliderFunction() {
 			t <= y && y < t + rect->getHeight();
 	};
 
-	colliderFunction[d + c] = [](Object* self, Object* other) {
+	_colliderFunction[d + c] = [](Object* self, Object* other) {
 		Object* dot = nullptr;
 		CircleObject* cir = nullptr;
 
@@ -197,7 +199,7 @@ void Object::setColliderFunction() {
 			<= pow(cir->getRadius(), 2);
 	};
 
-	colliderFunction[r + r] = [](Object* self, Object* other) {
+	_colliderFunction[r + r] = [](Object* self, Object* other) {
 		RectangleObject* rects = nullptr;
 		RectangleObject* recto = nullptr;
 
@@ -214,7 +216,7 @@ void Object::setColliderFunction() {
 			(rects->getHeight() + recto->getHeight()) * .5f;
 	};
 
-	colliderFunction[r + c] = [](Object* self, Object* other) {
+	_colliderFunction[r + c] = [](Object* self, Object* other) {
 		RectangleObject* rect = (RectangleObject*)self;
 		CircleObject* cir = (CircleObject*)other;
 
@@ -257,7 +259,7 @@ void Object::setColliderFunction() {
 	};
 
 
-	colliderFunction[c + c] = [](Object* self, Object* other) {
+	_colliderFunction[c + c] = [](Object* self, Object* other) {
 		CircleObject* cirs = nullptr;
 		CircleObject* ciro = nullptr;
 
@@ -273,4 +275,58 @@ void Object::setColliderFunction() {
 			pow(cirs->_y - ciro->_y, 2) <
 			pow(cirs->getRadius() + ciro->getRadius(), 2);
 	};
+}
+
+void Object::callCollisionMouseEvent(Object* self) {
+	MouseListener<Object*>* listener = self->getMouseListener();
+	int left = Input::LEFT;
+
+	// クリックしたとき
+	if (_input->isMouseDown(left)) {
+		listener->onMouseDown(left, self);
+	}
+	// クリックを離したとき
+	else if (_input->isMouseUp(left)) {
+		listener->onClick(self);
+	}
+
+	// オブジェクトに侵入したとき
+	if (!self->isOldCollision()) {
+		listener->onMouseEntry(self);
+	}
+}
+
+void Object::callNonCollisionMouseEvent(Object* self) {
+	MouseListener<Object*>* listener = self->getMouseListener();
+
+	// オブジェクトから離れたとき
+	if (self->isOldCollision()) {
+		listener->onMouseExit(self);
+	}
+}
+
+bool Object::isCollider(Object* other) {
+	bool res = _colliderFunction
+		[(int)this->_shape + (int)other->_shape](this, other);
+
+	if (!this->isCollision()) {
+		this->setCollision(res);
+	}
+	if (!other->isCollision()) {
+		other->setCollision(res);
+	}
+	Object* input = nullptr, * obj = nullptr;
+	if (this == _input) { input = this; obj = other; }
+	else if (other == _input) { input = other; obj = this; }
+
+	if (res && input && (this->getId() == "btn0" || other->getId() == "btn0")) {
+		int a = 0;
+	}
+
+	if (input && obj && obj->getMouseListener()) {
+		if (res) { callCollisionMouseEvent(obj); }
+		else { callNonCollisionMouseEvent(obj); }
+	}
+
+	return res;
 }

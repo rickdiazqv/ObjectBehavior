@@ -1,7 +1,6 @@
 #pragma once
 #include "define.h"
 #include "Task.h"
-#include "Connector.h"
 #include "Comparable.h"
 
 class Worker : public Task, public Comparable<Worker*> {
@@ -39,6 +38,9 @@ private:
 	inline void setNext(Worker* other) { _next = other; };
 
 public:
+	inline static void setConnector(Connector<Worker*, void, void>* connector) {
+		if (!_connector) { _connector = connector; }
+	}
 	static void sortSelf(Worker* self);
 
 protected:
@@ -48,7 +50,6 @@ private:
 	static bool sortSelf(Worker* const self, Worker* const root, const int index);
 
 public:
-	static void setConnector(Connector<Worker*, void, void>* connector);
 	static void sendWorkers();
 	inline static Worker* getCurrent() { return _current; }
 	inline static Worker* getDrawHead() { return _drawHead; }

@@ -3,7 +3,7 @@
 #include "Task.h"
 #include "Connector.h"
 
-class WorkManager : public Task, public Connector<Worker*, void, void> {
+class WorkManager final : public Task, public Connector<Worker*, void, void> {
 private:
 	inline static WorkManager* _self = nullptr;
 

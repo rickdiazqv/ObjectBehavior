@@ -19,8 +19,11 @@ protected:
 	inline static const bool PERS = false;
 
 private:
+	inline static unordered_map <int, TypeBiFunction<Object*, bool>>
+		_colliderFunction;
 	inline static Connector<Object*, Object*, bool>* _connector = nullptr;
-	inline static unordered_map <int, TypeBiFunction<Object*, bool>> colliderFunction;
+	MouseListener* _mouseListener = nullptr;
+	static Input* const _input;
 	inline static int objCnt = 0;
 
 protected:
@@ -42,6 +45,7 @@ public:
 private:
 	bool _collisionable = true;	// 当たり判定を有効にするか
 	bool _collision = false;		// 衝突したかどうか
+	bool _oldCollision = _collision;
 	bool _crossLayer = false;	// レイヤーを跨いで当たり判定を行うかどうか
 
 private:
@@ -58,7 +62,10 @@ public:
 protected:
 	virtual void createMorton();
 
-	// getterk
+private:
+	void updateMortonTree();
+
+	// getter
 public:
 	void init() override final;
 	inline Layer getLayer() { return _layer; }
@@ -76,29 +83,43 @@ public:
 	inline Object* getMortonPrev() { return _mortonPrev; }
 	inline bool isCollisionable() { return _collisionable; }
 	inline bool isCollision() { return _collision; }
+	inline bool isOldCollision() { return _oldCollision; }
 	inline bool isCrossLayer() { return _crossLayer; }
+
+private:
+	inline MouseListener* getMouseListener() { return _mouseListener; }
 
 	// setter
 public:
 	void setLayer(Layer layer) {}
+	inline void setMouseListener(MouseListener* mouseListener) {
+		if (!_mouseListener) { _mouseListener = mouseListener; }
+	}
 
 protected:
 	inline void setXHist(float xHist) { _xHist = xHist; }
 	inline void setYHist(float yHist) { _yHist = yHist; }
 	inline void setCollisionable(bool collisionable) { _collisionable = collisionable; }
 	inline void setCollision(bool collision) { _collision = collision; }
+	inline void setOldCollision(bool collision) { _oldCollision = collision; }
 	inline void setCrossLayer(bool crossLayer) { _crossLayer = crossLayer; }
 
 private:
 	void setMortonNext(Object* other) { _mortonNext = other; }
 	void setMortonPrev(Object* other) { _mortonPrev = other; }
-	void updateMortonTree();
 
 public:
-	static void setConnector(Connector<Object*, Object*, bool>* connector);
+	inline static void setConnector(Connector<Object*, Object*, bool>* connector) {
+		if (!_connector) { _connector = connector; }
+	}
+	static void setColliderFunction();
 
 private:
-	static void setColliderFunction();
+	static void callCollisionMouseEvent(Object* self);
+	static void callNonCollisionMouseEvent(Object* self);
+
+public:
+	bool isCollider(Object* other);
 
 	// Task
 public:
@@ -115,12 +136,4 @@ public:
 	// Wroker
 public:
 	int drawCompareTo(Worker* other) override;
-
-public:
-	bool isCollider(Object* other) {
-		bool res = colliderFunction[(int)this->_shape + (int)other->_shape](this, other);
-		if (!this->isCollision()) { this->setCollision(res); }
-		if (!other->isCollision()) { other->setCollision(res); }
-		return res;
-	}
 };

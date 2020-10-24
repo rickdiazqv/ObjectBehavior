@@ -5,8 +5,8 @@
 #include "CircleObject.h"
 
 WorkManager::WorkManager() {
-	//printfDx("WorkManager\n");
 	Worker::setConnector(this);
+	//printfDx("WorkManager\n");
 }
 
 WorkManager::~WorkManager() {

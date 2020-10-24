@@ -4,7 +4,9 @@
 #include "Morton.h"
 #include "Connector.h"
 
-class ObjectManager final : public Worker, public Connector<Object*, Object*, bool> {
+class ObjectManager final : 
+	public Worker, 
+	public Connector<Object*, Object*, bool> {
 public:
 	inline static const int PROC_PRIORITY = 10;
 	inline static const int DRAW_PRIORITY = 10;

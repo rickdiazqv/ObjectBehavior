@@ -151,6 +151,30 @@
     <Filter Include="SpriteObject\Button">
       <UniqueIdentifier>{7754e54e-b0b8-4daf-8bf9-bf56a4ab9a2e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Objects\Interface\Listener">
+      <UniqueIdentifier>{c34949cb-34cc-434c-bcd7-707fd641e040}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\Interface\Listener\MouseListener">
+      <UniqueIdentifier>{5a4ec90d-0a44-4098-b8be-7ea1aebc9dfa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes">
+      <UniqueIdentifier>{3d0114ef-8de2-4b53-ac79-cb3d9f317648}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Scene">
+      <UniqueIdentifier>{a420830e-b8d1-433a-ae5d-595ac33b28ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\SceneManager">
+      <UniqueIdentifier>{fd0d4b2e-e634-47b5-8c31-b3d65c1fd635}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\SceneChanger">
+      <UniqueIdentifier>{a4d551db-011b-48af-97d2-aa9994d1fa6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Scenes">
+      <UniqueIdentifier>{99a95224-82a5-4fd6-8876-59fe685808f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Scenes\Title">
+      <UniqueIdentifier>{1b817e68-0ba8-495d-a4ff-18222ae90d67}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -230,6 +254,15 @@
     </ClCompile>
     <ClCompile Include="Button.cpp">
       <Filter>SpriteObject\Button</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Scenes\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>Scenes\SceneManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Title.cpp">
+      <Filter>Scenes\Scenes\Title</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -358,6 +391,24 @@
     </ClInclude>
     <ClInclude Include="Button.h">
       <Filter>SpriteObject\Button</Filter>
+    </ClInclude>
+    <ClInclude Include="MouseListener.h">
+      <Filter>Objects\Interface\Listener\MouseListener</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Scenes\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneId.h">
+      <Filter>Tools\Enums\Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>Scenes\SceneManager</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneChanger.h">
+      <Filter>Scenes\SceneChanger</Filter>
+    </ClInclude>
+    <ClInclude Include="Title.h">
+      <Filter>Scenes\Scenes\Title</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -38,6 +38,7 @@ void Renderer::render() {
 	int x = (int)fx, y = (int)fy;
 
 	if (_scaleX == 1.f && _scaleY == 1.f) {
+		DrawFormatString(winx / 2, 0, 0xffffff, "%d", _sprite->getHandle());
 		DrawGraph(x, y, _sprite->getHandle(), TRUE);
 	}
 	else {

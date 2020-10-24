@@ -60,6 +60,10 @@ void Sprites::load() {
 	int dy = getDivY();
 	int sx = getSpriteSizeX();
 	int sy = getSpriteSizeY();
+	
+	char cd[256];
+	GetCurrentDirectory(256, cd);
+	int h = LoadGraph(fpath.c_str());
 
 	LoadDivGraph(getFilePath().c_str(), getSpritesNum(), getDivX(), getDivY(), getSpriteSizeX(), getSpriteSizeY(), _hndls);
 	for (auto entry : _sprites) {

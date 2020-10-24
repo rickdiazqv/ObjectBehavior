@@ -5,10 +5,12 @@
 #include "Sprite.h"
 #include "Sprites.h"
 
-class SpriteManager : public Connector<Sprite*, string, bool>, public Configurable<json&> {
+class SpriteManager : 
+	public Connector<Sprite*, string, bool>, 
+	public Configurable<json&> {
+
 private:
-	inline static const string SINGLE = "single";
-	inline static const string COMBINE = "combine";
+	inline static const char* const CONFIG_PATH = "data/json/sprites/sprites.json";
 	inline static const string SPRITE = "Sprite";
 	inline static const string SPRITES = "Sprites";
 
