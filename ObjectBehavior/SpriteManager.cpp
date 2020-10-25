@@ -3,10 +3,7 @@
 #include "Sprites.h"
 
 SpriteManager::SpriteManager() {
-	//const char* const fpath = "data/json/sprites/test.json";
-	json config = json::parse(DxFileRead(CONFIG_PATH));
-	configure(config);
-	//printfDx(DxFileRead("data/json/sprites/sprites.json").c_str());
+
 }
 
 SpriteManager::~SpriteManager() {

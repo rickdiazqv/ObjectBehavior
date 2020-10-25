@@ -177,6 +177,7 @@
   <ItemGroup>
     <ClCompile Include="CircleMorton.cpp" />
     <ClCompile Include="CircleObject.cpp" />
+    <ClCompile Include="ConfigLoader.cpp" />
     <ClCompile Include="CSVEditor.cpp" />
     <ClCompile Include="GameProcessor.cpp" />
     <ClCompile Include="Input.cpp" />
@@ -210,6 +211,7 @@
     <ClInclude Include="CircleMorton.h" />
     <ClInclude Include="CircleObject.h" />
     <ClInclude Include="class.h" />
+    <ClInclude Include="ConfigLoader.h" />
     <ClInclude Include="CSVEditor.h" />
     <ClInclude Include="declare.h" />
     <ClInclude Include="Comparable.h" />

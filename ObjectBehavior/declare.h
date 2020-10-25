@@ -22,6 +22,7 @@ class Scene;
 
 // singleton
 class GameProcessor;
+class ConfigLoader;
 class WorkManager;
 class ObjectManager;
 class Input;

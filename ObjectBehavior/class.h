@@ -17,6 +17,7 @@
 
 // singleton
 #include "GameProcessor.h"
+#include "ConfigLoader.h"
 #include "WorkManager.h"
 #include "ObjectManager.h"
 #include "Input.h"

@@ -22,10 +22,8 @@ void WorkManager::update() {
 }
 
 void WorkManager::draw() {
-	//clsDx();
 	Morton::drawGrid();
-	//DrawFormatString(300, 20, 0xffffff, (*_workers.begin())->toString().c_str());
-	//DrawFormatString(300, 40, 0xffffff, (*++_workers.begin())->toString().c_str());
+
 	int i = 0;
 	for (auto worker = Worker::getDrawHead(); worker != nullptr; worker = worker->getNext()) {
 		worker->draw();
@@ -35,11 +33,9 @@ void WorkManager::draw() {
 }
 
 void WorkManager::connect(Worker* self) {
-	//printfDx("connect\n");
 	if (!self) { return; }
 	_queWorkers.push(self);
 	_receive = true;
-	//printfDx("queue size:%d\n", _queWorkers.size());
 }
 
 void WorkManager::disconnect(Worker* self) {
@@ -66,6 +62,7 @@ void WorkManager::receive() {
 			_workers.push_back(self);
 			continue;
 		}
+
 		int comp = self->procCompareTo(self);
 		if (comp < 0) {
 			//printfDx("front\n");

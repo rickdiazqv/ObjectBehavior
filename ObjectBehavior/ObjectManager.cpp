@@ -59,7 +59,8 @@ void ObjectManager::update() {
 	int depth = 0;
 	int idx = 0;
 	int sq = 0;
-	MortonTree* tree = &_cell[0];
+	MortonTree* const root = &_cell[0];
+	MortonTree* tree = root;
 	MortonTree* parent = nullptr;
 	MortonTree* child = tree;
 
@@ -104,7 +105,7 @@ void ObjectManager::update() {
 
 		// ãˆÊƒZƒ‹‚É–ß‚é
 		parent = tree;
-		while (parent = parent->getParent()) {
+		while (parent != root && (parent = parent->getParent())) {
 			depth--;
 			if (child = parent->getNextChild()) {
 				depth++;

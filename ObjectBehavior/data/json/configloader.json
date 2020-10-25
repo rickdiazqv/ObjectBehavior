@@ -1,0 +1,9 @@
+{
+  "class": "ConfigLoader",
+  "config": [
+    {
+      "class": "SpriteManager",
+      "path": "data/json/sprites/sprites.json"
+    }
+  ]
+}

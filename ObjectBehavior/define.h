@@ -9,6 +9,7 @@ constexpr int winy = 900;
 constexpr int n_mouse = 3;
 constexpr int n_key = 256;
 
+constexpr const char* path_conf = "data/json/configloader.json";
 constexpr const char* path_key = "key.ini";
 
 constexpr SceneId sc_init = SceneId::Title;

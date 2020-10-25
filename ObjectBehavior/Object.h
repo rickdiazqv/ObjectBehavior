@@ -22,7 +22,7 @@ private:
 	inline static unordered_map <int, TypeBiFunction<Object*, bool>>
 		_colliderFunction;
 	inline static Connector<Object*, Object*, bool>* _connector = nullptr;
-	MouseListener* _mouseListener = nullptr;
+	MouseListener<Object*>* _mouseListener = nullptr;
 	static Input* const _input;
 	inline static int objCnt = 0;
 
@@ -87,12 +87,12 @@ public:
 	inline bool isCrossLayer() { return _crossLayer; }
 
 private:
-	inline MouseListener* getMouseListener() { return _mouseListener; }
+	inline MouseListener<Object*>* getMouseListener() { return _mouseListener; }
 
 	// setter
 public:
 	void setLayer(Layer layer) {}
-	inline void setMouseListener(MouseListener* mouseListener) {
+	inline void setMouseListener(MouseListener<Object*>* mouseListener) {
 		if (!_mouseListener) { _mouseListener = mouseListener; }
 	}
 

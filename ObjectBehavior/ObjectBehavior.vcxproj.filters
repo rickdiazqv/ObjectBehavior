@@ -175,6 +175,9 @@
     <Filter Include="Scenes\Scenes\Title">
       <UniqueIdentifier>{1b817e68-0ba8-495d-a4ff-18222ae90d67}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Tools\ConfigLoader">
+      <UniqueIdentifier>{d98cf7cd-0e81-4e9a-962b-d60135d739d9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -263,6 +266,9 @@
     </ClCompile>
     <ClCompile Include="Title.cpp">
       <Filter>Scenes\Scenes\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="ConfigLoader.cpp">
+      <Filter>Tools\ConfigLoader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -409,6 +415,9 @@
     </ClInclude>
     <ClInclude Include="Title.h">
       <Filter>Scenes\Scenes\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="ConfigLoader.h">
+      <Filter>Tools\ConfigLoader</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
