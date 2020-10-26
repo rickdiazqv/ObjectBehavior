@@ -4,8 +4,8 @@
 #include "Morton.h"
 #include "Connector.h"
 
-class ObjectManager final : 
-	public Worker, 
+class ObjectManager final :
+	public Worker,
 	public Connector<Object*, Object*, bool> {
 public:
 	inline static const int PROC_PRIORITY = 10;
@@ -48,7 +48,11 @@ public:
 	Object* connect(Object* self) override;
 	bool disconnect(Object* self) override;
 
+public:
+	void updateAt(MortonTree* const self);
+
 private:
+	void updateAt(Object* const root);
 	void printMortonTree(MortonTree* tree, int depth);
 };
 

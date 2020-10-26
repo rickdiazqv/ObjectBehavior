@@ -56,10 +56,28 @@ ObjectManager::~ObjectManager() {
 }
 
 void ObjectManager::update() {
+	updateAt(&_cell[0]);
+}
+
+void ObjectManager::updateAt(Object* const self) {
+	Morton* morton = self->getMorton();
+	int depth = morton->getDepth();
+	int absId = morton->getAbsMorton();
+
+	if (absId < 0 || CELL <= absId) {
+		//printfDx("objmgr con error: out of bounds\n");
+		return;
+	}
+
+	int idx = getRoot(depth) + absId;
+
+	updateAt(&_cell[idx]);
+}
+
+void ObjectManager::updateAt(MortonTree* const root) {
 	int depth = 0;
 	int idx = 0;
 	int sq = 0;
-	MortonTree* const root = &_cell[0];
 	MortonTree* tree = root;
 	MortonTree* parent = nullptr;
 	MortonTree* child = tree;
@@ -181,9 +199,6 @@ Object* ObjectManager::connect(Object* self) {
 	for (int i = 0; i < depth; i++) {
 		parent = tree->getParent();
 		parent->setIsLeaf(false);
-	}
-	if (res == self) {
-		int a = 0;
 	}
 
 	return res;

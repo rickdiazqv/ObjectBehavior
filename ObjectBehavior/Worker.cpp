@@ -4,8 +4,8 @@
 Worker::Worker(int procPriority, int drawPriority) {
 	//printfDx("Worker\n");
 	if (_connector) { _connector->connect(this); }
-	else { 
-		_queWorkers.push(this); 
+	else {
+		_queWorkers.push_back(this);
 	}
 
 	_procPriority = procPriority;
@@ -60,14 +60,13 @@ bool Worker::sortSelf(Worker* const self, Worker* const root, const int index) {
 }
 
 void Worker::sendWorkers() {
-	if (!_connector) { return; }
-	while (!_queWorkers.empty()) {
-		Worker* self = _queWorkers.front();
-		_queWorkers.pop();
-		if (!self) { continue; }
+	if (!_connector || _queWorkers.size() == 0) { return; }
 
+	for (Worker* self : _queWorkers) {
+		if (!self) { continue; }
 		_connector->connect(self);
 	}
+	list<Worker*>().swap(_queWorkers);
 }
 
 int Worker::compareTo(Worker* other) {

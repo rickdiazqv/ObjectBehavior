@@ -10,7 +10,7 @@ private:
 	static TypeBiConsumer<Worker*> setNeighbor[2];
 	inline static Worker* _current = nullptr;
 	inline static Worker* _drawHead = nullptr;
-	inline static queue<Worker*> _queWorkers;
+	inline static list<Worker*> _queWorkers;
 
 private:
 	Worker* _prev = nullptr;

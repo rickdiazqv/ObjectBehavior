@@ -10,7 +10,7 @@ WorkManager::WorkManager() {
 }
 
 WorkManager::~WorkManager() {
-	
+
 }
 
 void WorkManager::update() {
@@ -34,7 +34,7 @@ void WorkManager::draw() {
 
 void WorkManager::connect(Worker* self) {
 	if (!self) { return; }
-	_queWorkers.push(self);
+	_queWorkers.push_back(self);
 	_receive = true;
 }
 
@@ -44,10 +44,8 @@ void WorkManager::disconnect(Worker* self) {
 
 void WorkManager::receive() {
 	Worker::sendWorkers();
-	while (!_queWorkers.empty()) {
-		//printfDx("while ");
-		Worker* self = _queWorkers.front();
-		_queWorkers.pop();
+	if (_queWorkers.size() == 0) { return; }
+	for (Worker* self : _queWorkers) {
 		if (!self) { continue; }
 
 		// èâä˙âªÉÅÉ\ÉbÉh
@@ -83,10 +81,11 @@ void WorkManager::receive() {
 			_workers.insert(worker.base(), self);
 			break;
 		}
-		if (_workers.size() == size) { 
-			_workers.push_front(self); 
+		if (_workers.size() == size) {
+			_workers.push_front(self);
 		}
 	}
+	list<Worker*>().swap(_queWorkers);
 	_receive = false;
 	//DrawFormatString(500, 0, 0xffffff, "tasks size:%d, queue size:%d", _workers.size(), _queWorkers.size());
 	printfDx("\n");

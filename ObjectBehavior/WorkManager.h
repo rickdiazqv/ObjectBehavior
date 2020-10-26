@@ -12,7 +12,7 @@ private:
 	//Worker* _procTail = nullptr;
 	//Worker* _drawHead = nullptr;
 	//Worker* _drawTail = nullptr;
-	queue<Worker*> _queWorkers;
+	list<Worker*> _queWorkers;
 	bool _receive = true;
 
 private:
