@@ -18,7 +18,7 @@ void ConfigLoader::configure(const char* const fpath) {
 	}
 }
 
-void ConfigLoader::callConfigure(json& path) {
+inline void ConfigLoader::callConfigure(json& path) {
 	json config = json::parse(DxFileRead(j2s(path[j_path]).c_str()));
 	_confMap[path[j_class]]->configure(config);
 }

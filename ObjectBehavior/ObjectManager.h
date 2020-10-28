@@ -49,10 +49,10 @@ public:
 	bool disconnect(Object* self) override;
 
 public:
-	void updateAt(MortonTree* const self);
+	void updateAt(Object* const self);
 
 private:
-	void updateAt(Object* const root);
+	inline void updateAt(MortonTree* const root);
 	void printMortonTree(MortonTree* tree, int depth);
 };
 

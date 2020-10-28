@@ -19,13 +19,13 @@ public:
 	~MortonTree();
 
 public:
-	Object* getHead() { return _head; }
-	MortonTree* getParent() { return _parent; }
-	MortonTree* getChild(int index) { return _child[index]; }
-	MortonTree* getPrev() { return _prev; }
-	MortonTree* getNext() { return _next; }
-	bool isLeaf() { return _isLeaf; }
-	MortonTree* getNextChild() {
+	inline Object* getHead() { return _head; }
+	inline MortonTree* getParent() { return _parent; }
+	inline MortonTree* getChild(int index) { return _child[index]; }
+	inline MortonTree* getPrev() { return _prev; }
+	inline MortonTree* getNext() { return _next; }
+	inline bool isLeaf() { return _isLeaf; }
+	inline MortonTree* getNextChild() {
 		if (_childIndex == 4) {
 			_childIndex = 0;
 			return nullptr;
@@ -34,11 +34,11 @@ public:
 	}
 
 public:
-	void setHead(Object* obj) { _head = obj; }
-	void setParent(MortonTree* tree) { _parent = tree; }
-	void setChild(MortonTree* tree, int index) { _child[index] = tree; }
-	void setPrev(MortonTree* tree) { _prev = tree; }
-	void setNext(MortonTree* tree) { _next = tree; }
-	void setIsLeaf(bool isLeaf) { _isLeaf = isLeaf; }
-	void resetChildIndex() { _childIndex = 0; }
+	inline void setHead(Object* obj) { _head = obj; }
+	inline void setParent(MortonTree* tree) { _parent = tree; }
+	inline void setChild(MortonTree* tree, int index) { _child[index] = tree; }
+	inline void setPrev(MortonTree* tree) { _prev = tree; }
+	inline void setNext(MortonTree* tree) { _next = tree; }
+	inline void setIsLeaf(bool isLeaf) { _isLeaf = isLeaf; }
+	inline void resetChildIndex() { _childIndex = 0; }
 };

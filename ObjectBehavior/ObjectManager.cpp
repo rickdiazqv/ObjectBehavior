@@ -56,39 +56,22 @@ ObjectManager::~ObjectManager() {
 }
 
 void ObjectManager::update() {
-	updateAt(&_cell[0]);
-}
-
-void ObjectManager::updateAt(Object* const self) {
-	Morton* morton = self->getMorton();
-	int depth = morton->getDepth();
-	int absId = morton->getAbsMorton();
-
-	if (absId < 0 || CELL <= absId) {
-		//printfDx("objmgr con error: out of bounds\n");
-		return;
-	}
-
-	int idx = getRoot(depth) + absId;
-
-	updateAt(&_cell[idx]);
-}
-
-void ObjectManager::updateAt(MortonTree* const root) {
 	int depth = 0;
 	int idx = 0;
 	int sq = 0;
+	MortonTree* const root = &_cell[0];
 	MortonTree* tree = root;
 	MortonTree* parent = nullptr;
 	MortonTree* child = tree;
+	Object* self = nullptr;
+	Object* other = nullptr;
 
 	while (child) {
 		// treeの更新
 		tree = child;
 
 		// 同セル内で総当り
-		Object* self = tree->getHead();
-		Object* other = nullptr;
+		self = tree->getHead();
 		while (self && (other = self->getMortonNext())) {
 			do {
 				self->isCollider(other);
@@ -99,7 +82,6 @@ void ObjectManager::updateAt(MortonTree* const root) {
 		// 全ての親と総当り
 		parent = tree->getParent();
 		for (int d = depth; d > 0; d--, parent = parent->getParent()) {
-
 			self = tree->getHead();
 
 			// 親と総当り
@@ -127,6 +109,69 @@ void ObjectManager::updateAt(MortonTree* const root) {
 			depth--;
 			if (child = parent->getNextChild()) {
 				depth++;
+				break;
+			}
+		}
+	}
+}
+
+void ObjectManager::updateAt(Object* const self) {
+	Morton* morton = self->getMorton();
+	const int depth = morton->getDepth();
+	const int absId = morton->getAbsMorton();
+
+	if (absId < 0 || CELL <= absId) {
+		//printfDx("objmgr con error: out of bounds\n");
+		return;
+	}
+
+	const int idx = getRoot(depth) + absId;
+	MortonTree* const root = &_cell[idx];
+	MortonTree* parent = root->getParent();
+	Object* other = nullptr;
+
+	// 全ての親と総当り
+	for (int d = depth; d > 0; d--, parent = parent->getParent()) {
+		if (!(other = parent->getHead())) { continue; }
+		// 親と総当り
+		do {
+			self->isCollider(other);
+		} while (other = other->getMortonNext());
+	}
+
+	// 同セル内で総当り
+	if (other = self->getMortonNext()) {
+		do {
+			self->isCollider(other);
+		} while (other = other->getMortonNext());
+	}
+
+	// 子と総当たり
+	MortonTree* child = root->getNextChild();
+	while (child) {
+		// 子と総当たり
+		if (other = child->getHead()) {
+			do {
+				self->isCollider(other);
+			} while (other = other->getMortonNext());
+		}
+
+		// nodeが葉であれば上位セルに戻る
+		if (child->isLeaf()) {
+			child->resetChildIndex();
+		}
+		// 下位セルに移動する
+		else if (child = child->getNextChild()) {
+			continue;
+		}
+		else {
+			child = child->getParent();
+		}
+
+		// 上位セルに戻る
+		parent = child;
+		while (parent != root && (parent = parent->getParent())) {
+			if (child = parent->getNextChild()) {
 				break;
 			}
 		}

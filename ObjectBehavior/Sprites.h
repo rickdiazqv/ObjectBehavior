@@ -53,5 +53,5 @@ private:
 	inline void setSpriteSizeY(int size) { _eSizeY = size; }
 
 public:
-	inline void load() override;
+	void load() override;
 };

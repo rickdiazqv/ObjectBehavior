@@ -12,7 +12,7 @@ SceneManager::~SceneManager() {
 
 }
 
-void SceneManager::changeScene() {
+inline void SceneManager::changeScene() {
 	if (_nextSceneId == SCENE_ID) { return; }
 
 	switch (_nextSceneId) {
