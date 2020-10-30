@@ -119,7 +119,7 @@ private:
 	static void callNonCollisionMouseEvent(Object* self);
 
 public:
-	bool isCollider(Object* other);
+	bool isCollider(Object* other, bool skipIfStill);
 
 	// Task
 public:

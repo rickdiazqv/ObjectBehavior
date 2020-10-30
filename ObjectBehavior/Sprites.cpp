@@ -9,7 +9,7 @@ Sprites::Sprites(CSVEditor& csv, bool load) : Sprite(csv.getString(0, 2).c_str()
 }
 
 
-Sprites::Sprites(json& config, bool load) : Sprite(j2s(config["path"]).c_str(), load) {
+Sprites::Sprites(json& config, bool load) : Sprite(j2s(config[j_path]).c_str(), load) {
 	json& sprites = config[j_sprites];
 	json& div = config[j_div];
 

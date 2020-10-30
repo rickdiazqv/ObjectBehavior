@@ -178,6 +178,9 @@
     <Filter Include="Tools\ConfigLoader">
       <UniqueIdentifier>{d98cf7cd-0e81-4e9a-962b-d60135d739d9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SpriteObject\BackGround">
+      <UniqueIdentifier>{2eeb3bd1-5404-48c8-8a3a-265605974a33}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -269,6 +272,9 @@
     </ClCompile>
     <ClCompile Include="ConfigLoader.cpp">
       <Filter>Tools\ConfigLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="BackGround.cpp">
+      <Filter>SpriteObject\BackGround</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -418,6 +424,9 @@
     </ClInclude>
     <ClInclude Include="ConfigLoader.h">
       <Filter>Tools\ConfigLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="BackGround.h">
+      <Filter>SpriteObject\BackGround</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -74,7 +74,7 @@ void ObjectManager::update() {
 		self = tree->getHead();
 		while (self && (other = self->getMortonNext())) {
 			do {
-				self->isCollider(other);
+				self->isCollider(other, true);
 			} while (other = other->getMortonNext());
 			self = self->getMortonNext();
 		}
@@ -87,7 +87,7 @@ void ObjectManager::update() {
 			// 親と総当り
 			while (self && (other = parent->getHead())) {
 				do {
-					self->isCollider(other);
+					self->isCollider(other, true);
 				} while (other = other->getMortonNext());
 				self = self->getMortonNext();
 			}
@@ -135,14 +135,14 @@ void ObjectManager::updateAt(Object* const self) {
 		if (!(other = parent->getHead())) { continue; }
 		// 親と総当り
 		do {
-			self->isCollider(other);
+			self->isCollider(other, false);
 		} while (other = other->getMortonNext());
 	}
 
 	// 同セル内で総当り
 	if (other = self->getMortonNext()) {
 		do {
-			self->isCollider(other);
+			self->isCollider(other, false);
 		} while (other = other->getMortonNext());
 	}
 
@@ -152,7 +152,7 @@ void ObjectManager::updateAt(Object* const self) {
 		// 子と総当たり
 		if (other = child->getHead()) {
 			do {
-				self->isCollider(other);
+				self->isCollider(other, false);
 			} while (other = other->getMortonNext());
 		}
 

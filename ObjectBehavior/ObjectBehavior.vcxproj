@@ -191,6 +191,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BackGround.cpp" />
     <ClCompile Include="CircleMorton.cpp" />
     <ClCompile Include="CircleObject.cpp" />
     <ClCompile Include="ConfigLoader.cpp" />
@@ -223,6 +224,7 @@
     <ClCompile Include="Worker.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BackGround.h" />
     <ClInclude Include="Behavior.h" />
     <ClInclude Include="CircleMorton.h" />
     <ClInclude Include="CircleObject.h" />

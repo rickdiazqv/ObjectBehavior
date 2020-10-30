@@ -25,9 +25,7 @@ void SpriteManager::loadSprite(const char* const fpath) {
 }
 
 void SpriteManager::setSprite(json& config) {
-	/*for (int i = 0; i < csv.rowLength(); i++) {
-		_sprites[csv.getString(i, 0)] = new Sprite(csv.getString(i, 1).c_str());
-	}*/
+	_sprites[j2s(config[j_key])] = new Sprite(j2s(config[j_path]).c_str());
 }
 
 void SpriteManager::setSprites(json& config) {

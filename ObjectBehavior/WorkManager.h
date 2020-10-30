@@ -20,7 +20,7 @@ private:
 	~WorkManager();
 
 public:
-	static WorkManager* getInstance() {
+	inline static WorkManager* getInstance() {
 		if (!_self) { _self = new WorkManager(); }
 		return _self;
 	}

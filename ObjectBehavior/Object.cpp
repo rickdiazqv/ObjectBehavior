@@ -305,7 +305,10 @@ void Object::callNonCollisionMouseEvent(Object* self) {
 	}
 }
 
-bool Object::isCollider(Object* other) {
+bool Object::isCollider(Object* other, bool skipIfStill) {
+	if (!this->isCollisionable() || !other->isCollisionable()) { return false; }
+
+	//bool skip = skipIfStill && !this->isMove() && !other->isMove();
 	bool res = _colliderFunction
 		[(int)this->_shape + (int)other->_shape](this, other);
 
@@ -315,13 +318,23 @@ bool Object::isCollider(Object* other) {
 	if (!other->isCollision()) {
 		other->setCollision(res);
 	}
+
+	/*if (skip) {
+		this->setCollision(this->isOldCollision());
+		other->setCollision(other->isOldCollision());
+		res = this->isCollision() && other->isCollision();
+	}
+	else {
+		res = _colliderFunction
+			[(int)this->_shape + (int)other->_shape](this, other);
+		this->setCollision(res);
+		other->setCollision(res);
+	}*/
+
+
 	Object* input = nullptr, * obj = nullptr;
 	if (this == _input) { input = this; obj = other; }
 	else if (other == _input) { input = other; obj = this; }
-
-	if (res && input && (this->getId() == "btn0" || other->getId() == "btn0")) {
-		int a = 0;
-	}
 
 	if (input && obj && obj->getMouseListener()) {
 		if (res) { callCollisionMouseEvent(obj); }

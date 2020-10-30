@@ -5,6 +5,7 @@
 #include "CircleObject.h"
 #include "Button.h"
 #include "MouseListener.h"
+#include "BackGround.h"
 
 
 class Title : public Scene {
@@ -35,6 +36,7 @@ private:
 		void onMouseEntry(Object* ev) override { printfDx("entry "); }
 		void onMouseExit(Object* ev) override { printfDx("exit "); }
 	} ml;
+	BackGround sea;
 	//Model3D MGR("data/MGRŽo‹Mver1.3/MGRŽo‹M.pmx");
 	//Model3D miku("data/LatŽ®ƒ~ƒN/LatŽ®ƒ~ƒNVer2.3_Normal.pmd");
 	//rect1.vy = .5f;

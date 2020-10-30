@@ -38,5 +38,6 @@
 #include "Sprites.h"
 #include "Renderer.h"
 #include "Button.h"
+#include "BackGround.h"
 #include "Strings.h"
 #include "CSVEditor.h"

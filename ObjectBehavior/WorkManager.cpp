@@ -3,6 +3,7 @@
 #include "Input.h"
 #include "Morton.h"
 #include "CircleObject.h"
+#include "ObjectManager.h"
 
 WorkManager::WorkManager() {
 	Worker::setConnector(this);
@@ -85,6 +86,15 @@ void WorkManager::receive() {
 			_workers.push_front(self);
 		}
 	}
+
+	/*ObjectManager* objMgr = ObjectManager::getInstance();
+	Object* self = nullptr;
+	for (Worker* worker : _queWorkers) {
+		if (self = dynamic_cast<Object*>(worker)) {
+			objMgr->updateAt(self);
+		}
+	}*/
+
 	list<Worker*>().swap(_queWorkers);
 	_receive = false;
 	//DrawFormatString(500, 0, 0xffffff, "tasks size:%d, queue size:%d", _workers.size(), _queWorkers.size());

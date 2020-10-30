@@ -25,7 +25,7 @@ private:
 	~ObjectManager();
 
 public:
-	static ObjectManager* getInstance() {
+	inline static ObjectManager* getInstance() {
 		if (!_self) { _self = new ObjectManager(); }
 		return _self;
 	}

@@ -2,6 +2,7 @@
 
 Sprite::Sprite(const char* const fpath, bool load) : _fpath(fpath) {
 	GetImageSize_File(fpath, &_sizeX, &_sizeY);
+	int a = 0;
 	//printfDx("%s, (%d, %d)\n", fpath, getSizeX(), getSizeY());
 }
 

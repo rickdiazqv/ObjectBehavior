@@ -43,5 +43,6 @@ class Sprite;
 class Sprites;
 class Renderer;
 class Button;
+class BackGround;
 class Strings;
 class CSVEditor;

@@ -85,7 +85,8 @@ void Input::draw() {
 		c = 'R';
 	}
 
-	DrawFormatString(getMouseX(), getMouseY(), 0xffffff, icon);
+	DrawFormatString(getMouseX(), getMouseY(), 
+		isCollision() ? 0xff0000 : 0xffffff, icon);
 }
 
 string Input::toString() {

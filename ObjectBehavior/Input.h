@@ -33,7 +33,7 @@ private:
 	const string _id;
 
 public:
-	static Input* getInstance() {
+	inline static Input* getInstance() {
 		if (!_self) { _self = new Input(); }
 		return _self;
 	}

@@ -158,6 +158,11 @@
           }
         }
       ]
+    },
+    {
+      "class": "Sprite",
+      "key": "sea",
+      "path": "data/sprites/background/Sea-rocks-grass-wildflowers-yellow-flowers_1600x900.jpg"
     }
   ],
   "tail": {}
