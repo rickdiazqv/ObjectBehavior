@@ -9,11 +9,8 @@ RectangleObject::RectangleObject(float width, float height, Layer layer, bool pe
 }
 
 RectangleObject::RectangleObject(float x, float y, float width, float height, Layer layer, bool pers) : _id("rect" + to_string(rectCnt)), Object(x, y, layer, pers, SHAPE) {
-	_width = width;
-	_height = height;
-
-	_left = _x - _width * .5f;
-	_top = _y - _height * .5f;
+	setWidth(width);
+	setHeight(height);
 
 	rectCnt++;
 

@@ -1,7 +1,9 @@
 #include "Sprites.h"
 #include "CSVEditor.h"
 
-Sprites::Sprites(CSVEditor& csv, bool load) : Sprite(csv.getString(0, 2).c_str(), load) {
+Sprites::Sprites(CSVEditor& csv, bool load) :
+	_iterator(_sprites.end()),
+	Sprite(csv.getString(0, 2).c_str(), load) {
 
 	/*for (int i = 1; i < csv.rowLength(); i++) {
 		_sprites[csv.getString(i, 0)]
@@ -9,8 +11,9 @@ Sprites::Sprites(CSVEditor& csv, bool load) : Sprite(csv.getString(0, 2).c_str()
 }
 
 
-Sprites::Sprites(json& config, bool load) : Sprite(j2s(config[j_path]).c_str(), load) {
-	json& sprites = config[j_sprites];
+Sprites::Sprites(json& config, bool load) :
+	_iterator(_sprites.end()),
+	Sprite(j2s(config[j_path]).c_str(), load) {
 	json& div = config[j_div];
 
 	setDivX(j2i(div[j_x]));
@@ -24,23 +27,24 @@ Sprites::Sprites(json& config, bool load) : Sprite(j2s(config[j_path]).c_str(), 
 		_hndls[i] = 0;
 	}
 
-	for (json& sprite : sprites) {
-		json& reg = sprite[j_reg];
-		int regX = j2i(reg[j_x]);
-		int regY = j2i(reg[j_y]);
+	if (config.count(j_sprites) > 0) {
+		json& sprites = config[j_sprites];
 
-		string s = j2s(sprite[j_key]);
-		if (s == btn_emr[0]) {
-			int sx = getSizeX();
-			int sy = getSizeY();
-			int ssx = getSpriteSizeX();
-			int ssy = getSpriteSizeY();
-			int divx = getDivX();
-			int n = getDivX() * regY + regX;
-			int a = 0;
+		for (json& sprite : sprites) {
+			json& reg = sprite[j_reg];
+			int regX = j2i(reg[j_x]);
+			int regY = j2i(reg[j_y]);
+
+			_sprites[j2s(sprite[j_key])] =
+				new DivSprite(getDivX() * regY + regX,
+					getSpriteSizeX(), getSpriteSizeY());
 		}
-
-		_sprites[j2s(sprite[j_key])] = new DivSprite(getDivX() * regY + regX, getSpriteSizeX(), getSpriteSizeY());
+	}
+	else {
+		for (int i = 0; i < getSpritesNum(); i++) {
+			_sprites[to_string(i)] = 
+				new DivSprite(i, getSpriteSizeX(), getSpriteSizeY());
+		}
 	}
 }
 

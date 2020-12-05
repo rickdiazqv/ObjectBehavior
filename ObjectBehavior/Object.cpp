@@ -312,6 +312,10 @@ bool Object::isCollider(Object* other, bool skipIfStill) {
 	bool res = _colliderFunction
 		[(int)this->_shape + (int)other->_shape](this, other);
 
+	if (res && (this->getId() == "rect4" || other->getId() == "rect4")) {
+		int a = 0;
+	}
+
 	if (!this->isCollision()) {
 		this->setCollision(res);
 	}

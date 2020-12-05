@@ -194,6 +194,7 @@
     <ClCompile Include="BackGround.cpp" />
     <ClCompile Include="CircleMorton.cpp" />
     <ClCompile Include="CircleObject.cpp" />
+    <ClCompile Include="Clan.cpp" />
     <ClCompile Include="ConfigLoader.cpp" />
     <ClCompile Include="CSVEditor.cpp" />
     <ClCompile Include="GameProcessor.cpp" />
@@ -204,6 +205,7 @@
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ObjectManager.cpp" />
+    <ClCompile Include="Person.cpp" />
     <ClCompile Include="PlaneObject.cpp" />
     <ClCompile Include="ObjectMorton.cpp" />
     <ClCompile Include="RectangleMorton.cpp" />
@@ -219,15 +221,19 @@
     <ClCompile Include="Strings.cpp" />
     <ClCompile Include="Title.cpp" />
     <ClCompile Include="useful.cpp" />
+    <ClCompile Include="VarRenderer.cpp" />
+    <ClCompile Include="Window.cpp" />
     <ClCompile Include="WorkManager.cpp" />
-    <ClCompile Include="window.cpp" />
+    <ClCompile Include="dxinit.cpp" />
     <ClCompile Include="Worker.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BackGround.h" />
     <ClInclude Include="Behavior.h" />
+    <ClInclude Include="ButtonKey.h" />
     <ClInclude Include="CircleMorton.h" />
     <ClInclude Include="CircleObject.h" />
+    <ClInclude Include="Clan.h" />
     <ClInclude Include="class.h" />
     <ClInclude Include="ConfigLoader.h" />
     <ClInclude Include="CSVEditor.h" />
@@ -238,6 +244,7 @@
     <ClInclude Include="EditableTask.h" />
     <ClInclude Include="enums.h" />
     <ClInclude Include="functions.h" />
+    <ClInclude Include="gamedata.h" />
     <ClInclude Include="GameProcessor.h" />
     <ClInclude Include="global.h" />
     <ClInclude Include="Input.h" />
@@ -251,6 +258,7 @@
     <ClInclude Include="header.h" />
     <ClInclude Include="ObjectManager.h" />
     <ClInclude Include="package.h" />
+    <ClInclude Include="Person.h" />
     <ClInclude Include="PlaneObject.h" />
     <ClInclude Include="ObjectMorton.h" />
     <ClInclude Include="RectangleMorton.h" />
@@ -269,6 +277,8 @@
     <ClInclude Include="Strings.h" />
     <ClInclude Include="Title.h" />
     <ClInclude Include="useful.h" />
+    <ClInclude Include="VarRenderer.h" />
+    <ClInclude Include="Window.h" />
     <ClInclude Include="WorkManager.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Task.h" />

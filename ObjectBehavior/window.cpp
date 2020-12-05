@@ -1,26 +1,33 @@
-#include "header.h"
+#include "Window.h"
+#include "SpriteManager.h"
 
-#define ColorBit		16		//表現する色の数
+Window::Window(float x, float y) : 
+	Window(x, y, WIDTH, HEIGHT) {
 
-//======================================================
-//ウィンドウ関連処理
-//======================================================
-int LoopProcess() {
-	ScreenFlip();
-	if (ProcessMessage() != 0) { return 0; }
-	if (CheckHitKey(KEY_INPUT_ESCAPE) != 0) { return 0; }
-	ClearDrawScreen();
-
-	return 1;
 }
-int AllInit() {
-	SetAlwaysRunFlag(TRUE);
-	ChangeWindowMode(TRUE); //ウィンドウ表示
-	SetMainWindowText(title); //ウィンドウタイトル
-	SetGraphMode(winx, winy, ColorBit); //ウィンドウサイズ
-	SetFontSize(16); //利用フォントサイズ
-	if (DxLib_Init() < 0) { return -1; }
-	SetDrawScreen(DX_SCREEN_BACK); //描画対象
 
-	return 0;
+Window::Window(float x, float y, float width, float height) :
+	_id("wnd" + to_string(wndCnt++)),
+	RectangleObject(x, y, width, height, Layer::UI) {
+
+	Sprite* master = SpriteManager::getInstance()->getSprite(_master);
+
+	master->load();
+	_renderer.setScaleX(getWidth() / (float)master->getSizeX());
+	_renderer.setScaleY(getHeight() / (float)master->getSizeY());
+	_renderer.setVarAreaX(false, 3, 4);
+	_renderer.setVarAreaY(false, 3, 4);
+	_renderer.updateRenderingParam();
+}
+
+Window::~Window() {
+
+}
+
+void Window::update() {
+
+}
+
+void Window::draw() {
+	_renderer.render();
 }

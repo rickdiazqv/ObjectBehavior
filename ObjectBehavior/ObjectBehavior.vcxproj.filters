@@ -127,9 +127,6 @@
     <Filter Include="Components\Sprite\Sprite">
       <UniqueIdentifier>{dca38c4d-6940-4498-85e0-c68dcd952e99}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Components\Sprite\SpriteManager">
-      <UniqueIdentifier>{9581acee-4f07-4a44-a101-b6f37702deff}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Tools\CSVEditor">
       <UniqueIdentifier>{a7d0b969-8000-4fad-b888-8b6eaaf87c8f}</UniqueIdentifier>
     </Filter>
@@ -138,9 +135,6 @@
     </Filter>
     <Filter Include="Components\Sprite\Renderer">
       <UniqueIdentifier>{9cb490e5-2357-47c9-a9b6-c6d8fb7659cf}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Components\Sprite\Sprites">
-      <UniqueIdentifier>{e844e3c6-430c-411e-9b13-e19182b8a2b3}</UniqueIdentifier>
     </Filter>
     <Filter Include="Tools\Configurable">
       <UniqueIdentifier>{75ebfcf2-62f8-421b-b08f-0f68abb9cc5a}</UniqueIdentifier>
@@ -180,6 +174,36 @@
     </Filter>
     <Filter Include="SpriteObject\BackGround">
       <UniqueIdentifier>{2eeb3bd1-5404-48c8-8a3a-265605974a33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SpriteObject\Window">
+      <UniqueIdentifier>{9d127a6c-c1a6-4c24-b9e9-a1b5db047101}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Sprite\Renderer\Renderer">
+      <UniqueIdentifier>{cdd29e4d-d06f-427d-ba76-a79f1cfe0f5f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Sprite\Renderer\VarRenderer">
+      <UniqueIdentifier>{4cb508d4-6153-40d5-86f0-29593ca06b7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Sprite\Sprite\Sprite">
+      <UniqueIdentifier>{a2d7561b-b4a9-448d-aae0-6c25842561c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Sprite\Sprite\Sprites">
+      <UniqueIdentifier>{e844e3c6-430c-411e-9b13-e19182b8a2b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Sprite\Sprite\SpriteManager">
+      <UniqueIdentifier>{9581acee-4f07-4a44-a101-b6f37702deff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameData">
+      <UniqueIdentifier>{8e027a76-1eb9-416f-a46e-df53928c4b1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameData\Clan">
+      <UniqueIdentifier>{2c8d672d-135f-4f4f-a296-dd488c65dd0b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameData\Person">
+      <UniqueIdentifier>{a2d712a3-d33e-46ab-a573-6e32e844e77d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameData\Header">
+      <UniqueIdentifier>{0258bf2d-2801-40b7-9dec-1c83d431d391}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -228,9 +252,6 @@
     <ClCompile Include="ObjectManager.cpp">
       <Filter>Objects\Manager\ObjectManager</Filter>
     </ClCompile>
-    <ClCompile Include="window.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="useful.cpp">
       <Filter>Tools\Useful</Filter>
     </ClCompile>
@@ -240,11 +261,8 @@
     <ClCompile Include="CircleMorton.cpp">
       <Filter>Objects\Manager\Morton\CircleMorton</Filter>
     </ClCompile>
-    <ClCompile Include="Sprite.cpp">
-      <Filter>Components\Sprite\Sprite</Filter>
-    </ClCompile>
     <ClCompile Include="SpriteManager.cpp">
-      <Filter>Components\Sprite\SpriteManager</Filter>
+      <Filter>Components\Sprite\Sprite\SpriteManager</Filter>
     </ClCompile>
     <ClCompile Include="CSVEditor.cpp">
       <Filter>Tools\CSVEditor</Filter>
@@ -252,11 +270,8 @@
     <ClCompile Include="Strings.cpp">
       <Filter>Tools\Strings</Filter>
     </ClCompile>
-    <ClCompile Include="Renderer.cpp">
-      <Filter>Components\Sprite\Renderer</Filter>
-    </ClCompile>
     <ClCompile Include="Sprites.cpp">
-      <Filter>Components\Sprite\Sprites</Filter>
+      <Filter>Components\Sprite\Sprite\Sprites</Filter>
     </ClCompile>
     <ClCompile Include="Button.cpp">
       <Filter>SpriteObject\Button</Filter>
@@ -275,6 +290,27 @@
     </ClCompile>
     <ClCompile Include="BackGround.cpp">
       <Filter>SpriteObject\BackGround</Filter>
+    </ClCompile>
+    <ClCompile Include="dxinit.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Window.cpp">
+      <Filter>SpriteObject\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="VarRenderer.cpp">
+      <Filter>Components\Sprite\Renderer\VarRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer.cpp">
+      <Filter>Components\Sprite\Renderer\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>Components\Sprite\Sprite\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="Clan.cpp">
+      <Filter>GameData\Clan</Filter>
+    </ClCompile>
+    <ClCompile Include="Person.cpp">
+      <Filter>GameData\Person</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -380,11 +416,8 @@
     <ClInclude Include="CircleMorton.h">
       <Filter>Objects\Manager\Morton\CircleMorton</Filter>
     </ClInclude>
-    <ClInclude Include="Sprite.h">
-      <Filter>Components\Sprite\Sprite</Filter>
-    </ClInclude>
     <ClInclude Include="SpriteManager.h">
-      <Filter>Components\Sprite\SpriteManager</Filter>
+      <Filter>Components\Sprite\Sprite\SpriteManager</Filter>
     </ClInclude>
     <ClInclude Include="CSVEditor.h">
       <Filter>Tools\CSVEditor</Filter>
@@ -392,11 +425,8 @@
     <ClInclude Include="Strings.h">
       <Filter>Tools\Strings</Filter>
     </ClInclude>
-    <ClInclude Include="Renderer.h">
-      <Filter>Components\Sprite\Renderer</Filter>
-    </ClInclude>
     <ClInclude Include="Sprites.h">
-      <Filter>Components\Sprite\Sprites</Filter>
+      <Filter>Components\Sprite\Sprite\Sprites</Filter>
     </ClInclude>
     <ClInclude Include="Configurable.h">
       <Filter>Tools\Configurable</Filter>
@@ -427,6 +457,30 @@
     </ClInclude>
     <ClInclude Include="BackGround.h">
       <Filter>SpriteObject\BackGround</Filter>
+    </ClInclude>
+    <ClInclude Include="Window.h">
+      <Filter>SpriteObject\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="ButtonKey.h">
+      <Filter>SpriteObject\Button</Filter>
+    </ClInclude>
+    <ClInclude Include="VarRenderer.h">
+      <Filter>Components\Sprite\Renderer\VarRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer.h">
+      <Filter>Components\Sprite\Renderer\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>Components\Sprite\Sprite\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="Clan.h">
+      <Filter>GameData\Clan</Filter>
+    </ClInclude>
+    <ClInclude Include="Person.h">
+      <Filter>GameData\Person</Filter>
+    </ClInclude>
+    <ClInclude Include="gamedata.h">
+      <Filter>GameData\Header</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

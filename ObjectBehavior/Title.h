@@ -6,6 +6,7 @@
 #include "Button.h"
 #include "MouseListener.h"
 #include "BackGround.h"
+#include "Window.h"
 
 
 class Title : public Scene {
@@ -19,7 +20,7 @@ public:
 
 private:
 	RectangleObject rect1 = RectangleObject(111, 800, 50, 50, Layer::Object, true);
-	RectangleObject rect2 = RectangleObject(333, 333, 100, 100, Layer::Default, true);
+	RectangleObject rect2 = RectangleObject(333, 222, 100, 100, Layer::Default, true);
 	RectangleObject rect3 = RectangleObject(555, 555, 150, 150, Layer::Floor, true);
 	RectangleObject rect4 = RectangleObject(222, 222, 50, 50, Layer::Object, true);
 	RectangleObject rect5 = RectangleObject(333, 333, 50, 50, Layer::Object, true);
@@ -27,6 +28,7 @@ private:
 	RectangleObject rect7 = RectangleObject(500, 630, 400, 300, Layer::Object, true);
 	RectangleObject rect8 = RectangleObject(1000, 630, 50, 50, Layer::Object, true);
 	CircleObject cir0 = CircleObject(0, 0, 64, Layer::Object, true);
+	Window window = Window(400, 400, 600, 300);
 	Button btn1 = Button(1000, 100);
 	class ButtonListener : public MouseListener<Object*> {
 	public:

@@ -3,6 +3,7 @@
 #include "Input.h"
 #include "RectangleObject.h"
 #include "Renderer.h"
+#include "ButtonKey.h"
 
 class Button : public RectangleObject {
 private:
@@ -34,4 +35,3 @@ public:
 	void update() override;
 	void draw() override;
 };
-

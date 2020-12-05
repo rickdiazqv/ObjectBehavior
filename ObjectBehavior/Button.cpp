@@ -1,19 +1,14 @@
 #include "Button.h"
 #include "SpriteManager.h"
 
-Button::Button(float x, float y) : _id("btn" + to_string(btnCnt)), RectangleObject(x, y, WIDTH, HEIGHT, Layer::UI) {
-	/*for (Renderer& renderer : _renderer) {
-		renderer.load();
-	}*/
+Button::Button(float x, float y) : 
+	_id("btn" + to_string(btnCnt++)), 
+	RectangleObject(x, y, WIDTH, HEIGHT, Layer::UI) {
+
 	SpriteManager::getInstance()->getSprite(_master)->load();
 
 	setWidth(_renderer[0].getWidth());
 	setHeight(_renderer[0].getHeight());
-
-	//printfDx("%d\n", _renderer[0].getSprite()->getHandle());
-	//printfDx("(,%d, %d), (%d,%d)\n", getX(), getY(), getLeft(), getTop());
-
-	btnCnt++;
 }
 
 void Button::update() {

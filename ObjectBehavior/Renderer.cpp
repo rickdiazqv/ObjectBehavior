@@ -1,26 +1,26 @@
 #include "Renderer.h"
 #include "SpriteManager.h"
 
-Renderer::Renderer(Object* const obj, const string& sprite) :
-	Renderer(obj, SpriteManager::getInstance()->getSprite(sprite)) {
+Renderer::Renderer(Object* const parent, const string& sprite) :
+	Renderer(parent, SpriteManager::getInstance()->getSprite(sprite)) {
 
 }
 
 Renderer::Renderer(
-	Object* const obj,
+	Object* const parent,
 	const string& sprite,
 	const string& divSprite) :
-	Renderer(obj, SpriteManager::getInstance()->getSprite(sprite, divSprite)) {
-	int a = 0;
+	Renderer(parent, SpriteManager::getInstance()->getSprite(sprite, divSprite)) {
+
 }
 
-Renderer::Renderer(Object* const obj, Sprite* const sprite) :
-	_sprite(sprite), _parent(obj) {
+Renderer::Renderer(Object* const parent, Sprite* const sprite) :
+	_sprite(sprite), _parent(parent) {
 
-	setWidth((float)getSprite()->getSizeX());
-	setHeight((float)getSprite()->getSizeY());
-	setLeft(getX() - getWidth() / 2);
-	setTop(getY() - getHeight() / 2);
+	updateWidth();
+	updateHeight();
+	updateLeft();
+	updateTop();
 }
 
 Renderer::~Renderer() {
@@ -29,19 +29,14 @@ Renderer::~Renderer() {
 
 
 void Renderer::render() {
-	float px = _parent->getX();
-	float py = _parent->getY();
-	float l = getLeft();
-	float t = getTop();
-	float fx = _parent->getX() + getLeft();
-	float fy = _parent->getY() + getTop();
-	int x = (int)fx, y = (int)fy;
+	int x = (int)(getParent()->getX() + getLeft());
+	int y = (int)(getParent()->getY() + getTop());
 
 	if (_scaleX == 1.f && _scaleY == 1.f) {
 		DrawFormatString(winx / 2, 0, 0xffffff, "%d", _sprite->getHandle());
-		DrawGraph(x, y, _sprite->getHandle(), TRUE);
+		DrawGraph(x, y, getSprite()->getHandle(), TRUE);
 	}
 	else {
-		DrawExtendGraph(x, y, x + getWidth(), y + getHeight(), _sprite->getHandle(), TRUE);
+		DrawExtendGraph(x, y, x + getWidth(), y + getHeight(), getSprite()->getHandle(), TRUE);
 	}
 }
