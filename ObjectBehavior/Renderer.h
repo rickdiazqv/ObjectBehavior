@@ -44,19 +44,27 @@ protected:
 	inline float getTop() { return _top; }
 
 public:
-	inline void setScaleX(float scaleX) {
+	inline virtual void setScale(float scaleX, float scaleY) {
+		setScaleX(scaleX);
+		setScaleY(scaleY);
+	}
+	inline virtual void setScaleX(float scaleX) {
 		_scaleX = scaleX;
 		updateWidth();
 	}
-	inline void setScaleY(float scaleY) {
+	inline virtual void setScaleY(float scaleY) {
 		_scaleY = scaleY;
 		updateHeight();
 	}
-	inline void setX(float x) {
+	inline virtual void setPos(float x, float y) {
+		setX(x);
+		setY(y);
+	}
+	inline virtual void setX(float x) {
 		_x = x;
 		updateLeft();
 	}
-	inline void setY(float y) {
+	inline virtual void setY(float y) {
 		_y = y;
 		updateTop();
 	}

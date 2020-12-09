@@ -1,6 +1,6 @@
 #include "SceneManager.h"
 #include "Scene.h"
-#include "Title.h"
+#include "TitleScene.h"
 
 SceneManager::SceneManager() : Worker(PROC_PRIORITY, DRAW_PRIORITY) {
 	Scene::setSceneChanger(this);
@@ -17,7 +17,7 @@ inline void SceneManager::changeScene() {
 
 	switch (_nextSceneId) {
 	case SceneId::Title:
-		changeScene(new Title());
+		changeScene(new TitleScene());
 		break;
 
 	case SceneId::Home:

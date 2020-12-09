@@ -49,6 +49,80 @@ VarRenderer::~VarRenderer() {
 	delete[] _ys;
 }
 
+void VarRenderer::setVarArea(vector<int>&& varX, vector<int>&& varY) {
+	int divX = getMaster()->getDivX();
+	int divY = getMaster()->getDivY();
+
+	for (int x : varX) {
+		for (int y = 0; y < getMaster()->getDivY(); y++) {
+			_variable[y * divX + x] ^= X_AXIS;
+		}
+	}
+
+	for (int y : varY) {
+		for (int x = 0; x < getMaster()->getDivX(); x++) {
+			_variable[y * divY + x] ^= Y_AXIS;
+		}
+	}
+
+	updateRenderingParam();
+}
+
+void VarRenderer::updateRenderingParam() {
+	Sprites* const master = getMaster();
+	const int divX = master->getDivX();
+	const int divY = master->getDivY();
+	const float scaleX = getScaleX();
+	const float scaleY = getScaleY();
+	const float width = getWidth();
+	const float height = getHeight();
+	int cntX = 0, cntY = 0;
+
+	for (int i = 0; i < divX; i++) {
+		if (isVariableX(i)) {
+			cntX++;
+		}
+	}
+	for (int i = 0; i < divY; i++) {
+		if (isVariableY(i * divX)) {
+			cntY++;
+		}
+	}
+
+	const float extX = (width - (float)master->getSizeX()) / (float)cntX;
+	const float extY = (height - (float)master->getSizeY()) / (float)cntY;
+	float top = getTop();
+	
+	for (int i = 0; i < divY; i++) {
+		const int row = i * divX;
+		float left = getLeft();
+		for (int j = 0; j < divX; j++) {
+			const int index = row + j;
+			Sprite* const sprite = getSpriteAt(index);
+			float wid = (float)sprite->getSizeX();
+			float hei = (float)sprite->getSizeY();
+
+			if (isVariableX(index)) {
+				wid += extX;
+			}
+			if (isVariableY(index)) {
+				hei += extY;
+			}
+
+			setLeftAt(index, left);
+			setTopAt(index, top);
+			setWidthAt(index, wid);
+			setHeightAt(index, hei);
+			setXAt(index, getLeftAt(index) + getWidthAt(index) / 2.f);
+			setYAt(index, getTopAt(index) + getHeightAt(index) / 2.f);
+
+			left += getWidthAt(index);
+		}
+
+		top += getHeightAt(row);
+	}
+}
+
 void VarRenderer::render() {
 	for (int i = 0; i < getSprNum(); i++) {
 		Sprite* sprite = getSpriteAt(i);

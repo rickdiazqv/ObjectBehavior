@@ -1,23 +1,24 @@
 #include "Window.h"
 #include "SpriteManager.h"
 
-Window::Window(float x, float y) : 
-	Window(x, y, WIDTH, HEIGHT) {
-
-}
-
-Window::Window(float x, float y, float width, float height) :
+Window::Window(
+	float x,
+	float y,
+	float width,
+	float height,
+	string&& master,
+	vector<int>&& varX,
+	vector<int>&& varY) :
 	_id("wnd" + to_string(wndCnt++)),
+	_master(move(master)),
 	RectangleObject(x, y, width, height, Layer::UI) {
 
-	Sprite* master = SpriteManager::getInstance()->getSprite(_master);
+	Sprite* sprite = SpriteManager::getInstance()->getSprite(_master);
 
-	master->load();
-	_renderer.setScaleX(getWidth() / (float)master->getSizeX());
-	_renderer.setScaleY(getHeight() / (float)master->getSizeY());
-	_renderer.setVarAreaX(false, 3, 4);
-	_renderer.setVarAreaY(false, 3, 4);
-	_renderer.updateRenderingParam();
+	sprite->load();
+	_renderer.Renderer::setScaleX(getWidth() / (float)sprite->getSizeX());
+	_renderer.Renderer::setScaleY(getHeight() / (float)sprite->getSizeY());
+	_renderer.setVarArea(move(varX), move(varY));
 }
 
 Window::~Window() {

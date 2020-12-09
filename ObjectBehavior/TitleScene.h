@@ -6,13 +6,13 @@
 #include "Button.h"
 #include "MouseListener.h"
 #include "BackGround.h"
-#include "Window.h"
+#include "VintageWindow.h"
 
 
-class Title : public Scene {
+class TitleScene : public Scene {
 public:
-	Title();
-	~Title();
+	TitleScene();
+	~TitleScene();
 
 public:
 	void update() override;
@@ -28,7 +28,7 @@ private:
 	RectangleObject rect7 = RectangleObject(500, 630, 400, 300, Layer::Object, true);
 	RectangleObject rect8 = RectangleObject(1000, 630, 50, 50, Layer::Object, true);
 	CircleObject cir0 = CircleObject(0, 0, 64, Layer::Object, true);
-	Window window = Window(400, 400, 600, 300);
+	VintageWindow window = VintageWindow(400, 400, 600, 300);
 	Button btn1 = Button(1000, 100);
 	class ButtonListener : public MouseListener<Object*> {
 	public:

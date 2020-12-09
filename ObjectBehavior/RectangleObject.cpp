@@ -1,14 +1,20 @@
 #include "RectangleObject.h"
 
-RectangleObject::RectangleObject(Layer layer, bool pers) : RectangleObject(WIDTH, HEIGHT, layer, pers) {
+RectangleObject::RectangleObject(Layer layer, bool pers) :
+	RectangleObject(WIDTH, HEIGHT, layer, pers) {
 
 }
 
-RectangleObject::RectangleObject(float width, float height, Layer layer, bool pers) : RectangleObject(X, Y, width, height, layer, pers) {
+RectangleObject::RectangleObject(
+	float width, float height, Layer layer, bool pers) :
+	RectangleObject(X, Y, width, height, layer, pers) {
 
 }
 
-RectangleObject::RectangleObject(float x, float y, float width, float height, Layer layer, bool pers) : _id("rect" + to_string(rectCnt)), Object(x, y, layer, pers, SHAPE) {
+RectangleObject::RectangleObject(
+	float x, float y, float width, float height, Layer layer, bool pers) :
+	_id("rect" + to_string(rectCnt)),
+	Object(x, y, layer, pers, SHAPE) {
 	setWidth(width);
 	setHeight(height);
 
@@ -28,8 +34,8 @@ void RectangleObject::createMorton() {
 void RectangleObject::update() {
 	Object::update();
 
-	if (_x != _xHist) { _left = _x - _width * .5f; }
-	if (_y != _yHist) { _top = _y - _height * .5f; }
+	if (getX() != getXHist()) { setLeft(getX() - _width * .5f); }
+	if (getY() != getYHist()) { setTop(getY() - _height * .5f); }
 }
 
 void RectangleObject::draw() {
@@ -57,7 +63,7 @@ string RectangleObject::toString() {
 	oss <<
 		"Layer: " << int(getLayer()) <<
 		", pers: " << getPers() <<
-		", xy(" << _x << ", " << _y <<
+		", xy(" << getX() << ", " << getY() <<
 		"), wh(" << _width << ", " << _height <<
 		"), morton: " << _morton->getDepth() <<
 		":" << _morton->getMorton(_morton->getDepth()) <<

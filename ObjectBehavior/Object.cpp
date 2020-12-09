@@ -60,18 +60,18 @@ void Object::update() {
 	setOldCollision(isCollision());
 	setCollision(false);
 
-	bool move = vx != .0f || vy != .0f;
+	bool move = getVX() != .0f || getVY() != .0f;
 
 	setXHist(getX());
 	setYHist(getY());
 
 	if (move) {
-		_x += vx;
-		_y += vy;
+		addX(getVX());
+		addY(getVY());
 	}
 
-	vx += ax;
-	vy += ay;
+	addVX(getAX());
+	addVY(getAY());
 
 	if (!move) { return; }
 
@@ -118,9 +118,6 @@ int Object::drawCompareTo(Worker* other) {
 	int comp = 0;
 	if (!otr) {
 		//printfDx("can not cast\n");
-		int a = this->getDrawPriority();
-		int b = other->getDrawPriority();
-		int c = this->getDrawPriority() - other->getDrawPriority();
 		return this->getDrawPriority() - other->getDrawPriority();
 	}
 

@@ -192,6 +192,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BackGround.cpp" />
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CircleMorton.cpp" />
     <ClCompile Include="CircleObject.cpp" />
     <ClCompile Include="Clan.cpp" />
@@ -205,6 +206,8 @@
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ObjectManager.cpp" />
+    <ClCompile Include="ObjectPlate.cpp" />
+    <ClCompile Include="OperationScene.cpp" />
     <ClCompile Include="Person.cpp" />
     <ClCompile Include="PlaneObject.cpp" />
     <ClCompile Include="ObjectMorton.cpp" />
@@ -219,9 +222,10 @@
     <ClCompile Include="SpriteManager.cpp" />
     <ClCompile Include="Sprites.cpp" />
     <ClCompile Include="Strings.cpp" />
-    <ClCompile Include="Title.cpp" />
+    <ClCompile Include="TitleScene.cpp" />
     <ClCompile Include="useful.cpp" />
     <ClCompile Include="VarRenderer.cpp" />
+    <ClCompile Include="VintageWindow.cpp" />
     <ClCompile Include="Window.cpp" />
     <ClCompile Include="WorkManager.cpp" />
     <ClCompile Include="dxinit.cpp" />
@@ -231,6 +235,7 @@
     <ClInclude Include="BackGround.h" />
     <ClInclude Include="Behavior.h" />
     <ClInclude Include="ButtonKey.h" />
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="CircleMorton.h" />
     <ClInclude Include="CircleObject.h" />
     <ClInclude Include="Clan.h" />
@@ -257,6 +262,8 @@
     <ClInclude Include="Object.h" />
     <ClInclude Include="header.h" />
     <ClInclude Include="ObjectManager.h" />
+    <ClInclude Include="ObjectPlate.h" />
+    <ClInclude Include="OperationScene.h" />
     <ClInclude Include="package.h" />
     <ClInclude Include="Person.h" />
     <ClInclude Include="PlaneObject.h" />
@@ -275,9 +282,10 @@
     <ClInclude Include="SpriteManager.h" />
     <ClInclude Include="Sprites.h" />
     <ClInclude Include="Strings.h" />
-    <ClInclude Include="Title.h" />
+    <ClInclude Include="TitleScene.h" />
     <ClInclude Include="useful.h" />
     <ClInclude Include="VarRenderer.h" />
+    <ClInclude Include="VintageWindow.h" />
     <ClInclude Include="Window.h" />
     <ClInclude Include="WorkManager.h" />
     <ClInclude Include="resource.h" />

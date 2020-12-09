@@ -32,5 +32,5 @@ void CircleObject::update() {
 }
 
 void CircleObject::draw() {
-	DrawCircleAA(_x, _y, _radius, POS_NUM, 0xff0000, FALSE);
+	DrawCircleAA(getX(), getY(), _radius, POS_NUM, 0xff0000, FALSE);
 }

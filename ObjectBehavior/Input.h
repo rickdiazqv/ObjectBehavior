@@ -49,23 +49,23 @@ private:
 
 public:
 	//void init() override{}
-	float getX() = delete;
-	float getY() = delete;
-	float getXHist() = delete;
-	float getYHist() = delete;
-	float getDX() = delete;
-	float getDY() = delete;
-	inline float getMouseX() { return _x; }
-	inline float getMouseY() { return _y; }
-	inline float getMouseXHist() { return _xHist; }
-	inline float getMouseYHist() { return _yHist; }
-	inline float getMouseDX() { return getMouseX() - getMouseXHist(); }
-	inline float getMouseDY() { return getMouseY() - getMouseYHist(); }
-	inline bool isMove() {
-		int dx = getMouseDX();
-		int dy = getMouseDY();
+	//float getX() = delete;
+	//float getY() = delete;
+	//float getXHist() = delete;
+	//float getYHist() = delete;
+	//float getDX() = delete;
+	//float getDY() = delete;
+	//inline float getMouseX() { return _x; }
+	//inline float getMouseY() { return _y; }
+	//inline float getMouseXHist() { return _xHist; }
+	//inline float getMouseYHist() { return _yHist; }
+	//inline float getMouseDX() { return getMouseX() - getMouseXHist(); }
+	//inline float getMouseDY() { return getMouseY() - getMouseYHist(); }
+	/*inline bool isMove() {
+		int dx = getDX();
+		int dy = getDY();
 		return dx != 0 || dy != 0;
-	}
+	}*/
 	inline bool isMouseDown(int index) { return _mouse[index] == 1; }
 	inline bool isMouse(int index) { return _mouse[index] > 0; }
 	inline bool isMouseUp(int index) { return _mouse[index] == -1; }

@@ -1,6 +1,8 @@
 #include "Input.h"
 
-Input::Input() : _id("in"), Object(X, Y, Layer::UI, true, SHAPE, PROC_PRIORITY, DRAW_PRIORITY) {
+Input::Input() :
+	_id("in"),
+	Object(X, Y, Layer::UI, true, SHAPE, PROC_PRIORITY, DRAW_PRIORITY) {
 	for (int i = 0; i < n_mouse; i++) { _mouse[i] = 0; }
 	setKey(path_key);
 }
@@ -32,8 +34,8 @@ void Input::update() {
 	if (_useMouse) {
 		int x, y;
 		GetMousePoint(&x, &y);
-		vx = x - getMouseX();
-		vy = y - getMouseY();
+		setVX((float)x - getX());
+		setVY((float)y - getY());
 		Object::update();
 
 		int mi = GetMouseInput();
@@ -85,13 +87,18 @@ void Input::draw() {
 		c = 'R';
 	}
 
-	DrawFormatString(getMouseX(), getMouseY(), 
+	DrawFormatString(getX(), getY(),
 		isCollision() ? 0xff0000 : 0xffffff, icon);
 }
 
 string Input::toString() {
 	ostringstream oss;
-	oss << "xy: (" << setw(4) << getMouseX() << ", " << setw(4) << getMouseY() << "), hist: (" << setw(4) << getMouseXHist() << ", " << setw(4) << getMouseYHist() << "), d: (" << setw(4) << getMouseDX() << ", " << setw(4) << getMouseDY() << "), move: " << (isMove() ? " true" : "false") << ", mouse: (" << setw(2) << int(_mouse[0]) << setw(2) << int(_mouse[1]) << setw(2) << int(_mouse[2]) << "), \nkeysize: " << _key.size() << "key: (";
+	oss << "xy: (" << setw(4) << getX() << ", " << setw(4) << getY() <<
+		"), hist: (" << setw(4) << getXHist() << ", " << setw(4) << getYHist() <<
+		"), d: (" << setw(4) << getDX() << ", " << setw(4) << getDY() <<
+		"), move: " << (isMove() ? " true" : "false") <<
+		", mouse: (" << setw(2) << int(_mouse[0]) << setw(2) << int(_mouse[1]) << setw(2) << int(_mouse[2]) <<
+		"), \nkeysize: " << _key.size() << "key: (";
 
 	for (auto e = _key.begin(); e != _key.end(); e++) {
 		oss << setw(2) << (int)e->second;

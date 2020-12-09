@@ -4,25 +4,29 @@
 #include "VarRenderer.h"
 #include "Input.h"
 
-constexpr const char* window_master = "variable_window";
-
 class Window : public RectangleObject {
 private:
 	inline static int wndCnt = 0;
 
-private:
+protected:
 	Input& _input = *Input::getInstance();
 
-private:
-	const string _master = window_master;
+protected:
+	const string _master;
 	VarRenderer _renderer = VarRenderer(this, _master);
 
 private:
 	const string _id;
 
 public:
-	Window(float x, float y);
-	Window(float x, float y, float width, float height);
+	Window(
+		float x,
+		float y,
+		float width,
+		float height,
+		string&& master,
+		vector<int>&& varX,
+		vector<int>&& varY);
 	~Window();
 
 public:
@@ -32,4 +36,3 @@ public:
 	void update() override;
 	void draw() override;
 };
-

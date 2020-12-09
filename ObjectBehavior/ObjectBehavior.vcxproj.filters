@@ -163,12 +163,6 @@
     <Filter Include="Scenes\SceneChanger">
       <UniqueIdentifier>{a4d551db-011b-48af-97d2-aa9994d1fa6b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scenes\Scenes">
-      <UniqueIdentifier>{99a95224-82a5-4fd6-8876-59fe685808f1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scenes\Scenes\Title">
-      <UniqueIdentifier>{1b817e68-0ba8-495d-a4ff-18222ae90d67}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Tools\ConfigLoader">
       <UniqueIdentifier>{d98cf7cd-0e81-4e9a-962b-d60135d739d9}</UniqueIdentifier>
     </Filter>
@@ -204,6 +198,27 @@
     </Filter>
     <Filter Include="GameData\Header">
       <UniqueIdentifier>{0258bf2d-2801-40b7-9dec-1c83d431d391}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SpriteObject\Window\Window">
+      <UniqueIdentifier>{8672e8a1-d086-4180-9f61-94969218c5e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SpriteObject\Window\VintageWindow">
+      <UniqueIdentifier>{83643cb0-a580-40bf-95fc-1add16c93969}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameData\Scenes">
+      <UniqueIdentifier>{99a95224-82a5-4fd6-8876-59fe685808f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameData\Scenes\TitleScene">
+      <UniqueIdentifier>{1b817e68-0ba8-495d-a4ff-18222ae90d67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameData\Scenes\OperationScene">
+      <UniqueIdentifier>{ba18316a-58cb-4f8e-80bc-0064ceb8bd93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\Objects\ObjectPlate">
+      <UniqueIdentifier>{2b116466-f1a8-4726-82dc-a438d26ba119}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\Objects\Camera">
+      <UniqueIdentifier>{73161bab-aedb-4789-af04-5edd2871ea6d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -282,9 +297,6 @@
     <ClCompile Include="SceneManager.cpp">
       <Filter>Scenes\SceneManager</Filter>
     </ClCompile>
-    <ClCompile Include="Title.cpp">
-      <Filter>Scenes\Scenes\Title</Filter>
-    </ClCompile>
     <ClCompile Include="ConfigLoader.cpp">
       <Filter>Tools\ConfigLoader</Filter>
     </ClCompile>
@@ -293,9 +305,6 @@
     </ClCompile>
     <ClCompile Include="dxinit.cpp">
       <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Window.cpp">
-      <Filter>SpriteObject\Window</Filter>
     </ClCompile>
     <ClCompile Include="VarRenderer.cpp">
       <Filter>Components\Sprite\Renderer\VarRenderer</Filter>
@@ -311,6 +320,24 @@
     </ClCompile>
     <ClCompile Include="Person.cpp">
       <Filter>GameData\Person</Filter>
+    </ClCompile>
+    <ClCompile Include="Window.cpp">
+      <Filter>SpriteObject\Window\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="VintageWindow.cpp">
+      <Filter>SpriteObject\Window\VintageWindow</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleScene.cpp">
+      <Filter>GameData\Scenes\TitleScene</Filter>
+    </ClCompile>
+    <ClCompile Include="OperationScene.cpp">
+      <Filter>GameData\Scenes\OperationScene</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectPlate.cpp">
+      <Filter>Objects\Objects\ObjectPlate</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Objects\Objects\Camera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -449,17 +476,11 @@
     <ClInclude Include="SceneChanger.h">
       <Filter>Scenes\SceneChanger</Filter>
     </ClInclude>
-    <ClInclude Include="Title.h">
-      <Filter>Scenes\Scenes\Title</Filter>
-    </ClInclude>
     <ClInclude Include="ConfigLoader.h">
       <Filter>Tools\ConfigLoader</Filter>
     </ClInclude>
     <ClInclude Include="BackGround.h">
       <Filter>SpriteObject\BackGround</Filter>
-    </ClInclude>
-    <ClInclude Include="Window.h">
-      <Filter>SpriteObject\Window</Filter>
     </ClInclude>
     <ClInclude Include="ButtonKey.h">
       <Filter>SpriteObject\Button</Filter>
@@ -481,6 +502,24 @@
     </ClInclude>
     <ClInclude Include="gamedata.h">
       <Filter>GameData\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Window.h">
+      <Filter>SpriteObject\Window\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="VintageWindow.h">
+      <Filter>SpriteObject\Window\VintageWindow</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleScene.h">
+      <Filter>GameData\Scenes\TitleScene</Filter>
+    </ClInclude>
+    <ClInclude Include="OperationScene.h">
+      <Filter>GameData\Scenes\OperationScene</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectPlate.h">
+      <Filter>Objects\Objects\ObjectPlate</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Objects\Objects\Camera</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -31,16 +31,16 @@ protected:
 	Layer _layer = LAYER;
 	bool _pers = PERS;
 
-protected:
+private:
 	float _x = X, _y = Y;
 	float _xHist = _x, _yHist = _y;
+	float _vx = VX, _vy = VY;
+	float _ax = AX, _ay = AY;
+
+protected:
 	Morton* _morton;
 	Object* _mortonNext = nullptr;
 	Object* _mortonPrev = nullptr;
-
-public:
-	float vx = VX, vy = VY;
-	float ax = AX, ay = AY;
 
 private:
 	bool _collisionable = true;	// “–‚½‚è”»’è‚ð—LŒø‚É‚·‚é‚©
@@ -72,6 +72,10 @@ public:
 	inline bool getPers() { return _pers; }
 	inline float getX() { return _x; }
 	inline float getY() { return _y; }
+	inline float getVX() { return _vx; }
+	inline float getVY() { return _vy; }
+	inline float getAX() { return _ax; }
+	inline float getAY() { return _ay; }
 	inline float getXHist() { return _xHist; }
 	inline float getYHist() { return _yHist; }
 	inline float getDX() { return getX() - getXHist(); }
@@ -95,6 +99,21 @@ public:
 	inline void setMouseListener(MouseListener<Object*>* mouseListener) {
 		if (!_mouseListener) { _mouseListener = mouseListener; }
 	}
+
+public:
+	inline void setX(float x) { _x = x; }
+	inline void setY(float y) { _y = y; }
+	inline void addX(float x) { _x += x; }
+	inline void addY(float y) { _y += y; }
+	inline void setVX(float vx) { _vx = vx; }
+	inline void setVY(float vy) { _vy = vy; }
+	inline void addVX(float vx) { _vx += vx; }
+	inline void addVY(float vy) { _vy += vy; }
+	inline void setAX(float ax) { _ax = ax; }
+	inline void setAY(float ay) { _ay = ay; }
+	inline void addAX(float ax) { _ax += ax; }
+	inline void addAY(float ay) { _ay += ay; }
+	
 
 protected:
 	inline void setXHist(float xHist) { _xHist = xHist; }
