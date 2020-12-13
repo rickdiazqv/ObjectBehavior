@@ -7,7 +7,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 	GameProcessor* const gameProcessor = GameProcessor::geInstance();
 
 	while (LoopProcess()) {
-		DrawBox(0, 0, winx, winy, 0x7f7f7f, TRUE);
+		DrawBox(0, 0, WINDOW_X, WINDOW_Y, 0x7f7f7f, TRUE);
 		gameProcessor->process();
 	}
 

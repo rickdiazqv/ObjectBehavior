@@ -1,19 +1,24 @@
 #include "CircleObject.h"
 #include "CircleMorton.h"
 
-CircleObject::CircleObject(Layer layer, bool pers) : CircleObject(X, Y, RADIUS, layer, pers) {
+CircleObject::CircleObject(Layer layer, bool pers) : 
+	CircleObject(X, Y, RADIUS, layer, pers) {
 
 }
 
-CircleObject::CircleObject(float x, float y, Layer layer, bool pers) : CircleObject(x, y, RADIUS, layer, pers) {
+CircleObject::CircleObject(float x, float y, Layer layer, bool pers) : 
+	CircleObject(x, y, RADIUS, layer, pers) {
 
 }
 
-CircleObject::CircleObject(float radius, Layer layer, bool pers) : CircleObject(X, Y, radius, layer, pers) {
+CircleObject::CircleObject(float radius, Layer layer, bool pers) : 
+	CircleObject(X, Y, radius, layer, pers) {
 
 }
 
-CircleObject::CircleObject(float x, float y, float radius, Layer layer, bool pers) : Object(x, y, layer, pers, SHAPE) {
+CircleObject::CircleObject(float x, float y, float radius, Layer layer, bool pers) : 
+	_id("cir" + to_string(cirCnt++)),
+	Object(x, y, layer, pers, SHAPE) {
 
 	_radius = radius;
 	_radSq = _radius * _radius;
@@ -32,5 +37,5 @@ void CircleObject::update() {
 }
 
 void CircleObject::draw() {
-	DrawCircleAA(getX(), getY(), _radius, POS_NUM, 0xff0000, FALSE);
+	DrawCircleAA(getWindowX(), getWindowY(), _radius, POS_NUM, 0xff0000, FALSE);
 }

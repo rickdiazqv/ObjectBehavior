@@ -1,16 +1,15 @@
 #include "CircleMorton.h"
-#include "RectangleMorton.h"
 #include "CircleObject.h"
 
-CircleMorton::CircleMorton(Object* self) : Morton(self) {
+CircleMorton::CircleMorton(Object* self) : RectangleMorton(self) {
 
 }
 
 void CircleMorton::updateMortonParam() {
 	CircleObject* cir = (CircleObject*)_self;
-	float x = cir->getX();
-	float y = cir->getY();
+	float x = cir->getWorldX();
+	float y = cir->getWorldY();
 	float r = cir->getRadius();
 
-	RectangleMorton::updateRectangleMorton(this, x - r, y - r, x + r, y + r);
+	RectangleMorton::updateRectangleMorton(x - r, y - r, x + r, y + r);
 }

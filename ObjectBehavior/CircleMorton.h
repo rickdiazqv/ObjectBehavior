@@ -1,10 +1,11 @@
 #pragma once
-#include "Morton.h"
-class CircleMorton : public Morton {
+#include "RectangleMorton.h"
+
+class CircleMorton : public RectangleMorton {
 public:
 	CircleMorton(Object* self);
 
-public:
+protected:
 	void updateMortonParam() override;
 };
 

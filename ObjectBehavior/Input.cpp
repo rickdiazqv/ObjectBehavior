@@ -34,8 +34,8 @@ void Input::update() {
 	if (_useMouse) {
 		int x, y;
 		GetMousePoint(&x, &y);
-		setVX((float)x - getX());
-		setVY((float)y - getY());
+		setWindowVX((float)x - getWindowX());
+		setWindowVY((float)y - getWindowY());
 		Object::update();
 
 		int mi = GetMouseInput();
@@ -87,13 +87,13 @@ void Input::draw() {
 		c = 'R';
 	}
 
-	DrawFormatString(getX(), getY(),
+	DrawFormatString(getWindowX(), getWindowY(),
 		isCollision() ? 0xff0000 : 0xffffff, icon);
 }
 
 string Input::toString() {
 	ostringstream oss;
-	oss << "xy: (" << setw(4) << getX() << ", " << setw(4) << getY() <<
+	/*oss << "xy: (" << setw(4) << getX() << ", " << setw(4) << getY() <<
 		"), hist: (" << setw(4) << getXHist() << ", " << setw(4) << getYHist() <<
 		"), d: (" << setw(4) << getDX() << ", " << setw(4) << getDY() <<
 		"), move: " << (isMove() ? " true" : "false") <<
@@ -103,7 +103,7 @@ string Input::toString() {
 	for (auto e = _key.begin(); e != _key.end(); e++) {
 		oss << setw(2) << (int)e->second;
 	}
-	oss << ")";
+	oss << ")";*/
 
 	return oss.str();
 }

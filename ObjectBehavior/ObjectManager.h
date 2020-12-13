@@ -30,7 +30,7 @@ public:
 		return _self;
 	}
 
-	static void finalize() {
+	inline static void finalize() {
 		delete _self;
 		_self = nullptr;
 	}

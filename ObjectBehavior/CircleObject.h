@@ -9,10 +9,14 @@ protected:
 
 private:
 	inline static const Shape SHAPE = Shape::Circle;
+	inline static int cirCnt = 0;
 
 private:
 	float _radius = RADIUS;
 	float _radSq = _radius * _radius;
+
+private:
+	const string _id;
 
 public:
 	CircleObject(Layer layer, bool pers = false);
@@ -25,13 +29,9 @@ protected:
 	void createMorton() override;
 
 public:
-	float getRadius() {
-		return _radius;
-	}
-
-	float getRadSq() {
-		return  _radSq;
-	}
+	inline string getId() override { return _id; }
+	inline float getRadius() { return _radius; }
+	inline float getRadSq() { return  _radSq; }
 
 public:
 	void update() override;

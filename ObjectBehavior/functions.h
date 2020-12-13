@@ -26,6 +26,6 @@ template<typename T>
 using TypeBiConsumer = BiConsumer<T, T>;
 
 template <typename Of, typename What>
-inline bool instanceof(const What w) {
+inline bool instanceof(const What* w) {
 	return dynamic_cast<const Of*>(w) != 0;
 }

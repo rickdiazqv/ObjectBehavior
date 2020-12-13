@@ -6,9 +6,10 @@ class RectangleMorton : public Morton {
 public:
 	RectangleMorton(Object* self);
 
-public:
+protected:
 	void updateMortonParam() override;
 
-public:
-	static void updateRectangleMorton(Morton* const morton, float left, float top, float right, float bottom);
+protected:
+	void updateRectangleMorton(
+		float left, float top, float right, float bottom);
 };

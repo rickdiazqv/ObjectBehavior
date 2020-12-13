@@ -7,7 +7,7 @@
 using GameObject = Object*;
 
 class Object : public Worker, public EditableTask, public Behavior<GameObject> {
-private:
+protected:
 	inline static const int PROC_PRIORITY = 5;
 	inline static const int DRAW_PRIORITY = 5;
 
@@ -32,13 +32,18 @@ protected:
 	bool _pers = PERS;
 
 private:
-	float _x = X, _y = Y;
-	float _xHist = _x, _yHist = _y;
-	float _vx = VX, _vy = VY;
-	float _ax = AX, _ay = AY;
+	float _worldX = X, _worldY = Y;
+	float _windowX = X, _windowY = Y;
+	float _correctionX = .0f, _correctionY = .0f;
+	float _worldXHist = _worldX, _worldYHist = _worldY;
+	float _windowXHist = _windowX, _windowYHist = _windowY;
+	float _worldVX = VX, _worldVY = VY;
+	float _windowVX = VX, _windowVY = VY;
+	float _worldAX = AX, _worldAY = AY;
+	float _windowAX = AX, _windowAY = AY;
 
 protected:
-	Morton* _morton;
+	Morton* _morton = nullptr;
 	Object* _mortonNext = nullptr;
 	Object* _mortonPrev = nullptr;
 
@@ -64,23 +69,36 @@ protected:
 
 private:
 	void updateMortonTree();
+	void updatePosition();
 
 	// getter
 public:
 	void init() override final;
 	inline Layer getLayer() { return _layer; }
 	inline bool getPers() { return _pers; }
-	inline float getX() { return _x; }
-	inline float getY() { return _y; }
-	inline float getVX() { return _vx; }
-	inline float getVY() { return _vy; }
-	inline float getAX() { return _ax; }
-	inline float getAY() { return _ay; }
-	inline float getXHist() { return _xHist; }
-	inline float getYHist() { return _yHist; }
-	inline float getDX() { return getX() - getXHist(); }
-	inline float getDY() { return getY() - getYHist(); }
-	inline bool isMove() { return getDX() != .0f || getDY() != .0f; }
+	inline float getWorldX() { return _worldX; }
+	inline float getWorldY() { return _worldY; }
+	inline float getWindowX() { return _windowX; }
+	inline float getWindowY() { return _windowY; }
+	inline float getCorrectionX() { return _correctionX; }
+	inline float getCorrectionY() { return _correctionY; }
+	inline float getWorldVX() { return _worldVX; }
+	inline float getWorldVY() { return _worldVY; }
+	inline float getWorldAX() { return _worldAX; }
+	inline float getWorldAY() { return _worldAY; }
+	inline float getWindowVX() { return _windowVX; }
+	inline float getWindowVY() { return _windowVY; }
+	inline float getWindowAX() { return _windowAX; }
+	inline float getWindowAY() { return _windowAY; }
+	inline float getWorldXHist() { return _worldXHist; }
+	inline float getWorldYHist() { return _worldYHist; }
+	inline float getWindowXHist() { return _windowXHist; }
+	inline float getWindowYHist() { return _windowYHist; }
+	inline float getWorldDX() { return getWorldX() - getWorldXHist(); }
+	inline float getWorldDY() { return getWorldY() - getWorldYHist(); }
+	inline float getWindowDX() { return getWindowX() - getWindowXHist(); }
+	inline float getWindowDY() { return getWindowY() - getWindowYHist(); }
+	inline bool isMove() { return getWorldDX() != .0f || getWorldDY() != .0f; }
 	inline virtual string getId() { return _id; }
 	inline Morton* getMorton() { return _morton; }
 	inline Object* getMortonNext() { return _mortonNext; }
@@ -101,23 +119,74 @@ public:
 	}
 
 public:
-	inline void setX(float x) { _x = x; }
-	inline void setY(float y) { _y = y; }
-	inline void addX(float x) { _x += x; }
-	inline void addY(float y) { _y += y; }
-	inline void setVX(float vx) { _vx = vx; }
-	inline void setVY(float vy) { _vy = vy; }
-	inline void addVX(float vx) { _vx += vx; }
-	inline void addVY(float vy) { _vy += vy; }
-	inline void setAX(float ax) { _ax = ax; }
-	inline void setAY(float ay) { _ay = ay; }
-	inline void addAX(float ax) { _ax += ax; }
-	inline void addAY(float ay) { _ay += ay; }
+	inline void setWorldX(float x) {
+		_worldX = x;
+		setWindowX(getWorldX() + getCorrectionX());
+	}
+	inline void setWorldY(float y) {
+		_worldY = y;
+		setWindowY(getWorldY() + getCorrectionY());
+	}
+	inline void addWorldX(float x) {
+		setWorldX(getWorldX() + x);
+	}
+	inline void addWorldY(float y) {
+		setWorldY(getWorldY() + y);
+	}
+	inline virtual void setWindowX(float x) {
+		_windowX = x;
+		setCorrectionX(getWindowX() - getWorldX());
+	}
+	inline virtual void setWindowY(float y) {
+		_windowY = y;
+		setCorrectionY(getWindowY() - getWorldY());
+	}
+	inline void addWindowX(float x) {
+		setWindowX(getWindowX() + x);
+	}
+	inline void addWindowY(float y) {
+		setWindowY(getWindowY() + y);
+	}
 	
+	inline void setWorldVX(float vx) { _worldVX = vx; }
+	inline void setWorldVY(float vy) { _worldVY = vy; }
+	inline void addWorldVX(float vx) { setWorldVX(getWorldVX() + vx); }
+	inline void addWorldVY(float vy) { setWorldVY(getWorldVY() + vy); }
+	inline void setWorldAX(float ax) { _worldAX = ax; }
+	inline void setWorldAY(float ay) { _worldAY = ay; }
+	inline void addWorldAX(float ax) { setWorldAX(getWorldAX() + ax); }
+	inline void addWorldAY(float ay) { setWorldAY(getWorldAY() + ay); }
+
+	inline void setWindowVX(float vx) { _windowVX = vx; }
+	inline void setWindowVY(float vy) { _windowVY = vy; }
+	inline void addWindowVX(float vx) { setWindowVX(getWindowVX() + vx); }
+	inline void addWindowVY(float vy) { setWindowVY(getWindowVY() + vy); }
+	inline void setWindowAX(float ax) { _windowAX = ax; }
+	inline void setWindowAY(float ay) { _windowAY = ay; }
+	inline void addWindowAX(float ax) { setWindowAX(getWindowAX() + ax); }
+	inline void addWindowAY(float ay) { setWindowAY(getWindowAY() + ay); }
+
+private:
+	inline void setCorrectionX(float x) { _correctionX = x; }
+	inline void setCorrectionY(float y) { _correctionX = y; }
+	inline void addCorrectionX(float x) {
+		setCorrectionX(getCorrectionX() + x);
+	}
+	inline void addCorrectionY(float y) {
+		setCorrectionY(getCorrectionY() + y);
+	}
 
 protected:
-	inline void setXHist(float xHist) { _xHist = xHist; }
-	inline void setYHist(float yHist) { _yHist = yHist; }
+	inline void setWorldXHist(float xHist) {
+		_worldXHist = xHist;
+		setWindowXHist(getWorldXHist() + getCorrectionX());
+	}
+	inline void setWorldYHist(float yHist) {
+		_worldYHist = yHist;
+		setWindowYHist(getWorldYHist() + getCorrectionY());
+	}
+	inline void setWindowXHist(float xHist) { _windowXHist = xHist; }
+	inline void setWindowYHist(float yHist) { _windowYHist = yHist; }
 	inline void setCollisionable(bool collisionable) { _collisionable = collisionable; }
 	inline void setCollision(bool collision) { _collision = collision; }
 	inline void setOldCollision(bool collision) { _oldCollision = collision; }

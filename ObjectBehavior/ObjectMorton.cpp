@@ -5,8 +5,8 @@ ObjectMorton::ObjectMorton(Object* self) : Morton(self){
 }
 
 void ObjectMorton::updateMortonParam() {
-	float x = _self->getX();
-	float y = _self->getY();
+	float x = _self->getWorldX();
+	float y = _self->getWorldY();
 	int id = getOrder(x, y);
 	int deep = id % 4;
 

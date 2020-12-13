@@ -29,11 +29,11 @@ Renderer::~Renderer() {
 
 
 void Renderer::render() {
-	int x = (int)(getParent()->getX() + getLeft());
-	int y = (int)(getParent()->getY() + getTop());
+	int x = (int)(getParent()->getWindowX() + getLeft());
+	int y = (int)(getParent()->getWindowY() + getTop());
 
 	if (_scaleX == 1.f && _scaleY == 1.f) {
-		DrawFormatString(winx / 2, 0, 0xffffff, "%d", _sprite->getHandle());
+		DrawFormatString(WINDOW_X / 2, 0, 0xffffff, "%d", _sprite->getHandle());
 		DrawGraph(x, y, getSprite()->getHandle(), TRUE);
 	}
 	else {

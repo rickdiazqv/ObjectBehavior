@@ -126,8 +126,8 @@ void VarRenderer::updateRenderingParam() {
 void VarRenderer::render() {
 	for (int i = 0; i < getSprNum(); i++) {
 		Sprite* sprite = getSpriteAt(i);
-		int left = (int)(getParent()->getX() + getLeftAt(i));
-		int top = (int)(getParent()->getY() + getTopAt(i));
+		int left = (int)(getParent()->getWindowX() + getLeftAt(i));
+		int top = (int)(getParent()->getWindowY() + getTopAt(i));
 		int width = getWidthAt(i);
 		int height = getHeightAt(i);
 		if (isVariable(i)) {

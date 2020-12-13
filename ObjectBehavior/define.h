@@ -3,8 +3,8 @@
 
 constexpr const char* title = "ObjctBehavior";
 
-constexpr int winx = 1600;
-constexpr int winy = 900;
+constexpr int WINDOW_X = 1600;
+constexpr int WINDOW_Y = 900;
 
 constexpr int n_mouse = 3;
 constexpr int n_key = 256;

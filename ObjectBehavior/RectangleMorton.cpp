@@ -8,15 +8,24 @@ RectangleMorton::RectangleMorton(Object* self) : Morton(self) {
 
 void RectangleMorton::updateMortonParam() {
 	RectangleObject* rect = (RectangleObject*)_self;
-	float left = rect->getLeft();
-	float top = rect->getTop();
+	float left = rect->getWorldLeft();
+	float top = rect->getWorldTop();
 	float right = left + rect->getWidth();
 	float bottom = top + rect->getHeight();
 
-	updateRectangleMorton(this, left, top, right, bottom);
+	updateRectangleMorton(left, top, right, bottom);
 }
 
-void RectangleMorton::updateRectangleMorton(Morton* const morton, float left, float top, float right, float bottom) {
+void RectangleMorton::updateRectangleMorton(
+	float left, float top, float right, float bottom) {
+
+	float right_limit = getWidth() - 1.f;
+	float bottom_limit = getHeight() - 1.f;
+	int in_idx[2];
+	int in_diagonal[2][2][2] = {
+		{{right_limit, bottom_limit}, {.0f, bottom_limit}},
+		{{right_limit, .0f}, {.0f, .0f}},
+	};
 
 	int in[2] = { -1, -1 };
 	int id[2][2];
@@ -40,13 +49,19 @@ void RectangleMorton::updateRectangleMorton(Morton* const morton, float left, fl
 				for (int j = 0; j < 2; j++) {
 					if (out[i][j]) { continue; }
 					in[c++] = id[i][j];
+					in_idx[0] = i, in_idx[1] = j;
 				}
 			}
 			if (in[0] < 0) {
-				morton->resetMorton(); 
+				resetMorton();
 				return;
 			}
-			if (in[1] < 0) { in[1] = in[0]; }
+			if (in[1] < 0) {
+				int i = in_idx[0], j = in_idx[1];
+				in[1] = getOrder(
+					in_diagonal[i][j][0],
+					in_diagonal[i][j][1]);
+			}
 		}
 		else {
 			in[0] = id[1][0];
@@ -62,13 +77,13 @@ void RectangleMorton::updateRectangleMorton(Morton* const morton, float left, fl
 	int cur = in[0];
 
 	cur >>= (2 * shift);
-	if (depth == morton->getDepth() && cur == morton->getAbsMorton()) { return; }
+	if (depth == getDepth() && cur == getAbsMorton()) { return; }
 
-	morton->setDepth(depth);
-	morton->setMorton(cur % 4, depth);
-	morton->setAbsMorton(cur);
+	setDepth(depth);
+	setMorton(cur % 4, depth);
+	setAbsMorton(cur);
 	cur >>= 2;
 	for (int i = depth - 1; i >= 0; i--, cur >>= 2) {
-		morton->setMorton(cur % 4, i);
+		setMorton(cur % 4, i);
 	}
 }

@@ -198,9 +198,6 @@ void ObjectManager::draw() {
 		l++;
 	}
 	DrawFormatString(0, 800, 0xffffff, "n_obj:%d", c);
-	if (c > 9) {
-		int a = 0;
-	}
 }
 
 Object* ObjectManager::connect(Object* self) {
@@ -286,11 +283,6 @@ bool ObjectManager::disconnect(Object* self) {
 		}
 		return true;
 	} while (current);
-
-	//printfDx("objmgr dis error: self is not found\n");
-	if (self->getX() == 222.f) {
-		int a = 0;
-	}
 
 	return false;
 }

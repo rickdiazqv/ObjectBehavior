@@ -1,7 +1,11 @@
 #include "BackGround.h"
 #include "SpriteManager.h"
 
-BackGround::BackGround() : RectangleObject(winx / 2, winy / 2, WIDTH, HEIGHT, Layer::BackGround) {
+BackGround::BackGround() : 
+	_id("bgi" + to_string(bgCnt++)),
+	RectangleObject(WINDOW_X / 2, WINDOW_Y / 2, WINDOW_X, WINDOW_Y,
+		Layer::BackGround) {
+
 	setCollisionable(false);
 	SpriteManager::getInstance()->getSprite(_master)->load();
 }

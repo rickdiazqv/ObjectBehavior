@@ -11,9 +11,15 @@ private:
 	const string _master = "sea";
 	Renderer _renderer = Renderer(this, _master);
 
+private:
+	const string _id;
+
 public:
 	BackGround();
 	~BackGround();
+
+public:
+	inline string getId() override { return _id; }
 
 public:
 	void update();

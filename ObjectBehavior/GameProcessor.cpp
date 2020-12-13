@@ -5,6 +5,7 @@
 #include "Input.h"
 #include "SpriteManager.h"
 #include "SceneManager.h"
+#include "ObjectPlate.h"
 
 GameProcessor::GameProcessor() {
 	// リソースのロード
@@ -29,6 +30,8 @@ GameProcessor::~GameProcessor() {
 	Input::finalize();
 	SpriteManager::finalize();
 	SceneManager::finalize();
+
+	delete ObjectPlate::DEFAULT_PLATE;
 }
 
 void GameProcessor::process() {

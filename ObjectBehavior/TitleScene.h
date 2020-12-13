@@ -28,7 +28,7 @@ private:
 	RectangleObject rect7 = RectangleObject(500, 630, 400, 300, Layer::Object, true);
 	RectangleObject rect8 = RectangleObject(1000, 630, 50, 50, Layer::Object, true);
 	CircleObject cir0 = CircleObject(0, 0, 64, Layer::Object, true);
-	VintageWindow window = VintageWindow(400, 400, 600, 300);
+	//VintageWindow window = VintageWindow(400, 400, 600, 300);
 	Button btn1 = Button(1000, 100);
 	class ButtonListener : public MouseListener<Object*> {
 	public:
@@ -38,7 +38,7 @@ private:
 		void onMouseEntry(Object* ev) override { printfDx("entry "); }
 		void onMouseExit(Object* ev) override { printfDx("exit "); }
 	} ml;
-	BackGround sea;
+	//BackGround sea;
 	//Model3D MGR("data/MGRŽo‹Mver1.3/MGRŽo‹M.pmx");
 	//Model3D miku("data/LatŽ®ƒ~ƒN/LatŽ®ƒ~ƒNVer2.3_Normal.pmd");
 	//rect1.vy = .5f;

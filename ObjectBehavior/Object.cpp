@@ -7,19 +7,24 @@ Input* const Object::_input = Input::getInstance();
 /*Object::Object() : Object(X, Y, LAYER, PERS, Shape::Dot) {
 
 }*/
-Object::Object(float x, float y, Layer layer, bool pers, Shape shape) : Object(x, y, layer, pers, shape, PROC_PRIORITY, DRAW_PRIORITY) {
+Object::Object(float x, float y, Layer layer, bool pers, Shape shape) : 
+	Object(x, y, layer, pers, shape, PROC_PRIORITY, DRAW_PRIORITY) {
 
 }
 
-Object::Object(float x, float y, Layer layer, bool pers, Shape shape, int procPriority, int drawPriority) : _shape(shape), Worker(procPriority, procPriority) {
+Object::Object(
+	float x, float y, Layer layer, bool pers, Shape shape, 
+	int procPriority, int drawPriority) : 
+	_shape(shape), 
+	Worker(procPriority, procPriority) {
 	//printfDx("Object\n");
 	_layer = layer;
 	_pers = pers;
 
-	_x = x;
-	_y = y;
-	setXHist(getX());
-	setYHist(getY());
+	setWorldX(x);
+	setWorldY(y);
+	setWorldXHist(getWorldX());
+	setWorldYHist(getWorldY());
 
 	Awake();
 }
@@ -34,6 +39,9 @@ void Object::createMorton() {
 
 void Object::init() {
 	if (!_morton) {
+		if (instanceof<Input, Object>(this)) {
+			int a = 0;
+		}
 		createMorton();
 		_morton->updateMorton();
 	}
@@ -56,31 +64,71 @@ void Object::updateMortonTree() {
 	}
 }
 
+void Object::updatePosition() {
+
+}
+
 void Object::update() {
 	setOldCollision(isCollision());
 	setCollision(false);
 
-	bool move = getVX() != .0f || getVY() != .0f;
+	setWorldXHist(getWorldX());
+	setWorldYHist(getWorldY());
 
-	setXHist(getX());
-	setYHist(getY());
+	float worldVX = getWorldVX();
+	float worldVY = getWorldVY();
+	bool worldMoveX = worldVX != .0f;
+	bool worldMoveY = worldVX != .0f;
 
-	if (move) {
-		addX(getVX());
-		addY(getVY());
+	if (worldMoveX) {
+		addWorldX(worldVX);
+	}
+	if (worldMoveY) {
+		addWorldY(worldVY);
 	}
 
-	addVX(getAX());
-	addVY(getAY());
+	float windowVX = getWindowVX();
+	float windowVY = getWindowVY();
+	bool windowMoveX = windowVX != .0f;
+	bool windowMoveY = windowVY != .0f;
 
-	if (!move) { return; }
+	if (windowMoveX) {
+		addWindowX(windowVX);
+	}
+	if (windowMoveY) {
+		addWindowY(windowVY);
+	}
 
-	float dx = getDX(), dy = getDY();
+	float worldAX = getWorldAX();
+	float worldAY = getWorldAY();
+	bool worldMoveVX = worldAX != .0f;
+	bool worldMoveVY = worldAX != .0f;
+
+	if (worldMoveVX) {
+		addWorldVX(getWorldAX());
+	}
+	if (worldMoveVY) {
+		addWorldVY(getWorldAY());
+	}
+
+	float windowAX = getWindowAX();
+	float windowAY = getWindowAY();
+	bool windowMoveVX = windowAX != .0f;
+	bool windowMoveVY = windowAX != .0f;
+
+	if (windowMoveVX) {
+		addWindowVX(getWindowAX());
+	}
+	if (windowMoveVY) {
+		addWindowVY(getWindowAY());
+	}
+
+	if (!worldMoveX && !worldMoveY) { return; }
+
+	float dx = getWorldDX(), dy = getWorldDY();
+
 	if (dy != .0f) { sortSelf(this, dy >= .0f ? 1 : -1); }
 
-	if (_y >= winy - 25) {
-		int a = 0;
-	}
 	int depthHist = _morton->getDepth();
 	int absIdHist = _morton->getAbsMorton();
 	_morton->updateMorton();
@@ -93,7 +141,9 @@ void Object::update() {
 
 string Object::toString() {
 	ostringstream oss;
-	oss << "Layer: " << int(getLayer()) << ", pers: " << getPers() << ", (" << _x << ", " << _y << ")";
+	oss << "Layer: " << int(getLayer()) << ", pers: " << getPers() <<
+		", (" << getWorldX() << ", " << getWorldY() << ")" <<
+		", (" << getWindowX() << ", " << getWindowY() << ")";
 	return oss.str();
 }
 
@@ -127,7 +177,7 @@ int Object::drawCompareTo(Worker* other) {
 		bool potr = otr->getPers();
 
 		if (pslf && potr) {
-			comp = (this->getY() - otr->getY()) >= .0f ? 1 : -1;
+			comp = (this->getWorldY() - otr->getWorldY()) >= .0f ? 1 : -1;
 		}
 		else if (pslf && !potr) {
 		}
@@ -153,7 +203,9 @@ void Object::setColliderFunction() {
 	_colliderFunction[0] = nullptr;
 
 	_colliderFunction[d + d] = [](Object* self, Object* other) {
-		return self->_x == other->_x && self->_y == other->_y;
+		return
+			self->getWorldX() == other->getWorldX() &&
+			self->getWorldY() == other->getWorldY();
 	};
 
 	_colliderFunction[d + r] = [](Object* self, Object* other) {
@@ -170,8 +222,8 @@ void Object::setColliderFunction() {
 			return false;
 		}
 
-		float& x = dot->_x, & y = dot->_y;
-		float l = rect->getLeft(), t = rect->getTop();
+		float x = dot->getWorldX(), y = dot->getWorldY();
+		float l = rect->getWorldLeft(), t = rect->getWorldTop();
 		return l <= x && x < l + rect->getWidth() &&
 			t <= y && y < t + rect->getHeight();
 	};
@@ -191,8 +243,8 @@ void Object::setColliderFunction() {
 		}
 
 		return
-			pow(dot->_x - cir->getX(), 2) +
-			pow(dot->_y - cir->getY(), 2)
+			pow(dot->getWorldX() - cir->getWorldX(), 2) +
+			pow(dot->getWorldY() - cir->getWorldY(), 2)
 			<= pow(cir->getRadius(), 2);
 	};
 
@@ -207,9 +259,9 @@ void Object::setColliderFunction() {
 			return false;
 		}
 
-		return abs(rects->_x - recto->_x) <
+		return abs(rects->getWorldX() - recto->getWorldX()) <
 			(rects->getWidth() + recto->getWidth()) * .5f &&
-			abs(rects->_y - recto->_y) <
+			abs(rects->getWorldY() - recto->getWorldY()) <
 			(rects->getHeight() + recto->getHeight()) * .5f;
 	};
 
@@ -225,9 +277,9 @@ void Object::setColliderFunction() {
 		}
 		if (!rect || !cir) { return false; }
 
-		float l = rect->getLeft(), t = rect->getTop();
+		float l = rect->getWorldLeft(), t = rect->getWorldTop();
 		float r = l + rect->getWidth(), b = t + rect->getHeight();
-		float& x = cir->_x, & y = cir->_y;
+		float x = cir->getWorldX(), y = cir->getWorldY();
 		float rad = cir->getRadius();
 		float radSq = cir->getRadSq();
 
@@ -268,8 +320,8 @@ void Object::setColliderFunction() {
 		}
 
 		return
-			pow(cirs->_x - ciro->_x, 2) +
-			pow(cirs->_y - ciro->_y, 2) <
+			pow(cirs->getWorldX() - ciro->getWorldX(), 2) +
+			pow(cirs->getWorldY() - ciro->getWorldY(), 2) <
 			pow(cirs->getRadius() + ciro->getRadius(), 2);
 	};
 }

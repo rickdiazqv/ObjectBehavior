@@ -23,14 +23,13 @@ void WorkManager::update() {
 }
 
 void WorkManager::draw() {
-	Morton::drawGrid();
-
 	int i = 0;
 	for (auto worker = Worker::getDrawHead(); worker != nullptr; worker = worker->getNext()) {
 		worker->draw();
 		//DrawFormatString(300, 100 + i * 40, 0xffffff, worker->toString().c_str());
 		i++;
 	}
+	Morton::drawGrid();
 }
 
 void WorkManager::connect(Worker* self) {

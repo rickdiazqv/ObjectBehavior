@@ -13,12 +13,17 @@ RectangleObject::RectangleObject(
 
 RectangleObject::RectangleObject(
 	float x, float y, float width, float height, Layer layer, bool pers) :
-	_id("rect" + to_string(rectCnt)),
-	Object(x, y, layer, pers, SHAPE) {
+	RectangleObject(
+		x, y, width, height, PROC_PRIORITY, DRAW_PRIORITY, layer, pers) {
+}
+
+RectangleObject::RectangleObject(
+	float x, float y, float width, float height,
+	int procPriority, int drawPriority, Layer layer, bool pers) :
+	_id("rect" + to_string(rectCnt++)),
+	Object(x, y, layer, pers, SHAPE, procPriority, drawPriority) {
 	setWidth(width);
 	setHeight(height);
-
-	rectCnt++;
 
 	Start();
 }
@@ -34,13 +39,19 @@ void RectangleObject::createMorton() {
 void RectangleObject::update() {
 	Object::update();
 
-	if (getX() != getXHist()) { setLeft(getX() - _width * .5f); }
-	if (getY() != getYHist()) { setTop(getY() - _height * .5f); }
+	if (getWorldX() != getWorldXHist()) {
+		setWorldLeft(getWorldX() - getWidth() * .5f);
+	}
+	if (getWorldY() != getWorldYHist()) {
+		setWorldTop(getWorldY() - getHeight() * .5f);
+	}
 }
 
 void RectangleObject::draw() {
-	DrawBoxAA(_left, _top, _left + _width, _top + _height, isCollision() ? 0x0000ff : 0xff0000, FALSE);
-	DrawFormatString(_left, _top, 0, getId().c_str());
+	float left = getWindowLeft();
+	float top = getWindowTop();
+	DrawBoxAA(left, top, left + getWidth(), top + getHeight(), isCollision() ? 0x0000ff : 0xff0000, FALSE);
+	DrawFormatString(left, top, 0, getId().c_str());
 
 	/*float left = .0f;
 	float top = .0f;
@@ -63,7 +74,8 @@ string RectangleObject::toString() {
 	oss <<
 		"Layer: " << int(getLayer()) <<
 		", pers: " << getPers() <<
-		", xy(" << getX() << ", " << getY() <<
+		", xy(" << getWorldX() << ", " << getWorldY() <<
+		"), (" << getWindowX() << ", " << getWindowY() <<
 		"), wh(" << _width << ", " << _height <<
 		"), morton: " << _morton->getDepth() <<
 		":" << _morton->getMorton(_morton->getDepth()) <<
