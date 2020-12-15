@@ -11,6 +11,7 @@ ObjectPlate::ObjectPlate(float x, float y, float width, float height,
 	RectangleObject(
 		x, y, width, height, PROC_PRIORITY, DRAW_PRIORITY, layer, pers) {
 
+	setCollisionable(false);
 }
 
 ObjectPlate::~ObjectPlate() {

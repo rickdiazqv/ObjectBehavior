@@ -89,6 +89,9 @@ void Input::draw() {
 
 	DrawFormatString(getWindowX(), getWindowY(),
 		isCollision() ? 0xff0000 : 0xffffff, icon);
+
+	DrawFormatString(200, WINDOW_Y - 200, 0xffffff, "wld(%f, %f)", getWorldX(), getWorldY());
+	DrawFormatString(200, WINDOW_Y - 100, 0xffffff, "win(%f, %f)", getWindowX(), getWindowY());
 }
 
 string Input::toString() {

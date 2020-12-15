@@ -74,7 +74,8 @@ void ObjectManager::update() {
 		self = tree->getHead();
 		while (self && (other = self->getMortonNext())) {
 			do {
-				self->isCollider(other, true);
+				bool c = self->isCollider(other, false);
+				c = c;
 			} while (other = other->getMortonNext());
 			self = self->getMortonNext();
 		}
@@ -87,7 +88,8 @@ void ObjectManager::update() {
 			// e‚Æ‘“–‚è
 			while (self && (other = parent->getHead())) {
 				do {
-					self->isCollider(other, true);
+					bool c = self->isCollider(other, false);
+					c = c;
 				} while (other = other->getMortonNext());
 				self = self->getMortonNext();
 			}
@@ -142,7 +144,8 @@ void ObjectManager::updateAt(Object* const self) {
 	// “¯ƒZƒ‹“à‚Å‘“–‚è
 	if (other = self->getMortonNext()) {
 		do {
-			self->isCollider(other, false);
+			bool c = self->isCollider(other, false);
+			c = c;
 		} while (other = other->getMortonNext());
 	}
 
@@ -152,7 +155,8 @@ void ObjectManager::updateAt(Object* const self) {
 		// Žq‚Æ‘“–‚½‚è
 		if (other = child->getHead()) {
 			do {
-				self->isCollider(other, false);
+				bool c = self->isCollider(other, false);
+				c = c;
 			} while (other = other->getMortonNext());
 		}
 
